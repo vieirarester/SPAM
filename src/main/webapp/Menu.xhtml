@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:growl id="mensagem"/>
+
+            <p:menubar> 
+                <p:menuitem value="Início" url="index.xhtml" icon="ui-icon-home"/>
+
+                <p:submenu label="Cadastre-se!" icon="ui-icon-disk">
+                    <p:menuitem value="Sou um aluno" url="CadastroUsuario.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+                    <p:menuitem value="Sou um monitor" url="CadastroMonitor.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+                </p:submenu>
+
+                <p:menuitem value="Ajuda" url="#" icon="ui-icon-help"/>
+
+                <p:menuitem value="Sobre" url="#" icon="ui-icon-info" />
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Pesquisar"/>
+                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                        <p:commandButton type="button" value="Entrar" icon="ui-icon-person"/>
+                    </h:outputLink>
+                    
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </h:body>
+</html>

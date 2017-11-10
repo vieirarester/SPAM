@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Monitores</title>
+    </h:head>
+    <h:body style="background-color: #acb8ff">
+        <ui:include src="Menu.xhtml"/>
+
+        <p:messages/>
+
+        <h:form id="cadastrarMonitor">
+            <p:growl id="msgCadastroMonitor"/>
+            <p:fieldset legend="Cadastrar Monitor">
+                <p:panelGrid columns="3">
+                    <h:outputText value="Nome*"/>
+                    <p:inputText id="nomeMonitor" value="#{builderMonitor.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
+                    <p:message for="nomeMonitor"/>
+
+                    <h:outputText value="Login*"/>
+                    <p:inputText id="loginMonitor" value="#{builderMonitor.login}" required="true" requiredMessage="O login é obrigatório!"/>
+                    <p:message for="loginMonitor"/>
+
+                    <h:outputText value="Senha*"/>
+                    <p:password id="senhaMonitor" value="#{builderMonitor.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
+                    <p:message for="senhaMonitor"/>
+
+                    <h:outputText value="Disciplina*"/>
+                    <p:inputText id="disciplinaMonitor" value="#{builderMonitor.disciplina}" required="true" requiredMessage="A disciplina é obrigatória!"/>
+                    <p:message for="disciplinaMonitor"/>
+
+                    <h:outputText value="Horários*"/>
+                    <p:dataTable id="horarios" var="horario" value="#{builderMonitor.horarios} "
+                                 paginator="true" rows="4" selectionMode="single">
+                        <p:column headerText="Dia da Semana" >
+                            <p:inputText value="#{horario.dia}"/>
+                        </p:column>
+                        <p:column headerText="Hora" >
+                            <p:inputText value="#{horario.hora}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Cadastrar" icon="ui-icon-disk" oncomplete="PF('cadastrarMonitorDialog').show()"/>
+            </p:fieldset>
+
+            <p:dialog id="confirmarCadastroMonitor" resizable="false" visible="false" modal="true" 
+                      showEffect="clip" hideEffect="explode" widgetVar="cadastrarMonitorDialog">
+                <f:facet name="header">Atenção!</f:facet>
+                <h:outputText value="Você realmente deseja cadastrar este monitor?"/>
+                <f:facet name="footer">
+
+                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{monitorControlador.inserirMonitor(builderMonitor.construirUsuario())}"
+                                     oncomplete="PF('cadastrarMonitorDialog').hide()" update="cadastrarMonitor"/>
+                    <p:commandButton value="Não" icon="ui-icon-closethick" oncomplete="PF('cadastrarMonitorDialog').hide()"/>
+
+                </f:facet>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
