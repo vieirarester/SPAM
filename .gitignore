@@ -123,6 +123,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+nb-configuration.xml
 
 ### Windows ###
 # Windows thumbnail cache files
