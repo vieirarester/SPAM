@@ -28,13 +28,13 @@ public class Horario {
     @Column
     private String dia;
     @Column
-    private Date hora;
+    private String hora;
     
     public Horario(){
         
     }
 
-    public Horario(long id, String dia, Date hora) {
+    public Horario(long id, String dia, String hora) {
         this.id = id;
         this.dia = dia;
         this.hora = hora;
@@ -52,11 +52,11 @@ public class Horario {
         this.dia = dia;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
     

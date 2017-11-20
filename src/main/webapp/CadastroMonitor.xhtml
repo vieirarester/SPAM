@@ -39,16 +39,37 @@ and open the template in the editor.
                     <p:message for="disciplinaMonitor"/>
 
                     <h:outputText value="Horários*"/>
-                    <p:dataTable id="horarios" var="horario" value="#{builderMonitor.horarios} "
-                                 paginator="true" rows="4" selectionMode="single">
-                        <p:column headerText="Dia da Semana" >
-                            <p:inputText value="#{horario.dia}"/>
-                        </p:column>
-                        <p:column headerText="Hora" >
-                            <p:inputText value="#{horario.hora}"/>
-                        </p:column>
-                    </p:dataTable>
+                    <p:fieldset id="horariosMonitor" >
+                        <h:panelGrid columns="3">
+                            <h:outputText value="Dia*"/>
+                            <p:inputText id="diaHorarioMonitor" value="#{monitorControlador.horario.dia}" required="true" requiredMessage="O dia é obrigatório!"/>
+                            <p:message for="diaHorarioMonitor"/>
 
+                            <h:outputText value="Hora*"/>
+                            <p:inputText id="horaHorarioMonitor" value="#{monitorControlador.horario.hora}" required="true" requiredMessage="O horario é obrigatório!"/>
+                            <p:message for="horaHorarioMonitor"/>
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Adicionar" icon="ui-icon-plus"
+                                                 update="@all"
+                                                 action="#{monitorControlador.inserirHorario()}" />
+                            </f:facet>
+                        </h:panelGrid>
+                        <p:dataTable id="tabelaHorarios" style="width: 50%"
+                                     value="${monitorControlador.monitor.horarios}"
+                                     var="item" paginator="true" rows="3" editable="true"
+                                     rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
+
+                            <p:column headerText="Dia" style="width:10%; align:center">
+                                <p align="center">${item.dia}</p>
+                            </p:column>
+
+                            <p:column headerText="Hora" style="width:10%; align:center">
+                                <p align="center">${item.hora}</p>
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <p:message for="horariosMonitor"/>
                 </p:panelGrid>
 
                 <p:commandButton value="Cadastrar" icon="ui-icon-disk" oncomplete="PF('cadastrarMonitorDialog').show()"/>
@@ -60,7 +81,7 @@ and open the template in the editor.
                 <h:outputText value="Você realmente deseja cadastrar este monitor?"/>
                 <f:facet name="footer">
 
-                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{monitorControlador.inserirMonitor(builderMonitor.construirUsuario())}"
+                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{monitorControlador.inserirMonitor(builderMonitor.buildUsuario())}"
                                      oncomplete="PF('cadastrarMonitorDialog').hide()" update="cadastrarMonitor"/>
                     <p:commandButton value="Não" icon="ui-icon-closethick" oncomplete="PF('cadastrarMonitorDialog').hide()"/>
 

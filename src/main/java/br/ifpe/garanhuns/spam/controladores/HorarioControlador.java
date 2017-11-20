@@ -40,20 +40,9 @@ public class HorarioControlador {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-    
-    public String inserirHorario(Horario horario) {
-
-        this.horarioDao.inserir(horario);
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O horário foi cadastrado com sucesso!"));
-        return "";
-    }
 
     public void deletarHorario(Horario horario) {
-        this.horarioDao.deletar(horario);
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O horário foi deletado com sucesso!"));
-
+        
     }
 
     public String atualizarHorario(Horario horario) {

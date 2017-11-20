@@ -29,7 +29,11 @@ public class BuilderMonitor {
     public BuilderMonitor() {
     }
     
-    public Monitor construirUsuario() {
+    public Monitor construirMonitor() {
+        return new Monitor(id, nome, login, senha, disciplina, horarios);
+    }
+    
+    public Monitor buildUsuario() {
         return new Monitor(id, nome, login, senha, disciplina, horarios);
     }
 

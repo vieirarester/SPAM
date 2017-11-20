@@ -6,7 +6,6 @@
 package br.ifpe.garanhuns.spam.builders;
 
 import br.ifpe.garanhuns.spam.modelo.negocio.Horario;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -20,7 +19,7 @@ public class BuilderHorario {
     
     private long id;
     private String dia;
-    private Date hora;
+    private String hora;
     
     public BuilderHorario(){
         
@@ -42,11 +41,11 @@ public class BuilderHorario {
         this.dia = dia;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 }
