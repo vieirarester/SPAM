@@ -27,7 +27,11 @@ public class MonitorImplDao implements MonitorDao {
 
     @Override
     public void inserir(Monitor a) {
-        DaoManagerHiber.getInstance().persist(a);
+        try{
+            DaoManagerHiber.getInstance().persist(a);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
