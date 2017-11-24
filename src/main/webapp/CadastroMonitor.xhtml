@@ -81,7 +81,7 @@ and open the template in the editor.
                 <h:outputText value="Você realmente deseja cadastrar este monitor?"/>
                 <f:facet name="footer">
 
-                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{monitorControlador.inserirMonitor(builderMonitor.buildUsuario())}"
+                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{monitorControlador.inserirMonitor(builderMonitor.construirMonitor())}"
                                      oncomplete="PF('cadastrarMonitorDialog').hide()" update="cadastrarMonitor"/>
                     <p:commandButton value="Não" icon="ui-icon-closethick" oncomplete="PF('cadastrarMonitorDialog').hide()"/>
 

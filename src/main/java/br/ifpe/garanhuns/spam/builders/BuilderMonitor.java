@@ -32,10 +32,6 @@ public class BuilderMonitor {
     public Monitor construirMonitor() {
         return new Monitor(id, nome, login, senha, disciplina, horarios);
     }
-    
-    public Monitor buildUsuario() {
-        return new Monitor(id, nome, login, senha, disciplina, horarios);
-    }
 
     public long getId() {
         return id;
