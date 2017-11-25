@@ -24,6 +24,8 @@ public class Usuario {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column
+    private int tipo = 2;
+    @Column
     private String nome;
     @Column (nullable=false, unique=true)
     private String login;

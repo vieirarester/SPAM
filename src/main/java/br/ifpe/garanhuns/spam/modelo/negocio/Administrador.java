@@ -25,6 +25,8 @@ public class Administrador {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column
+    private int tipo = 1;
+    @Column
     private String nome;
     @Column(nullable = false, unique = true)
     private String login;

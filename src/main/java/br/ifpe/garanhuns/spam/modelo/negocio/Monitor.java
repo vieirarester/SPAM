@@ -28,6 +28,8 @@ public class Monitor {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column
+    private int tipo = 3;
+    @Column
     private String nome;
     @Column(nullable = false, unique = true)
     private String login;
