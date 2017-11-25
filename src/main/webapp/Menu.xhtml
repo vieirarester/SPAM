@@ -30,12 +30,24 @@ and open the template in the editor.
 
                 <f:facet name="options">
                     <p:inputText style="margin-right:10px" placeholder="Pesquisar"/>
-                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                        <p:commandButton type="button" value="Entrar" icon="ui-icon-person"/>
-                    </h:outputLink>
-                    
+                    <p:commandButton icon="ui-icon-search"/>
+                    <p:commandButton value="Entrar" icon="ui-icon-person" oncomplete="PF('entrarUsuarioDialog').show()"/>
                 </f:facet>
             </p:menubar>
+
+            <p:dialog header="Entrar" widgetVar="entrarUsuarioDialog" resizable="false" modal="true">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="usuario" value="Usuário:" />
+                    <p:inputText id="usuario" value="" required="true" label="usuario" />
+
+                    <h:outputLabel for="senha" value="Senha:" />
+                    <p:password id="senha" value="" required="true" label="senha" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Entrar" update="mensagem" actionListener="#" />
+                    </f:facet>  
+                </h:panelGrid>
+            </p:dialog>
         </h:form>
     </h:body>
 </html>
