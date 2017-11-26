@@ -18,13 +18,13 @@ import javax.persistence.Table;
  */
 @Table
 @Entity
-public class Usuario {
+public class Aluno {
     @Column(name="id")
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column
-    private int tipo = 2;
+    final private int tipo;
     @Column
     private String nome;
     @Column (nullable=false, unique=true)
@@ -32,14 +32,16 @@ public class Usuario {
     @Column
     private String senha;
 
-    public Usuario(long id, String nome, String login, String senha) {
+    public Aluno(long id, String nome, String login, String senha) {
+        this.tipo = 2;
         this.id = id;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
     }
 
-    public  Usuario() {
+    public  Aluno() {
+        this.tipo = 2;
     }
 
     public long getId() {
@@ -74,7 +76,7 @@ public class Usuario {
         this.senha = senha;
     }
     
-    public void alterar(Usuario t) {
+    public void alterar(Aluno t) {
         if (t == null) {
             return;
         }
@@ -102,7 +104,7 @@ public class Usuario {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Usuario other = (Usuario) obj;
+        final Aluno other = (Aluno) obj;
         if (this.id != other.id) {
             return false;
         }

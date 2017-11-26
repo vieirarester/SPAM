@@ -6,52 +6,52 @@
 package br.ifpe.garanhuns.spam.dao.implementacoes;
 
 import br.ifpe.garanhuns.spam.dao.DaoManagerHiber;
-import br.ifpe.garanhuns.spam.dao.UsuarioDao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import java.util.List;
+import br.ifpe.garanhuns.spam.dao.AlunoDao;
 
 /**
  *
  * @author Ester
  */
-public class UsuarioImplDao implements UsuarioDao {
+public class AlunoImplDao implements AlunoDao {
 
     @Override
-    public Usuario recuperarLogin(String login) {
+    public Aluno recuperarLogin(String login) {
         try {
-            return (Usuario) DaoManagerHiber.getInstance().recover("from Usuario where login=" + login);
+            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno where login=" + login);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
     }
 
     @Override
-    public void inserir(Usuario a) {
+    public void inserir(Aluno a) {
         DaoManagerHiber.getInstance().persist(a);
     }
 
     @Override
-    public void atualizar(Usuario a) {
+    public void atualizar(Aluno a) {
         DaoManagerHiber.getInstance().update(a);
     }
 
     @Override
-    public void deletar(Usuario a) {
+    public void deletar(Aluno a) {
         DaoManagerHiber.getInstance().delete(a);
     }
 
     @Override
-    public Usuario recuperar(long id) {
+    public Aluno recuperar(long id) {
         try {
-            return (Usuario) DaoManagerHiber.getInstance().recover("from Usuario where id=" + id);
+            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno where id=" + id);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
     }
 
     @Override
-    public List<Usuario> recuperarTodos() {
-        return DaoManagerHiber.getInstance().recover("from Usuario");
+    public List<Aluno> recuperarTodos() {
+        return DaoManagerHiber.getInstance().recover("from Aluno");
     }
 
 }

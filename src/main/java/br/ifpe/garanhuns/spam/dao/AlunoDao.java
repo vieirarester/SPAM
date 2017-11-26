@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.modelo.negocio.login;
+package br.ifpe.garanhuns.spam.dao;
+
+import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 
 /**
  *
  * @author Ester
  */
-public class LoginUsuario {
+public interface AlunoDao extends Dao<Aluno>{
     
+    public Aluno recuperarLogin(String login);
 }
