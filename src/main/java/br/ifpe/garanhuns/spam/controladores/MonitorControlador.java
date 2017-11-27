@@ -112,4 +112,11 @@ public class MonitorControlador {
 
         return "";
     }
+
+    public String removeHorario(Horario horario) {
+        Monitor m = this.getMonitor();
+        m.getHorarios().remove(horario);
+        this.setMonitor(m);
+        return "";
+    }
 }

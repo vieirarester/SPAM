@@ -74,6 +74,12 @@ and open the template in the editor.
                             <p:column headerText="Hora" style="width:10%; align:center">
                                 <p align="center">${item.hora}</p>
                             </p:column>
+
+                            <p:column style="width:15%" headerText="">
+                                <p:commandButton title="Remover" icon="ui-icon-trash"  update="@all"
+                                                 action="#{monitorControlador.removeHorario(item)}" />
+                            </p:column>
+
                         </p:dataTable>
                     </p:fieldset>
                     <p:message for="horariosMonitor"/>
