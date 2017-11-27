@@ -9,6 +9,8 @@ import br.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,17 +24,17 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class AlunoControlador {
-    
+
     AlunoDao alunoDao = null;
-    
+
     private Aluno aluno;
-    
+
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         alunoDao = new AlunoImplDao();
         aluno = new Aluno();
     }
-    
+
     public Aluno getAluno() {
         return aluno;
     }
@@ -70,5 +72,16 @@ public class AlunoControlador {
     public List<Aluno> recuperarTodosAluno() {
         return this.alunoDao.recuperarTodos();
     }
-    
+    /**
+     * public void entrar(){ FacesContext context =
+     * FacesContext.getCurrentInstance(); try { Aluno aluno =
+     * alunoDao.entrar(aluno.getLogin(), aluno.getSenha());
+     * context.getExternalContext().getSessionMap().put("alunoLogado", aluno);
+     * context.getExternalContext().redirect(
+     * context.getExternalContext().getRequestContextPath() +
+     * "/aluno/index.xhtml"); } catch (Exception ex) {
+     * Logger.getLogger(AlunoControlador.class.getName()).log(Level.SEVERE,
+     * null, ex); } }
+    *
+     */
 }

@@ -53,6 +53,11 @@ public class AdministradorImplDao implements AdministradorDao{
     public List<Administrador> recuperarTodos() {
         return DaoManagerHiber.getInstance().recover("from Administrador");
     }
+
+    @Override
+    public Administrador entrar(String login, String senha) {
+        return null;
+    }
     
     
 }

@@ -5,7 +5,7 @@
  */
 package br.ifpe.garanhuns.spam.negocio;
 
-import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
  *
  * @author 20141D12GR0076
  */
-public class UsuarioTest {
+public class AlunoTest {
 
-    public UsuarioTest() {
+    public AlunoTest() {
     }
 
     @Test
@@ -23,10 +23,10 @@ public class UsuarioTest {
         String senhaCerta = "oi";
         String senhaTeste = "oi";
 
-        Usuario usuario = new Usuario();
-        usuario.setSenha(senhaCerta);
+        Aluno aluno = new Aluno();
+        aluno.setSenha(senhaCerta);
 
-        assertTrue(usuario.autenticar(senhaTeste));
+        assertTrue(aluno.autenticar(senhaTeste));
     }
 
     @Test
@@ -34,10 +34,10 @@ public class UsuarioTest {
         String senhaCerta = "oi";
         String senhaTeste = "oib";
 
-        Usuario usuario = new Usuario();
-        usuario.setSenha(senhaCerta);
+        Aluno aluno = new Aluno();
+        aluno.setSenha(senhaCerta);
 
-        assertFalse(usuario.autenticar(senhaTeste));
+        assertFalse(aluno.autenticar(senhaTeste));
     }
 
     @Test
@@ -45,10 +45,10 @@ public class UsuarioTest {
         String senhaCerta = "oi";
         String senhaTeste = "";
 
-        Usuario usuario = new Usuario();
-        usuario.setSenha(senhaCerta);
+        Aluno aluno = new Aluno();
+        aluno.setSenha(senhaCerta);
 
-        assertFalse(usuario.autenticar(senhaTeste));
+        assertFalse(aluno.autenticar(senhaTeste));
     }
 
     @Test
@@ -56,10 +56,10 @@ public class UsuarioTest {
         String senhaCerta = "oi";
         String senhaTeste = null;
 
-        Usuario usuario = new Usuario();
-        usuario.setSenha(senhaCerta);
+        Aluno aluno = new Aluno();
+        aluno.setSenha(senhaCerta);
 
-        assertFalse(usuario.autenticar(senhaTeste));
+        assertFalse(aluno.autenticar(senhaTeste));
     }
 
 }

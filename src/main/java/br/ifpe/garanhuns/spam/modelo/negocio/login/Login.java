@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.dao;
+package br.ifpe.garanhuns.spam.modelo.negocio.login;
 
 import br.ifpe.garanhuns.spam.modelo.negocio.Administrador;
+import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 
 /**
  *
  * @author Ester
  */
-public interface AdministradorDao extends Dao<Administrador>{
+public class Login {
     
-    public Administrador recuperarLogin(String login);
-    public Administrador entrar(String login, String senha);
+    private Administrador administrador;
+    private Aluno aluno;
+    private Monitor monitor;
 }

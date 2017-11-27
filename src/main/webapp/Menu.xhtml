@@ -20,7 +20,7 @@ and open the template in the editor.
                 <p:menuitem value="Início" url="index.xhtml" icon="ui-icon-home"/>
 
                 <p:submenu label="Cadastre-se!" icon="ui-icon-disk">
-                    <p:menuitem value="Sou um aluno" url="CadastroUsuario.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+                    <p:menuitem value="Sou um aluno" url="CadastroAluno.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
                     <p:menuitem value="Sou um monitor" url="CadastroMonitor.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
                 </p:submenu>
 
@@ -44,7 +44,7 @@ and open the template in the editor.
                     <p:password id="senha" value="" required="true" label="senha" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Entrar" update="mensagem" actionListener="#" />
+                        <p:commandButton value="Entrar" icon="ui-icon-key" update="mensagem" actionListener="#" />
                     </f:facet>  
                 </h:panelGrid>
             </p:dialog>
