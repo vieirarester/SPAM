@@ -40,14 +40,21 @@ and open the template in the editor.
 
                     <h:outputText value="Horários*"/>
                     <p:fieldset id="horariosMonitor" >
-                        <h:panelGrid columns="3">
-                            <h:outputText value="Dia*"/>
-                            <p:inputText id="diaHorarioMonitor" value="#{monitorControlador.horario.dia}" required="true" requiredMessage="O dia é obrigatório!"/>
-                            <p:message for="diaHorarioMonitor"/>
+                        <h:panelGrid columns="2">
 
-                            <h:outputText value="Hora*"/>
-                            <p:inputText id="horaHorarioMonitor" value="#{monitorControlador.horario.hora}" required="true" requiredMessage="O horario é obrigatório!"/>
-                            <p:message for="horaHorarioMonitor"/>
+                            <h:outputText value="Dia"/>
+                            <p:selectOneListbox id="Dia" value="#{monitorControlador.horario.dia}" style="width:200px" scrollHeight="60">
+                                <f:selectItem itemLabel="Domingo" itemValue="Domingo" />
+                                <f:selectItem itemLabel="Segunda" itemValue="Segunda" />
+                                <f:selectItem itemLabel="Terça" itemValue="Terça" />
+                                <f:selectItem itemLabel="Quarta" itemValue="Quarta" />
+                                <f:selectItem itemLabel="Quinta" itemValue="Quita" />
+                                <f:selectItem itemLabel="Sexta" itemValue="Sexta" />
+                                <f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+                            </p:selectOneListbox>
+
+                            <h:outputText value="Hora"/>
+                            <p:inputText id="horaHorarioMonitor" value="#{monitorControlador.horario.hora}"/>
 
                             <f:facet name="footer">
                                 <p:commandButton value="Adicionar" icon="ui-icon-plus"
