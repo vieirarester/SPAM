@@ -13,8 +13,8 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Aluno"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Administrador"/>
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Monitor"/>
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Horario"/>
+        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Usuario"/>
     </session-factory>
 </hibernate-configuration>
