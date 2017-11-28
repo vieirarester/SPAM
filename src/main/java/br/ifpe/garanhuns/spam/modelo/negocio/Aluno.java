@@ -11,55 +11,27 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 20141D12GR0076
+ * @author Ester
  */
 @Table
 @Entity
 public class Aluno extends Usuario{
     @Column
-    final private int tipo;
-    @Column
-    private String nome;
+    private String curso;
 
-    public Aluno(long id, String nome, String login, String senha) {
-        this.tipo = 2;
-        this.nome = nome;
+    public Aluno(long id, String nome, String login, String senha, String curso) {
+        this.curso = curso;
     }
 
     public  Aluno() {
-        this.tipo = 2;
     }
 
-    public long getId() {
-        return id;
+    public String getCurso() {
+        return curso;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
     
     public void alterar(Aluno t) {

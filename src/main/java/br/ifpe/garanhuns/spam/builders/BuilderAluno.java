@@ -18,25 +18,20 @@ import javax.faces.bean.RequestScoped;
 public class BuilderAluno {
     
     private long id;
-    final private int tipo;
     private String nome;
     private String login;
     private String senha;
+    private String curso;
 
     public BuilderAluno() {
-        this.tipo = 2;
     }
     
     public Aluno construirAluno() {
-        return new Aluno(id, nome, login, senha);
+        return new Aluno(id, nome, login, senha, curso);
     }
 
     public long getId() {
         return id;
-    }
-
-    public int getTipo() {
-        return tipo;
     }
 
     public String getNome() {
@@ -61,5 +56,13 @@ public class BuilderAluno {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 }
