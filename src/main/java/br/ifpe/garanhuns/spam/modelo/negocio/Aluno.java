@@ -6,6 +6,7 @@
 package br.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,7 +16,9 @@ import javax.persistence.Table;
  */
 @Table
 @Entity
-public class Aluno extends Usuario{
+@DiscriminatorValue(value = "A")
+public class Aluno extends Usuario {
+
     @Column
     private String curso;
 
@@ -23,7 +26,7 @@ public class Aluno extends Usuario{
         this.curso = curso;
     }
 
-    public  Aluno() {
+    public Aluno() {
     }
 
     public String getCurso() {
@@ -33,7 +36,7 @@ public class Aluno extends Usuario{
     public void setCurso(String curso) {
         this.curso = curso;
     }
-    
+
     public void alterar(Aluno t) {
         if (t == null) {
             return;
@@ -68,6 +71,5 @@ public class Aluno extends Usuario{
         }
         return true;
     }
-    
-    
+
 }
