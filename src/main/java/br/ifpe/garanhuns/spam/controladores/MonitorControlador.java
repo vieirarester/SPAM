@@ -55,6 +55,8 @@ public class MonitorControlador {
 
     public String inserirMonitor(Monitor monitor) {
 
+        monitor.setHorarios(this.monitor.getHorarios());
+        
         this.monitorDao.inserir(monitor);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));

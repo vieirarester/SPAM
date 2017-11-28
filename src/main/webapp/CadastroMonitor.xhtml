@@ -38,7 +38,7 @@ and open the template in the editor.
                     <p:inputText id="disciplinaMonitor" value="#{builderMonitor.disciplina}" required="true" requiredMessage="A disciplina é obrigatória!"/>
                     <p:message for="disciplinaMonitor"/>
 
-                    <h:outputText value="Horários*"/>
+                    <h:outputText value="Horários"/>
                     <p:fieldset id="horariosMonitor" >
                         <h:panelGrid columns="2">
 
@@ -48,7 +48,7 @@ and open the template in the editor.
                                 <f:selectItem itemLabel="Segunda" itemValue="Segunda" />
                                 <f:selectItem itemLabel="Terça" itemValue="Terça" />
                                 <f:selectItem itemLabel="Quarta" itemValue="Quarta" />
-                                <f:selectItem itemLabel="Quinta" itemValue="Quita" />
+                                <f:selectItem itemLabel="Quinta" itemValue="Quinta" />
                                 <f:selectItem itemLabel="Sexta" itemValue="Sexta" />
                                 <f:selectItem itemLabel="Sábado" itemValue="Sábado" />
                             </p:selectOneListbox>
@@ -58,7 +58,7 @@ and open the template in the editor.
 
                             <f:facet name="footer">
                                 <p:commandButton value="Adicionar" icon="ui-icon-plus"
-                                                 update="@all"
+                                                 update="tabelaHorarios"
                                                  action="#{monitorControlador.inserirHorario()}" />
                             </f:facet>
                         </h:panelGrid>
@@ -75,7 +75,7 @@ and open the template in the editor.
                                 <p align="center">${item.hora}</p>
                             </p:column>
 
-                            <p:column style="width:15%" headerText="">
+                            <p:column style="width:5%" headerText="">
                                 <p:commandButton title="Remover" icon="ui-icon-trash"  update="@all"
                                                  action="#{monitorControlador.removeHorario(item)}" />
                             </p:column>
