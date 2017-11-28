@@ -57,7 +57,15 @@ public class Horario {
     }
 
     public String getHoraInicio() {
-        return horaInicio;
+        String horaResultado = horaInicio;
+        try{
+            if(validarHora(horaInicio)){
+                horaResultado = horaInicio.substring(11,16);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return horaResultado;
     }
 
     public void setHoraInicio(String horaInicio) {
@@ -65,7 +73,22 @@ public class Horario {
     }
 
     public String getHoraFim() {
-        return horaFim;
+        String horaResultado = horaFim;
+        try{
+            if(validarHora(horaFim)){
+                horaResultado = horaFim.substring(11,16);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return horaResultado;
+    }
+    
+    public Boolean validarHora(String horaResultado){
+        if(horaResultado == null || horaResultado.isEmpty()){
+            return false;
+        }
+        return true;
     }
 
     public void setHoraFim(String horaFim) {
