@@ -9,6 +9,6 @@ package br.ifpe.garanhuns.spam.modelo.negocio.login;
  *
  * @author Ester
  */
-public class LoginAdministrador {
+public class LoginUsuario {
     
 }

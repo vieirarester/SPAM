@@ -14,7 +14,7 @@ import javax.persistence.Table;
  *
  * @author Ester
  */
-@Table
+
 @Entity
 @DiscriminatorValue(value = "A")
 public class Aluno extends Usuario {

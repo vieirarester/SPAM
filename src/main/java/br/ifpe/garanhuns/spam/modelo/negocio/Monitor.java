@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  * @author 20141D120122
  */
-@Table
+
 @Entity
 @DiscriminatorValue(value = "M")
 public class Monitor extends Usuario{
