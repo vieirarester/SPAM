@@ -16,19 +16,20 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BuilderHorario {
-    
+
     private long id;
     private String dia;
-    private String hora;
-    
-    public BuilderHorario(){
-        
+    private String horaInicio;
+    private String horaFim;
+
+    public BuilderHorario() {
+
     }
-    
-    public Horario construirHorario(){
-        return new Horario(id, dia, hora);
+
+    public Horario construirHorario() {
+        return new Horario(id, dia, horaInicio, horaFim);
     }
-    
+
     public long getId() {
         return id;
     }
@@ -41,11 +42,20 @@ public class BuilderHorario {
         this.dia = dia;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
     }
+
+    public String getHoraFim() {
+        return horaFim;
+    }
+
+    public void setHoraFim(String horaFim) {
+        this.horaFim = horaFim;
+    }
+
 }

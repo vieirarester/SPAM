@@ -89,7 +89,8 @@ public class MonitorControlador {
 
         Horario h = new Horario();
         h.setDia(this.horario.getDia());
-        h.setHora(this.horario.getHora());
+        h.setHoraInicio(this.horario.getHoraInicio());
+        h.setHoraFim(this.horario.getHoraFim());
 
         if (m.getHorarios() == null) {
             m.setHorarios(new ArrayList<Horario>());
@@ -97,7 +98,7 @@ public class MonitorControlador {
 
         boolean existe = false;
         for (Horario hor : m.getHorarios()) {
-            if (hor.getDia().equals(this.horario.getDia()) && hor.getHora().equals(this.horario.getHora())) {
+            if (hor.getDia().equals(this.horario.getDia()) && hor.getHoraInicio().equals(this.horario.getHoraInicio()) && hor.getHoraFim().equals(this.horario.getHoraFim())) {
                 existe = true;
                 break;
             }

@@ -14,7 +14,6 @@ import javax.persistence.Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ester
@@ -22,23 +21,27 @@ import javax.persistence.Table;
 @Table
 @Entity
 public class Horario {
-    @Column(name="id")
+
+    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     private String dia;
     @Column
-    private String hora;
-    
-    public Horario(){
-        
+    private String horaInicio;
+    @Column
+    private String horaFim;
+
+    public Horario() {
+
     }
 
-    public Horario(long id, String dia, String hora) {
+    public Horario(long id, String dia, String horaInicio, String horaFim) {
         this.id = id;
         this.dia = dia;
-        this.hora = hora;
+        this.horaInicio = horaInicio;
+        this.horaFim = horaFim;
     }
 
     public long getId() {
@@ -53,13 +56,20 @@ public class Horario {
         this.dia = dia;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
     }
-    
-    
+
+    public String getHoraFim() {
+        return horaFim;
+    }
+
+    public void setHoraFim(String horaFim) {
+        this.horaFim = horaFim;
+    }
+
 }
