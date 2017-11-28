@@ -10,9 +10,6 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,20 +19,12 @@ import javax.persistence.Table;
  */
 @Table
 @Entity
-public class Monitor {
+public class Monitor extends Usuario{
 
-    @Column(name = "id")
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
     @Column
     private int tipo = 3;
     @Column
     private String nome;
-    @Column(nullable = false, unique = true)
-    private String login;
-    @Column
-    private String senha;
     @Column
     private String disciplina;
     @OneToMany (cascade = CascadeType.ALL)
@@ -45,10 +34,7 @@ public class Monitor {
     }
     
     public Monitor(long id, String nome, String login, String senha, String disciplina, List<Horario> horarios) {
-        this.id = id;
         this.nome = nome;
-        this.login = login;
-        this.senha = senha;
         this.disciplina = disciplina;
         this.horarios = horarios;
     }
