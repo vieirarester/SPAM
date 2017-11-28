@@ -31,6 +31,7 @@ public class MonitorImplDao implements MonitorDao {
             DaoManagerHiber.getInstance().persist(a);
         }catch(Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

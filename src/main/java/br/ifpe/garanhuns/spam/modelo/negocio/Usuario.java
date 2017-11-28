@@ -7,28 +7,34 @@ package br.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  *
  * @author Ester
  */
-@Table
 @Entity
-public class Administrador extends Usuario{
+@Table
+public class Usuario {
     
     @Column
-    private int tipo = 1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
     @Column
-    private String nome;
-    
-    public Administrador(){
+    protected String login;
+    @Column
+    protected String senha;
+
+    public Usuario() {
         
     }
-
-    public Administrador(long id, String nome, String login, String senha) {
+    
+    public Usuario(long id, String login, String senha) {
         this.id = id;
-        this.nome = nome;
         this.login = login;
         this.senha = senha;
     }
@@ -37,12 +43,8 @@ public class Administrador extends Usuario{
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -60,5 +62,6 @@ public class Administrador extends Usuario{
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
     
 }

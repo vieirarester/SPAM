@@ -7,9 +7,6 @@ package br.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -18,26 +15,15 @@ import javax.persistence.Table;
  */
 @Table
 @Entity
-public class Aluno {
-    @Column(name="id")
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+public class Aluno extends Usuario{
     @Column
     final private int tipo;
     @Column
     private String nome;
-    @Column (nullable=false, unique=true)
-    private String login;
-    @Column
-    private String senha;
 
     public Aluno(long id, String nome, String login, String senha) {
         this.tipo = 2;
-        this.id = id;
         this.nome = nome;
-        this.login = login;
-        this.senha = senha;
     }
 
     public  Aluno() {

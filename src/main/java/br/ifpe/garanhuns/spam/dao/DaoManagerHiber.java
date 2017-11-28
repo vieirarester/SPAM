@@ -41,11 +41,12 @@ public class DaoManagerHiber {
     public void persist(Object o) {
         Transaction tr = null;
         try {
+
             s = sessionFactory.openSession();
             tr = s.beginTransaction();
-            s.save(o);
-            tr.commit();
+            s.save(o);            
             s.flush();
+            tr.commit();
         } catch (RuntimeException e) {
             if (tr != null) tr.rollback();
             throw e;
