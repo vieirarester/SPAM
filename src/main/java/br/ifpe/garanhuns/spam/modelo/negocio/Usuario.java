@@ -34,7 +34,7 @@ public class Usuario {
     protected long id;
     @Column
     protected String nome;
-    @Column
+    @Column(nullable = false, unique = true)
     protected String login;
     @Column
     protected String senha;
