@@ -18,7 +18,6 @@ import javax.persistence.Table;
  *
  * @author 20141D120122
  */
-@Table
 @Entity
 @DiscriminatorValue(value = "M")
 public class Monitor extends Usuario{
@@ -96,6 +95,10 @@ public class Monitor extends Usuario{
     
     public boolean autenticar(String senha) {
         return this.senha.equals(senha);
+    }
+    
+    public String toString(){
+        return ("MonitorControlador: id:"+id+", nome:"+nome+", login:"+login+ ", senha:"+senha+ ", disciplina:"+disciplina+ ", horários:"+horarios+"}");
     }
     
 }
