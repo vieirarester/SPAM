@@ -38,13 +38,13 @@ and open the template in the editor.
             <p:dialog header="Entrar" widgetVar="entrarUsuarioDialog" resizable="false" modal="true">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="usuario" value="Usuário:" />
-                    <p:inputText id="usuario" value="" required="true" label="usuario" />
+                    <p:inputText id="usuario" value="#{login}" required="true" requiredMessage="O login é obrigatório!" />
 
                     <h:outputLabel for="senha" value="Senha:" />
-                    <p:password id="senha" value="" required="true" label="senha" />
+                    <p:password id="senha" value="#{senha}" required="true" requiredMessage="A senha é obrigatória!" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Entrar" icon="ui-icon-key" update="mensagem" actionListener="#" />
+                        <p:commandButton value="Entrar" icon="ui-icon-key" update="mensagem" actionListener="#{usuarioControlador.realizarLogin(login, senha)}" />
                     </f:facet>  
                 </h:panelGrid>
             </p:dialog>
