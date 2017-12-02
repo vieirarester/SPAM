@@ -8,7 +8,6 @@ package br.ifpe.garanhuns.spam.modelo.negocio;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  *
