@@ -22,23 +22,24 @@ and open the template in the editor.
         <h:form id="cadastrarAluno">
             <p:growl id="msgCadastroAluno"/>
             <p:fieldset legend="Cadastrar Aluno">
-                <p:panelGrid columns="3">
+                <p:panelGrid columns="2">
                     <h:outputText value="Nome*"/>
                     <p:inputText id="nomeAluno" value="#{builderAluno.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
-                    <p:message for="nomeAluno"/>
 
                     <h:outputText value="Login*"/>
                     <p:inputText id="loginAluno" value="#{builderAluno.login}" required="true" requiredMessage="O login é obrigatório!"/>
-                    <p:message for="loginAluno"/>
 
                     <h:outputText value="Senha*"/>
                     <p:password id="senhaAluno" value="#{builderAluno.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
-                    <p:message for="senhaAluno"/>
                     
                     <h:outputText value="Curso*"/>
                     <p:inputText id="cursoAluno" value="#{builderAluno.curso}" required="true" requiredMessage="O curso é obrigatório!"/>
                     
                 </p:panelGrid>
+                <br></br>
+                * Campos obrigatórios
+                <br></br>
+                <br></br>
                 
                 <p:commandButton value="Cadastrar" icon="ui-icon-disk" oncomplete="PF('cadastrarAlunoDialog').show()"/>
             </p:fieldset>
