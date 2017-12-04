@@ -60,4 +60,14 @@ public class BuilderMonitor {
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 }
