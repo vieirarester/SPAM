@@ -27,7 +27,7 @@ public class Monitor{
     private long id;
     @Column
     private String nome;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
     @Column
     private String disciplina;

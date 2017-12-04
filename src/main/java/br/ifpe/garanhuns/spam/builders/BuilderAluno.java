@@ -24,6 +24,7 @@ public class BuilderAluno {
     private Usuario usuario;
 
     public BuilderAluno() {
+        this.usuario = new Usuario();
     }
     
     public Aluno construirAluno() {

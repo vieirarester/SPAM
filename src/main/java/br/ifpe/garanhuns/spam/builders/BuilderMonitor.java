@@ -27,6 +27,7 @@ public class BuilderMonitor {
     private List<Horario> horarios;
 
     public BuilderMonitor() {
+        this.usuario = new Usuario();
     }
     
     public Monitor construirMonitor() {

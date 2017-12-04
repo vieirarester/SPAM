@@ -5,6 +5,7 @@
  */
 package br.ifpe.garanhuns.spam.modelo.negocio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Aluno {
     private String nome;
     @Column
     private String curso;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     public Aluno() {

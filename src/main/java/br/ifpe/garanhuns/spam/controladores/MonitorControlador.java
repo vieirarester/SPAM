@@ -9,6 +9,7 @@ import br.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.ifpe.garanhuns.spam.modelo.negocio.Monitor;
+import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,12 +30,14 @@ public class MonitorControlador {
 
     private Monitor monitor;
     private Horario horario;
+    private Usuario usuario;
 
     @PostConstruct
     public void inicializar() {
         monitorDao = new MonitorImplDao();
         monitor = new Monitor();
         horario = new Horario();
+        usuario = new Usuario();
     }
 
     public Monitor getMonitor() {

@@ -8,6 +8,7 @@ package br.ifpe.garanhuns.spam.controladores;
 import br.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -24,13 +25,15 @@ import javax.faces.context.FacesContext;
 public class AlunoControlador {
 
     AlunoDao alunoDao = null;
-
+    
+    private Usuario usuario;
     private Aluno aluno;
 
     @PostConstruct
     public void inicializar() {
         alunoDao = new AlunoImplDao();
         aluno = new Aluno();
+        usuario = new Usuario();
     }
 
     public Aluno getAluno() {
