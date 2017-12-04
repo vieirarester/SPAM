@@ -2,31 +2,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Bem-vindo ao SPAM</title>
     </h:head>
-    <h:body style="background-color: #acb8ff">        
-        <ui:include src="Menu.xhtml"/>
-        
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <center>
-            <table>
-                <tr>
-                    <td style="height: 50%">
-                        <h1 style="color: black; font-style: italic; font-size: 400%; font-family: serif"> Bem-vindo ao SPAM!</h1>
-                    </td>
-                </tr>
-            </table>
-        </center>
+    <h:body style="background-color: #acb8ff">
+        <p:fieldset style="background-color: deeppink">
+            <p:menubar>
+                <f:facet name="options">
+                    <p:splitButton value="Inscreva-se">
+                        <p:menuitem value="Sou aluno" url="CadastroAluno.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+                        <p:menuitem value="Sou monitor" url="CadastroMonitor.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+                    </p:splitButton>
+                    <p:commandButton value="Entrar" oncomplete="PF('entrarUsuarioDialog').show()"/>
+
+                </f:facet>
+            </p:menubar>
+            <center>
+                <h1>Bem-vindo ao SPAM!</h1>
+            </center>
+        </p:fieldset>
+
+        <p:panel>
+            <center>
+                <p:inputText style="margin-right:10px; width: 25%" placeholder="Pesquisar"/>
+                <p:commandButton icon="ui-icon-search"/>
+            </center>
+        </p:panel>
+
+        <p:panel>
+            <div align="right">
+                <p:panelGrid columns="1">
+                    <h3 align="center"> Entre na sua conta</h3>
+                    <p:inputText placeholder="Usuário"/>
+                    <p:password placeholder="Senha"/>
+                    <p:commandButton value="Entrar" style="width: 100%"/>
+                </p:panelGrid>
+            </div>
+        </p:panel>
+
+        <p:dialog header="Entrar no SPAM" widgetVar="entrarUsuarioDialog" resizable="false" modal="true" style="width: 100%">
+            <p:panel>
+                <p:inputText placeholder="Usuário" style="width: 97%"/><br></br>
+                <p:password placeholder="Senha" style="width: 97%"/><br></br>
+                <br></br>
+                <br></br>
+                <p:commandButton value="Entrar" style="width: 100%"/>
+                <f:facet name="footer">
+                    Não tem uma conta? Inscreva-se!
+                </f:facet>
+            </p:panel>
+        </p:dialog>
+
+        <p:layoutUnit position="south">
+            <p:panel>
+                <center>
+                    <p:commandLink value="Sobre" style="margin-right: 70px"/>
+                    <p:commandLink value="Ajuda"/>
+                </center>
+            </p:panel>
+        </p:layoutUnit>
     </h:body>
 </html>
 
