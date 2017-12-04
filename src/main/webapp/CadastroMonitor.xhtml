@@ -27,10 +27,10 @@ and open the template in the editor.
                             <p:inputText id="nomeMonitor" value="#{builderMonitor.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
 
                             <h:outputText value="Login*"/>
-                            <p:inputText id="loginMonitor" value="#{builderMonitor.login}" required="true" requiredMessage="O login é obrigatório!"/>
+                            <p:inputText id="loginMonitor" value="#{builderMonitor.usuario.login}" required="true" requiredMessage="O login é obrigatório!"/>
 
                             <h:outputText value="Senha*"/>
-                            <p:password id="senhaMonitor" value="#{builderMonitor.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
+                            <p:password id="senhaMonitor" value="#{builderMonitor.usuario.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
 
                             <h:outputText value="Disciplina*"/>
                             <p:inputText id="disciplinaMonitor" value="#{builderMonitor.disciplina}" required="true" requiredMessage="A disciplina é obrigatória!"/>
