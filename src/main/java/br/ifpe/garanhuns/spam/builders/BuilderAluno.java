@@ -6,6 +6,7 @@
 package br.ifpe.garanhuns.spam.builders;
 
 import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -19,15 +20,14 @@ public class BuilderAluno {
     
     private long id;
     private String nome;
-    private String login;
-    private String senha;
     private String curso;
+    private Usuario usuario;
 
     public BuilderAluno() {
     }
     
     public Aluno construirAluno() {
-        return new Aluno(id, nome, login, senha, curso);
+        return new Aluno(id, nome, curso, usuario);
     }
 
     public long getId() {
@@ -42,27 +42,19 @@ public class BuilderAluno {
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getCurso() {
         return curso;
     }
 
     public void setCurso(String curso) {
         this.curso = curso;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

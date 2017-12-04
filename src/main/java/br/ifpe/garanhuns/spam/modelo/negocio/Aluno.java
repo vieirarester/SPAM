@@ -6,25 +6,54 @@
 package br.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Ester
  */
 @Entity
-@DiscriminatorValue(value = "A")
-public class Aluno extends Usuario {
+public class Aluno {
 
+    @Id
+    @GeneratedValue
+    private long id;
+    @Column
+    private String nome;
     @Column
     private String curso;
-
-    public Aluno(long id, String nome, String login, String senha, String curso) {
-        this.curso = curso;
-    }
+    @OneToOne
+    private Usuario usuario;
 
     public Aluno() {
+    }
+    
+    public Aluno(long id, String nome, String curso, Usuario usuario){
+        this.id = id;
+        this.nome = nome;
+        this.curso = curso;
+        this.usuario = usuario;
+    }
+
+    public Aluno(String nome, String curso, Usuario usuario) {
+        this.nome = nome;
+        this.curso = curso;
+        this.usuario = usuario;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCurso() {
@@ -35,17 +64,25 @@ public class Aluno extends Usuario {
         this.curso = curso;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public void alterar(Aluno t) {
         if (t == null) {
             return;
         }
-        this.setLogin(t.getLogin());
-        this.setSenha(t.getSenha());
+        this.getUsuario().setLogin(t.usuario.getLogin());
+        this.getUsuario().setSenha(t.usuario.getSenha());
         this.setNome(t.getNome());
     }
 
     public boolean autenticar(String password) {
-        return this.senha.equals(password);
+        return this.usuario.getSenha().equals(password);
     }
 
     @Override

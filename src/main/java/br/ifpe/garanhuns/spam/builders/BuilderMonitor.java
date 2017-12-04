@@ -7,6 +7,7 @@ package br.ifpe.garanhuns.spam.builders;
 
 import br.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.ifpe.garanhuns.spam.modelo.negocio.Monitor;
+import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,8 +22,7 @@ public class BuilderMonitor {
     
     private long id;
     private String nome;
-    private String login;
-    private String senha;
+    private Usuario usuario;
     private String disciplina;
     private List<Horario> horarios;
 
@@ -30,7 +30,7 @@ public class BuilderMonitor {
     }
     
     public Monitor construirMonitor() {
-        return new Monitor(id, nome, login, senha, disciplina, horarios);
+        return new Monitor(id, nome, usuario, disciplina, horarios);
     }
 
     public long getId() {
@@ -43,22 +43,6 @@ public class BuilderMonitor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getDisciplina() {

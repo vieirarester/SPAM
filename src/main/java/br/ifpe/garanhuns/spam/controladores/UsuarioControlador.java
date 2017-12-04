@@ -33,46 +33,6 @@ public class UsuarioControlador {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
 
-    public String realizarLogin(String login, String senha) {
-        String retorno = "/CadastroAluno.xhtml";
-        Usuario usuario = null;
-
-        usuario = this.monitorDao.recuperarLogin(login);
-        if (usuario != null) {
-            //Redirecionar Monitor
-            if (usuario.getSenha().equals(senha)) {
-                this.setUsuarioLogado(usuario);
-                retorno = "/MonitorIndex.xhtml?faces-redirect=true";
-            } else {
-                usuario = null;
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login ou Senha Inválidos!"));
-            }
-        } else {
-            //Redirecionar Aluno
-            usuario = this.alunoDao.recuperarLogin(login);
-            if (usuario != null) {
-                //Redirecionar Monitor
-                if (usuario.getSenha().equals(senha)) {
-                    this.setUsuarioLogado(usuario);
-                    retorno = "/AlunoIndex.xhtml?faces-redirect=true";
-                } else {
-                    usuario = null;
-                    FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login ou Senha Inválidos!"));
-                }
-            } else {
-
-                usuario = null;
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "login Inválido!"));
-            }
-
-            
-        }
-        return retorno;
-    }
-
     public String realizarLogout() {
 
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

@@ -9,18 +9,26 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author 20141D120122
  */
 @Entity
-@DiscriminatorValue(value = "M")
-public class Monitor extends Usuario{
-
+public class Monitor{
+    
+    @Id
+    @GeneratedValue
+    private long id;
+    @Column
+    private String nome;
+    @OneToOne
+    private Usuario usuario;
     @Column
     private String disciplina;
     @OneToMany (cascade = CascadeType.ALL)
@@ -29,10 +37,31 @@ public class Monitor extends Usuario{
     public Monitor() {
     }
     
-    public Monitor(long id, String nome, String login, String senha, String disciplina, List<Horario> horarios) {
+    public Monitor(long id, String nome, Usuario usuario, String disciplina, List<Horario> horarios) {
         this.nome = nome;
+        this.usuario = usuario;
         this.disciplina = disciplina;
         this.horarios = horarios;
+    }
+    
+    public long getId(){
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getDisciplina() {
@@ -66,10 +95,10 @@ public class Monitor extends Usuario{
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.login, other.login)) {
+        if (!Objects.equals(this.usuario.getLogin(), other.usuario.getLogin())) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
+        if (!Objects.equals(this.usuario.getSenha(), other.usuario.getSenha())) {
             return false;
         }
         if (!Objects.equals(this.disciplina, other.disciplina)) {
@@ -85,19 +114,14 @@ public class Monitor extends Usuario{
         if (t == null) {
             return;
         }
-        this.setLogin(t.getLogin());
-        this.setSenha(t.getSenha());
+        this.usuario.setLogin(t.usuario.getLogin());
+        this.usuario.setSenha(t.usuario.getSenha());
         this.setNome(t.getNome());
         this.setDisciplina(t.getDisciplina());
         this.setHorarios(t.getHorarios());
     }
     
     public boolean autenticar(String senha) {
-        return this.senha.equals(senha);
+        return this.usuario.getSenha().equals(senha);
     }
-    
-    public String toString(){
-        return ("MonitorControlador: id:"+id+", nome:"+nome+", login:"+login+ ", senha:"+senha+ ", disciplina:"+disciplina+ ", horários:"+horarios+"}");
-    }
-    
 }
