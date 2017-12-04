@@ -7,9 +7,11 @@ package br.ifpe.garanhuns.spam.controladores;
 
 import br.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.ifpe.garanhuns.spam.dao.MonitorDao;
-import br.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
+import br.ifpe.garanhuns.spam.dao.UsuarioDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,14 +25,51 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class UsuarioControlador {
 
-    MonitorDao monitorDao = new MonitorImplDao();
-    AlunoDao alunoDao = new AlunoImplDao();
+    UsuarioDao usuarioDao = null;
 
-    public UsuarioControlador() {
+    private Usuario usuario;
+
+    @PostConstruct
+    public void inicializar() {
+        usuarioDao = new UsuarioImplDao();
+        usuario = new Usuario();
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
+    }
+
+    public String realizarLogin(String login, String senha) {
+        String retorno = "";
+        Usuario usuario = null;
+
+        usuario = this.usuarioDao.recuperarLogin(login);
+
+        if (usuario != null) {
+            if (usuario.getSenha().equals(senha)) {
+                this.setUsuarioLogado(usuario);
+                //verificar o tipo do usuario para saber pra qual página retornar
+                retorno = "";
+            } else {
+                usuario = null;
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login ou Senha Inválidos!"));
+            }
+        } else {
+            usuario = null;
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login Inválido!"));
+        }
+
+        return retorno;
     }
 
     public String realizarLogout() {
