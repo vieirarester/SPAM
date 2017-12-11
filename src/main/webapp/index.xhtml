@@ -9,63 +9,66 @@
         <title>Bem-vindo ao SPAM</title>
     </h:head>
     <h:body style="background-color: #acb8ff">
-        <p:fieldset style="background-color: #007eff">
-            <p:menubar>
-                <f:facet name="options">
-                    <p:splitButton value="Inscreva-se">
-                        <p:menuitem value="Sou aluno" url="CadastroAluno.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
-                        <p:menuitem value="Sou monitor" url="CadastroMonitor.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
-                    </p:splitButton>
-                    <p:commandButton value="Entrar" oncomplete="PF('entrarUsuarioDialog').show()"/>
+        <h:form>
+            <p:growl/>
+            <p:fieldset style="background-color: #007eff">
+                <p:menubar>
+                    <f:facet name="options">
+                        <p:splitButton value="Inscreva-se">
+                            <p:menuitem value="Sou aluno" url="CadastroAluno.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+                            <p:menuitem value="Sou monitor" url="CadastroMonitor.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+                        </p:splitButton>
+                        <p:commandButton value="Entrar" oncomplete="PF('entrarUsuarioDialog').show()"/>
 
-                </f:facet>
-            </p:menubar>
-            <center>
-                <h1>Bem-vindo(a)!</h1>
-                <br></br>
-            </center>
-        </p:fieldset>
+                    </f:facet>
+                </p:menubar>
+                <center>
+                    <h1>Bem-vindo(a)!</h1>
+                    <br></br>
+                </center>
+            </p:fieldset>
 
-        <p:panel>
-            <center>
-                <p:inputText style="margin-right:10px; width: 25%" placeholder="Pesquisar"/>
-                <p:commandButton icon="ui-icon-search"/>
-            </center>
-        </p:panel>
-
-        <p:panel style="background-image: url(spam-logo.jpeg)">
-            <div align="right">
-                <p:panelGrid columns="1">
-                    <h3 align="center"> Entre na sua conta</h3>
-                    <p:inputText placeholder="Usuário"/>
-                    <p:password placeholder="Senha"/>
-                    <p:commandButton value="Entrar" style="width: 100%"/>
-                </p:panelGrid>
-            </div>
-        </p:panel>
-
-        <p:dialog header="Entrar no SPAM" widgetVar="entrarUsuarioDialog" resizable="false" modal="true" style="width: 100%">
-            <p:panel>
-                <p:inputText placeholder="Usuário" style="width: 97%"/><br></br>
-                <p:password placeholder="Senha" style="width: 97%"/><br></br>
-                <br></br>
-                <br></br>
-                <p:commandButton value="Entrar" style="width: 100%"/>
-                <f:facet name="footer">
-                    Não tem uma conta? Inscreva-se!
-                </f:facet>
-            </p:panel>
-        </p:dialog>
-
-        <p:layoutUnit position="south">
             <p:panel>
                 <center>
-                    <p:commandLink value="Sobre" style="margin-right: 70px"/>
-                    <p:commandLink value="Ajuda" style="margin-right: 70px"/>
-                    ©2017 SPAM
+                    <p:inputText style="margin-right:10px; width: 25%" placeholder="Pesquisar"/>
+                    <p:commandButton icon="ui-icon-search"/>
                 </center>
             </p:panel>
-        </p:layoutUnit>
+
+            <p:panel style="background-image: url(spam-logo.jpeg)">
+                <div align="right">
+                    <p:panelGrid columns="1">
+                        <h3 align="center"> Entre na sua conta</h3>
+                        <p:inputText placeholder="Usuário" value="#{login}" style="width: 97%" required="true" requiredMessage="O login precisa ser preenchido."/><br></br>
+                        <p:password placeholder="Senha" value="#{senha}" style="width: 97%" required="true" requiredMessage="A senha precisa ser preenchida."/><br></br>
+                        <p:commandButton value="Entrar" style="width: 100%" action="#{usuarioControlador.realizarLogin(login, senha)}"/>
+                    </p:panelGrid>
+                </div>
+            </p:panel>
+
+            <p:dialog header="Entrar no SPAM" widgetVar="entrarUsuarioDialog" resizable="false" modal="true" style="width: 100%">
+                <p:panel>
+                    <p:inputText placeholder="Usuário" value="#{login}" style="width: 97%" required="true" requiredMessage="O login precisa ser preenchido."/><br></br>
+                    <p:password placeholder="Senha" value="#{senha}" style="width: 97%" required="true" requiredMessage="A senha precisa ser preenchida."/><br></br>
+                    <br></br>
+                    <br></br>
+                    <p:commandButton value="Entrar" style="width: 100%" action="#{usuarioControlador.realizarLogin(login, senha)}"/>
+                    <f:facet name="footer">
+                        Não tem uma conta? Inscreva-se!
+                    </f:facet>
+                </p:panel>
+            </p:dialog>
+
+            <p:layoutUnit position="south">
+                <p:panel>
+                    <center>
+                        <p:commandLink value="Sobre" style="margin-right: 70px"/>
+                        <p:commandLink value="Ajuda" style="margin-right: 70px"/>
+                        ©2017 SPAM
+                    </center>
+                </p:panel>
+            </p:layoutUnit>
+        </h:form>
     </h:body>
 </html>
 
