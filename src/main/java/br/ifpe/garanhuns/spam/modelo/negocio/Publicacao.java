@@ -31,13 +31,22 @@ public class Publicacao {
         
     }
     
-    public Publicacao(long id, List<Resposta> respostas){
+    public Publicacao(long id, String titulo, List<Resposta> respostas){
         this.id=id;
+        this.titulo = titulo;
         this.respostas=respostas;
     }
 
     public long getId() {
         return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public List<Resposta> getRespostas() {

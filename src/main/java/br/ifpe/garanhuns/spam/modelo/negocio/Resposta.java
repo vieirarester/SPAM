@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author Ester
  */
 @Entity
-class Resposta {
+public class Resposta {
     
     @Id
     @GeneratedValue
