@@ -7,6 +7,7 @@ package br.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 class Resposta {
     
     @Id
+    @GeneratedValue
     private long id;
     @Column
     private String descricao;
