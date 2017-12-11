@@ -19,7 +19,7 @@ public class AlunoImplDao implements AlunoDao {
     @Override
     public Aluno recuperarLogin(String login) {
         try {
-            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno where login=" + login);
+            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno, Usuario where Aluno.usuario_id = Usuario.id and Usuario.login = '" + login+"'");
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
