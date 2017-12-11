@@ -16,5 +16,7 @@
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Monitor"/>
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Horario"/>
         <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Usuario"/>
+        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Publicacao"/>
+        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Resposta"/>
     </session-factory>
 </hibernate-configuration>
