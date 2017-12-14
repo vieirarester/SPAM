@@ -11,11 +11,31 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Página inicial de alunos</title>
+        <title>Página inicial de Alunos</title>
     </h:head>
-    <h:body style="background-color: #acb8ff">
-        <ui:include src="Menu.xhtml"/>
-        <h1>Finja que aqui tem uma página de aluno</h1>
-
+    <h:body style="background-color: #e3eaf0">
+        <ui:include src="MenuIndexUsuarios.xhtml"/>
+        <h:form>
+            <p:panel>
+                <div align="left">
+                    <p:panel style="width: 20%">
+                        <div align="center">
+                            <h4>Nome do usuário</h4>
+                            <p:commandLink value="Publicações"/>
+                        </div>
+                    </p:panel>
+                </div>
+                <div align="center">
+                    <p:dataTable var="publicacao" style="width: 55%" selectionMode="single">
+                        <p:column headerText="Título">
+                            <h:outputText value="oi"/>
+                        </p:column>
+                        <p:column headerText="Título">
+                            <h:outputText value="oi"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </p:panel>
+        </h:form>
     </h:body>
 </html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body style="background-color: #e3eaf0">
+        <ui:include src="MenuIndexUsuarios.xhtml"/>
+        <h:form>
+            <p:layout>
+                <p:layoutUnit size = "250" position="west" gutter="30" >
+                    <div align="center">
+                        <p:panel>
+                            <h4>Nome do usuário</h4>
+                            <p:commandLink value="Publicações"/>
+                        </p:panel>
+                    </div>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <center>
+                        <p:panel>
+                            <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 41%"/>
+                        </p:panel>
+                        
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                        oi<br></br>
+                    </center>
+                </p:layoutUnit>
+
+                <p:layoutUnit size = "250" position="east" gutter="30">
+                    <ui:insert name="menu">
+                    </ui:insert>
+                </p:layoutUnit>
+            </p:layout>
+            <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
+                <p:panel>
+                    <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{builderPublicacao.titulo}"/><br></br><br></br>
+                    <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{builderPublicacao.mensagem}"/>
+
+                    <f:facet name="footer">
+                        <center>
+                            <p:commandButton value="Publicar" icon="ui-icon-check"/>
+                        </center>
+                    </f:facet>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
