@@ -21,13 +21,14 @@ public class BuilderPublicacao {
     
     private long id;
     private String titulo;
+    private String mensagem;
     private List<Resposta> respostas;
     
     public BuilderPublicacao(){
     }
     
     public Publicacao construirPublicacao(){
-        return new Publicacao(id, titulo, respostas);
+        return new Publicacao(id, titulo, mensagem, respostas);
     }
     
     public long getId() {
@@ -40,6 +41,14 @@ public class BuilderPublicacao {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public List<Resposta> getRespostas() {

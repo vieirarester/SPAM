@@ -24,6 +24,8 @@ public class Publicacao {
     private long id;
     @Column
     private String titulo;
+    @Column
+    private String mensagem;
     @OneToMany
     private List<Resposta> respostas;
     
@@ -31,9 +33,10 @@ public class Publicacao {
         
     }
     
-    public Publicacao(long id, String titulo, List<Resposta> respostas){
+    public Publicacao(long id, String titulo, String mensagem, List<Resposta> respostas){
         this.id=id;
         this.titulo = titulo;
+        this.mensagem = mensagem;
         this.respostas=respostas;
     }
 
@@ -47,6 +50,14 @@ public class Publicacao {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     public List<Resposta> getRespostas() {
