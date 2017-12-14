@@ -6,10 +6,8 @@
 package br.ifpe.garanhuns.spam.controladores;
 
 import br.ifpe.garanhuns.spam.dao.AlunoDao;
-import br.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.ifpe.garanhuns.spam.dao.UsuarioDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
-import br.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -58,7 +56,6 @@ public class UsuarioControlador {
     }
     
     public String realizarLogin(String login, String senha) {
-        String retorno = "";
         Aluno aluno = null;
 
         aluno = this.alunoDao.recuperarLogin(login);
@@ -66,7 +63,6 @@ public class UsuarioControlador {
         if (aluno != null) {
             if (aluno.getUsuario().getSenha().equals(senha)) {
                 this.setAlunoLogado(aluno);
-                retorno = "/AlunoIndex.xhtml";
             } else {
                 aluno = null;
                 FacesContext.getCurrentInstance().addMessage(null,
@@ -78,7 +74,7 @@ public class UsuarioControlador {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login Inválido!"));
         }
 
-        return retorno;
+        return "/alunoIndex.xhtml";
     }
 
     public String realizarLogout() {
