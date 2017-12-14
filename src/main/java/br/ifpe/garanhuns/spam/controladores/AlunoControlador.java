@@ -73,16 +73,4 @@ public class AlunoControlador {
     public List<Aluno> recuperarTodosAluno() {
         return this.alunoDao.recuperarTodos();
     }
-    /**
-     * public void entrar(){ FacesContext context =
-     * FacesContext.getCurrentInstance(); try { Aluno aluno =
-     * alunoDao.entrar(aluno.getLogin(), aluno.getSenha());
-     * context.getExternalContext().getSessionMap().put("alunoLogado", aluno);
-     * context.getExternalContext().redirect(
-     * context.getExternalContext().getRequestContextPath() +
-     * "/aluno/index.xhtml"); } catch (Exception ex) {
-     * Logger.getLogger(AlunoControlador.class.getName()).log(Level.SEVERE,
-     * null, ex); } }
-    *
-     */
 }
