@@ -19,7 +19,7 @@
                             <p:menuitem value="Sou aluno" url="cadastroAluno.xhtml" icon="ui-icon-person" />
                             <p:menuitem value="Sou monitor" url="cadastroMonitor.xhtml" icon="ui-icon-person" />
                         </p:menuButton>
-                       
+
                     </f:facet>
                 </p:menubar>
                 <center>
@@ -41,7 +41,12 @@
                         <p:panel style="width: 20%">
                             <h3 align="center"> Entre na sua conta</h3>
                             <p:inputText placeholder="Usuário" value="#{builderUsuario.login}" required="true" requiredMessage="Login é obrigatório" style="width: 97%"/><br></br><br></br>
-                            <p:password placeholder="Senha" value="#{builderUsuario.senha}" required="true" requiredMessage="Senha é obrigatório" style="width: 97%"/><br></br><br></br>
+                            <p:password placeholder="Senha" value="#{builderUsuario.senha}" required="true" requiredMessage="Senha é obrigatório" style="width: 97%"/><br></br>
+                            <p:panel>
+                                <h:form>
+                                    <center><p:commandLink value="Esqueci a senha" ajax="false"/><br></br></center>
+                                </h:form>
+                            </p:panel>
                             <p:commandButton value="Entrar" style="width: 100%" update="@all" action="#{usuarioControlador.realizarLogin(builderUsuario.login, builderUsuario.senha)}"/>
                         </p:panel>
                     </h:form>
