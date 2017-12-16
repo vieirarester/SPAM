@@ -13,7 +13,9 @@ import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -35,6 +37,7 @@ public class UsuarioControlador {
     private Usuario usuario;
     private Aluno aluno;
     private Monitor monitor;
+    private Publicacao publicacao; 
 
     @PostConstruct
     public void inicializar() {
@@ -44,6 +47,7 @@ public class UsuarioControlador {
         aluno = new Aluno();
         monitorDao = new MonitorImplDao();
         monitor = new Monitor();
+        publicacao = new Publicacao();
     }
 
     public Aluno getAluno() {
@@ -66,8 +70,8 @@ public class UsuarioControlador {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
     
-     public Aluno getUsuarioLogado() {
-        return (Aluno) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+     public Usuario getUsuarioLogado() {
+        return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("usuarioLogado");
     }
 
@@ -146,5 +150,32 @@ public class UsuarioControlador {
 
         return "/index.xhtml";
     }
+    
+    public String inserirHorario() {
 
+        Usuario u = this.getUsuarioLogado();
+
+        Publicacao p = new Publicacao();
+        p.setTitulo(this.publicacao.getTitulo());
+        p.setMensagem(this.publicacao.getMensagem());
+        p.setRespostas(this.publicacao.getRespostas());
+
+        if (u.getPublicacoes()== null) {
+            u.setPublicacoes(new ArrayList<Publicacao>());
+        }
+
+        u.getPublicacoes().add(p);
+        this.setUsuario(u);
+        
+
+        return "";
+    }
+
+    public String removePublicacao(Publicacao publicacao) {
+        Usuario u = this.getUsuarioLogado();
+        u.getPublicacoes().remove(publicacao);
+        this.setUsuario(u);
+        return "";
+    }
+    
 }
