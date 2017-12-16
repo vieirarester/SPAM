@@ -10,13 +10,13 @@
         <property name="hibernate.connection.password">1234</property>
         
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Aluno"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Monitor"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Horario"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Usuario"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Publicacao"/>
-        <mapping class="br.ifpe.garanhuns.spam.modelo.negocio.Resposta"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao"/>
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Resposta"/>
     </session-factory>
 </hibernate-configuration>
