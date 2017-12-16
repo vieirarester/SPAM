@@ -5,8 +5,12 @@
  */
 package br.edu.ifpe.garanhuns.spam.controladores;
 
+import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
+import br.edu.ifpe.garanhuns.spam.dao.UsuarioDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -27,6 +31,7 @@ import javax.faces.context.FacesContext;
 public class MonitorControlador {
 
     MonitorDao monitorDao = null;
+    AlunoDao alunoDao = null;
 
     private Monitor monitor;
     private Horario horario;
@@ -35,6 +40,7 @@ public class MonitorControlador {
     @PostConstruct
     public void inicializar() {
         monitorDao = new MonitorImplDao();
+        alunoDao = new AlunoImplDao();
         monitor = new Monitor();
         horario = new Horario();
         usuario = new Usuario();
@@ -55,14 +61,28 @@ public class MonitorControlador {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-
+    
+    public boolean validarUsuario(String login){
+        boolean jaExiste;
+        if(monitorDao.recuperarLogin(login)!=null || alunoDao.recuperarLogin(login)!=null){
+            jaExiste=true;
+        } else{
+            jaExiste=false;
+        }
+        return jaExiste;
+    }
+    
     public String inserirMonitor(Monitor monitor) {
-
-        monitor.setHorarios(this.monitor.getHorarios());
         
-        this.monitorDao.inserir(monitor);
+        if (!validarUsuario(monitor.getUsuario().getLogin())) {
+            monitor.setHorarios(this.monitor.getHorarios());
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));
+            this.monitorDao.inserir(monitor);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
+        }
         return "";
     }
 
@@ -87,8 +107,8 @@ public class MonitorControlador {
     public List<Monitor> recuperarTodosMonitor() {
         return this.monitorDao.recuperarTodos();
     }
-    
-    public List<Horario> recuperarTodosHorario(){
+
+    public List<Horario> recuperarTodosHorario() {
         return this.monitor.getHorarios();
     }
 

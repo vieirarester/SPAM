@@ -16,9 +16,8 @@ and open the template in the editor.
     </h:head>
     <h:body style="background-color: #e3eaf0">
         <ui:include src="menuPaginasCadastro.xhtml"/>
-        <p:messages/>
-
         <h:form id="cadastrarAluno">
+            <p:growl id="mensagemCadastroMonitor" life="5000"/>
             <p:panel>
                 <center>
                     <p:fieldset legend="Cadastrar Aluno">
@@ -28,7 +27,7 @@ and open the template in the editor.
 
                             <h:outputText value="Curso*"/>
                             <p:inputText id="cursoAluno" value="#{builderAluno.curso}" required="true" requiredMessage="O curso é obrigatório!"/>
-                            
+
                             <h:outputText value="Login*"/>
                             <p:inputText id="loginAluno" value="#{builderAluno.usuario.login}" required="true" requiredMessage="O login é obrigatório!"/>
 

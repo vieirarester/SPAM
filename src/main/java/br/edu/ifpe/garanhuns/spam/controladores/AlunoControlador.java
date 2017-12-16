@@ -6,7 +6,9 @@
 package br.edu.ifpe.garanhuns.spam.controladores;
 
 import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
+import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
@@ -25,13 +27,15 @@ import javax.faces.context.FacesContext;
 public class AlunoControlador {
 
     AlunoDao alunoDao = null;
-    
+    MonitorDao monitorDao = null;
+
     private Usuario usuario;
     private Aluno aluno;
 
     @PostConstruct
     public void inicializar() {
         alunoDao = new AlunoImplDao();
+        monitorDao = new MonitorImplDao();
         aluno = new Aluno();
         usuario = new Usuario();
     }
@@ -44,11 +48,24 @@ public class AlunoControlador {
         this.aluno = aluno;
     }
 
+    public boolean validarUsuario(String login) {
+        boolean jaExiste;
+        if (alunoDao.recuperarLogin(login) != null || monitorDao.recuperarLogin(login)!=null) {
+            jaExiste = true;
+        } else {
+            jaExiste = false;
+        }
+        return jaExiste;
+    }
+
     public String inserirAluno(Aluno aluno) {
 
-        this.alunoDao.inserir(aluno);
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O aluno foi cadastrado com sucesso!"));
+        if (!validarUsuario(aluno.getUsuario().getLogin())) {
+            this.alunoDao.inserir(aluno);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O aluno foi cadastrado com sucesso!"));
+        } else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
+        }
         return "";
     }
 

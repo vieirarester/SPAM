@@ -15,9 +15,8 @@ and open the template in the editor.
     </h:head>
     <h:body style="background-color: #e3eaf0">
         <ui:include src="menuPaginasCadastro.xhtml"/>
-        <p:messages/>
-
         <h:form id="cadastrarMonitor">
+            <p:growl id="mensagemCadastroMonitor" life="5000"/>
             <p:panel>
                 <center>
                     <p:fieldset legend="Cadastrar Monitor">
