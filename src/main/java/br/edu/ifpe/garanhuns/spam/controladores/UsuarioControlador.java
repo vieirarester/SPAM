@@ -66,6 +66,14 @@ public class UsuarioControlador {
         this.usuario = usuario;
     }
 
+    public Publicacao getPublicacao() {
+        return publicacao;
+    }
+
+    public void setPublicacao(Publicacao publicacao) {
+        this.publicacao = publicacao;
+    }
+    
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
