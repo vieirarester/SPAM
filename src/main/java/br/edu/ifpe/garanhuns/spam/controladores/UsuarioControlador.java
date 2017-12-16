@@ -151,7 +151,7 @@ public class UsuarioControlador {
         return "/index.xhtml";
     }
     
-    public String inserirHorario() {
+    public String inserirPublicacao() {
 
         Usuario u = this.getUsuarioLogado();
 
