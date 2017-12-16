@@ -20,14 +20,13 @@ and open the template in the editor.
                     <p:commandButton value="Entrar" oncomplete="PF('entrarUsuarioDialog').show()"/>
                 </f:facet>
             </p:menubar>
-
             <p:dialog header="Entrar no SPAM" widgetVar="entrarUsuarioDialog" resizable="false" modal="true" style="width: 100%" closeOnEscape="true">
                 <p:panel>
-                    <p:inputText placeholder="Usuário" style="width: 97%"/><br></br>
-                    <p:password placeholder="Senha" style="width: 97%"/><br></br>
+                    <p:inputText placeholder="Usuário" value="#{builderUsuario.login}" required="true" requiredMessage="Login é obrigatório" style="width: 97%"/><br></br>
+                    <p:password placeholder="Senha" value="#{builderUsuario.senha}" required="true" requiredMessage="Senha é obrigatório" style="width: 97%"/><br></br>
                     <br></br>
                     <br></br>
-                    <p:commandButton value="Entrar" style="width: 100%"/>
+                    <p:commandButton value="Entrar" update="@all" action="#{usuarioControlador.realizarLogin(builderUsuario.login, builderUsuario.senha)}" style="width: 100%"/>
                     <f:facet name="footer">
                         Não tem uma conta? Inscreva-se!
                     </f:facet>
