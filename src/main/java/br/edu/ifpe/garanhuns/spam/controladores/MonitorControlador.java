@@ -61,19 +61,19 @@ public class MonitorControlador {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-    
-    public boolean validarUsuario(String login){
+
+    public boolean validarUsuario(String login) {
         boolean jaExiste;
-        if(monitorDao.recuperarLogin(login)!=null || alunoDao.recuperarLogin(login)!=null){
-            jaExiste=true;
-        } else{
-            jaExiste=false;
+        if (monitorDao.recuperarLogin(login) != null || alunoDao.recuperarLogin(login) != null) {
+            jaExiste = true;
+        } else {
+            jaExiste = false;
         }
         return jaExiste;
     }
-    
+
     public String inserirMonitor(Monitor monitor) {
-        
+
         if (!validarUsuario(monitor.getUsuario().getLogin())) {
             monitor.setHorarios(this.monitor.getHorarios());
 
@@ -112,6 +112,26 @@ public class MonitorControlador {
         return this.monitor.getHorarios();
     }
 
+    public boolean validarHorario(Horario horario) {
+        String[] horaEntrada = horario.getHoraInicio().split(":");
+        String[] horaSaida = horario.getHoraFim().split(":");
+        int[] entrada = new int[2];
+        int[] saida = new int[2];
+
+        for (int i = 0; i < 2; i++) {
+            entrada[i] = Integer.parseInt(horaEntrada[i]);
+            saida[i] = Integer.parseInt(horaSaida[i]);
+        }
+
+        if (entrada[0] < saida[0]) {
+            return true;
+        } else if (entrada[1] < saida[1]) {
+            return true;
+        }
+
+        return false;
+    }
+
     public String inserirHorario() {
 
         Monitor m = this.getMonitor();
@@ -134,10 +154,16 @@ public class MonitorControlador {
         }
 
         if (!existe) {
-            m.getHorarios().add(h);
-            this.setMonitor(m);
+            if (validarHorario(h)) {
+                m.getHorarios().add(h);
+                this.setMonitor(m);
+            } else {
+                FacesContext.getCurrentInstance().addMessage("mensagemCadastroMonitor", new FacesMessage("Formato de horário errado. Hora de entrada posterior a hora de saida!"));
+
+            }
+
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Horário já cadastrado!"));
+            FacesContext.getCurrentInstance().addMessage("mensagemCadastroMonitor", new FacesMessage("Horário já cadastrado!"));
         }
 
         return "";
