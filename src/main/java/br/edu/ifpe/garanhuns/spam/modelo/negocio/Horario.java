@@ -1,4 +1,4 @@
-package br.ifpe.garanhuns.spam.modelo.negocio;
+package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

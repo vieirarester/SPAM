@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.controladores;
+package br.edu.ifpe.garanhuns.spam.controladores;
 
-import br.ifpe.garanhuns.spam.dao.AlunoDao;
-import br.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
-import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

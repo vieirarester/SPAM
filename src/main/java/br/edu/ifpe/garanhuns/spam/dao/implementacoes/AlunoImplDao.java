@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.dao.implementacoes;
+package br.edu.ifpe.garanhuns.spam.dao.implementacoes;
 
-import br.ifpe.garanhuns.spam.dao.DaoManagerHiber;
-import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.edu.ifpe.garanhuns.spam.dao.DaoManagerHiber;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import java.util.List;
-import br.ifpe.garanhuns.spam.dao.AlunoDao;
+import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
 
 /**
  *
@@ -19,7 +19,11 @@ public class AlunoImplDao implements AlunoDao {
     @Override
     public Aluno recuperarLogin(String login) {
         try {
-            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno, Usuario where Aluno.usuario_id = Usuario.id and Usuario.login = '" + login+"'");
+            DaoManagerHiber dmh = DaoManagerHiber.getInstance();
+
+            List<Aluno> alunos = dmh.recover("from Aluno where login = '" + login+"'");
+            
+            return (Aluno) alunos.get(0);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }

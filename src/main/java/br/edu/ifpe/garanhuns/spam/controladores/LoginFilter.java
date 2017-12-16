@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.controladores;
+package br.edu.ifpe.garanhuns.spam.controladores;
 
-import br.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -36,7 +36,7 @@ public class LoginFilter implements Filter {
         }
         if (alun == null) {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/index.xhtml");
         } else {
             chain.doFilter(request, response);
         }

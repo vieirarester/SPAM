@@ -3,31 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.builders;
+package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
-import br.ifpe.garanhuns.spam.modelo.negocio.Resposta;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author Ester
  */
-@ManagedBean
-@RequestScoped
-public class BuilderResposta {
+@Entity
+public class Resposta {
     
+    @Id
+    @GeneratedValue
     private long id;
+    @Column
     private String descricao;
     
-    public BuilderResposta(){
+    public Resposta(){
         
     }
     
-    public Resposta construirResposta(){
-        return new Resposta(id, descricao);
+    public Resposta(long id, String descricao){
+        this.id = id;
+        this.descricao = descricao;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -38,5 +42,5 @@ public class BuilderResposta {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    } 
+    }  
 }

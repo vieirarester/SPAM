@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.controladores;
+package br.edu.ifpe.garanhuns.spam.controladores;
 
-import br.ifpe.garanhuns.spam.dao.MonitorDao;
-import br.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Horario;
-import br.ifpe.garanhuns.spam.modelo.negocio.Monitor;
-import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -86,6 +86,10 @@ public class MonitorControlador {
 
     public List<Monitor> recuperarTodosMonitor() {
         return this.monitorDao.recuperarTodos();
+    }
+    
+    public List<Horario> recuperarTodosHorario(){
+        return this.monitor.getHorarios();
     }
 
     public String inserirHorario() {

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.dao.implementacoes;
+package br.edu.ifpe.garanhuns.spam.dao.implementacoes;
 
-import br.ifpe.garanhuns.spam.dao.DaoManagerHiber;
-import br.ifpe.garanhuns.spam.dao.UsuarioDao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Usuario;
+import br.edu.ifpe.garanhuns.spam.dao.DaoManagerHiber;
+import br.edu.ifpe.garanhuns.spam.dao.UsuarioDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
 
 /**

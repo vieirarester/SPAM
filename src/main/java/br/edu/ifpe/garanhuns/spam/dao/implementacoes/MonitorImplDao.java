@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.dao.implementacoes;
+package br.edu.ifpe.garanhuns.spam.dao.implementacoes;
 
-import br.ifpe.garanhuns.spam.dao.DaoManagerHiber;
-import br.ifpe.garanhuns.spam.dao.MonitorDao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Monitor;
+import br.edu.ifpe.garanhuns.spam.dao.DaoManagerHiber;
+import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import java.util.List;
 
 /**
@@ -19,7 +19,11 @@ public class MonitorImplDao implements MonitorDao {
     @Override
     public Monitor recuperarLogin(String login) {
         try {
-            return (Monitor) DaoManagerHiber.getInstance().recover("from Monitor where login=" + login);
+            DaoManagerHiber dmh = DaoManagerHiber.getInstance();
+            
+            List<Monitor> monitores = dmh.recover("from Monitor where login = '" + login+"'");
+            
+            return (Monitor) monitores.get(0);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }

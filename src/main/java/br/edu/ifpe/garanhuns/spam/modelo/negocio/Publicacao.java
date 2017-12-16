@@ -3,34 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifpe.garanhuns.spam.builders;
+package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
-import br.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
-import br.ifpe.garanhuns.spam.modelo.negocio.Resposta;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Ester
  */
-@ManagedBean
-@RequestScoped
-public class BuilderPublicacao {
+@Entity
+public class Publicacao {
     
+    @Id
+    @GeneratedValue
     private long id;
+    @Column
     private String titulo;
+    @Column
     private String mensagem;
+    @OneToMany
     private List<Resposta> respostas;
     
-    public BuilderPublicacao(){
+    public Publicacao(){
+        
     }
     
-    public Publicacao construirPublicacao(){
-        return new Publicacao(id, titulo, mensagem, respostas);
+    public Publicacao(long id, String titulo, String mensagem, List<Resposta> respostas){
+        this.id=id;
+        this.titulo = titulo;
+        this.mensagem = mensagem;
+        this.respostas=respostas;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -58,4 +67,6 @@ public class BuilderPublicacao {
     public void setRespostas(List<Resposta> respostas) {
         this.respostas = respostas;
     }
+    
+    
 }

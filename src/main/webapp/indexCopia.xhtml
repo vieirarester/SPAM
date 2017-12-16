@@ -9,9 +9,8 @@
         <title>Bem-vindo ao SPAM</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
-        <p:messages/>
         <h:form>
-            <p:growl id="mensagem" life="4000"/>
+            <p:growl/>
             <p:fieldset style="background-color: #007eff">
                 <p:menubar>
                     <f:facet name="options">
@@ -19,6 +18,7 @@
                             <p:menuitem value="Sou aluno" url="cadastroAluno.xhtml" icon="ui-icon-person" />
                             <p:menuitem value="Sou monitor" url="cadastroMonitor.xhtml" icon="ui-icon-person" />
                         </p:menuButton>
+                        <p:commandButton value="Entrar" oncomplete="PF('entrarUsuarioDialog').show()"/>
 
                     </f:facet>
                 </p:menubar>
@@ -55,7 +55,6 @@
                     </center>
                 </p:panel>
             </p:layoutUnit>
-
         </h:form>
     </h:body>
 </html>
