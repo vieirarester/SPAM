@@ -5,8 +5,11 @@
  */
 package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -15,11 +18,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Usuario {
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String login;
     @Column
     private String senha;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Publicacao> publicacoes;
+    
     public Usuario() {
 
     }
@@ -44,4 +49,14 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public List<Publicacao> getPublicacoes() {
+        return publicacoes;
+    }
+
+    public void setPublicacoes(List<Publicacao> publicacoes) {
+        this.publicacoes = publicacoes;
+    }
+    
+    
 }
