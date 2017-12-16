@@ -123,9 +123,9 @@ public class MonitorControlador {
             saida[i] = Integer.parseInt(horaSaida[i]);
         }
 
-        if (entrada[0] < saida[0]) {
+        if (entrada[0] < saida[0] && horario.getDia()!=null) {
             return true;
-        } else if (entrada[1] < saida[1]) {
+        } else if (entrada[1] < saida[1] && horario.getDia()!=null && entrada[0] == saida[0]) {
             return true;
         }
 
@@ -158,12 +158,12 @@ public class MonitorControlador {
                 m.getHorarios().add(h);
                 this.setMonitor(m);
             } else {
-                FacesContext.getCurrentInstance().addMessage("mensagemCadastroMonitor", new FacesMessage("Formato de horário errado. Hora de entrada posterior a hora de saida!"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Formato de horário errado. Hora de entrada posterior a hora de saida!"));
 
             }
 
         } else {
-            FacesContext.getCurrentInstance().addMessage("mensagemCadastroMonitor", new FacesMessage("Horário já cadastrado!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Horário já cadastrado!"));
         }
 
         return "";
