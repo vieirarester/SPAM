@@ -70,8 +70,18 @@ public class UsuarioControlador {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("alunoLogado", aluno);
     }
 
+    public Aluno getAlunoLogado() {
+        return (Aluno) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+                .get("alunoLogado");
+    }
+
     private void setMonitorLogado(Monitor monitor) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("monitorLogado", monitor);
+    }
+    
+     public Monitor getMonitorLogado() {
+        return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+                .get("monitorLogado");
     }
 
     public String realizarLogin(String login, String senha) {
@@ -84,7 +94,7 @@ public class UsuarioControlador {
                     if (a.getUsuario().getSenha().equals(senha)) {
                         this.setAlunoLogado(a);
                         return "alunoIndex.xhtml";
-                        
+
                     } else {
                         a = null;
                         FacesContext.getCurrentInstance().addMessage(null,
@@ -113,12 +123,12 @@ public class UsuarioControlador {
                 } else {
                     m = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha incorretos!", "Login inválido"));
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha incorretos!", "Login inválido"));
                 }
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login e Senha são obrigatórios!", "Falha no login!"));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login e Senha são obrigatórios!", "Falha no login!"));
         }
         return "";
     }
