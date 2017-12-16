@@ -75,44 +75,50 @@ public class UsuarioControlador {
     }
 
     public String realizarLogin(String login, String senha) {
-        if (this.alunoDao != null) {
+        if (!login.isEmpty() && !senha.isEmpty()) {
+            if (this.alunoDao != null) {
 
-            Aluno a = this.alunoDao.recuperarLogin(login);
+                Aluno a = this.alunoDao.recuperarLogin(login);
 
-            if (a != null) {
-                if (a.getUsuario().getSenha().equals(senha)) {
-                    this.setAlunoLogado(a);
-                    return "alunoIndex.xhtml";
+                if (a != null) {
+                    if (a.getUsuario().getSenha().equals(senha)) {
+                        this.setAlunoLogado(a);
+                        return "alunoIndex.xhtml";
+                        
+                    } else {
+                        a = null;
+                        FacesContext.getCurrentInstance().addMessage(null,
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha inválida!", "Falha no login"));
+                    }
                 } else {
                     a = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login ou Senha Inválidos!"));
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login inválido!", "Falha no login"));
                 }
-            } else {
-                a = null;
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login Inválido!"));
             }
-        }
 
-        if (this.monitorDao != null) {
+            if (this.monitorDao != null) {
 
-            Monitor m = this.monitorDao.recuperarLogin(login);
+                Monitor m = this.monitorDao.recuperarLogin(login);
 
-            if (m != null) {
-                if (m.getUsuario().getSenha().equals(senha)) {
-                    this.setMonitorLogado(m);
-                    return "monitorIndex.xhtml";
+                if (m != null) {
+                    if (m.getUsuario().getSenha().equals(senha)) {
+                        this.setMonitorLogado(m);
+                        return "monitorIndex.xhtml";
+                    } else {
+                        m = null;
+                        FacesContext.getCurrentInstance().addMessage(null,
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Senha inválida!"));
+                    }
                 } else {
                     m = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login ou Senha Inválidos!"));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Login inválido!"));
                 }
-            } else {
-                m = null;
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no Login!", "Login Inválido!"));
             }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login e Senha são obrigatórios!", "Falha no login!"));
         }
         return "";
     }
