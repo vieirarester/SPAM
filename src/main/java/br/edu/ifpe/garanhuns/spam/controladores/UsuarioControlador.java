@@ -162,7 +162,8 @@ public class UsuarioControlador {
     public String inserirPublicacao() {
 
         Usuario u = this.getUsuarioLogado();
-
+        
+        if(u != null){
         Publicacao p = new Publicacao();
         p.setTitulo(this.publicacao.getTitulo());
         p.setMensagem(this.publicacao.getMensagem());
@@ -173,6 +174,7 @@ public class UsuarioControlador {
         }
 
         u.getPublicacoes().add(p);
+        }
         this.setUsuario(u);
         
 
