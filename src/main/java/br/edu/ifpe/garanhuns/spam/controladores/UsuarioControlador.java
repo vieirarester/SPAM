@@ -65,6 +65,11 @@ public class UsuarioControlador {
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
+    
+     public Aluno getUsuarioLogado() {
+        return (Aluno) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+                .get("usuarioLogado");
+    }
 
     private void setAlunoLogado(Aluno aluno) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("alunoLogado", aluno);
@@ -93,6 +98,7 @@ public class UsuarioControlador {
                 if (a != null) {
                     if (a.getUsuario().getSenha().equals(senha)) {
                         this.setAlunoLogado(a);
+                        this.setUsuarioLogado(this.getAlunoLogado().getUsuario());
                         return "alunoIndex.xhtml";
 
                     } else {
@@ -114,6 +120,7 @@ public class UsuarioControlador {
                 if (m != null) {
                     if (m.getUsuario().getSenha().equals(senha)) {
                         this.setMonitorLogado(m);
+                        this.setUsuarioLogado(this.getMonitorLogado().getUsuario());
                         return "monitorIndex.xhtml";
                     } else {
                         m = null;
