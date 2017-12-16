@@ -14,19 +14,40 @@ and open the template in the editor.
         <title>SPAM - Uma nova forma de atendimento de monitoria</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
-        <ui:include src="MenuPaginasCadastro.xhtml"/>
-
+        <ui:include src="menuPaginasCadastro.xhtml"/>
         <p:fieldset style="background-color: #007eff">
 
             <center>
-                <h1>Página de ajuda!</h1>
+                <h1>Central de ajuda</h1>
             </center>
         </p:fieldset>
         <p:panel>
-            <h3>Perguntas Frequentes:</h3>
+            <h2>Olá,<br></br>
+            como podemos ajudar?</h2>
         </p:panel>
-      
-
-
+        <h2>Perguntas Frequentes:</h2>
+        <p:accordionPanel>
+            <p:tab title="Como criar uma conta">
+                <h:panelGrid columns="" cellpadding="10">
+                    <h:outputText
+                        value="Na página principal, basta clicar no botão Inscreva-se no lado superior direito e escolher o tipo
+                        de conta que você quer. Logo em seguida, preencha os campos da página de
+                        cadastro, clique no botão Inscreva-se e logo após Sim para confirmar o cadastro."/>
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="Como entrar na minha conta">
+                <h:panelGrid columns="1" cellpadding="10">
+                    <h:outputText value="Na página inicial, bastar preencher os campos de login e senha 
+                                  corretamente a direita e clicar no botão Entrar pra usar o sistema." />
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="Como fazer uma publicação">
+                <h:panelGrid columns="1" cellpadding="10">
+                    <h:outputText value="Após fazer o login, na página principal do usuário, basta clicar no
+                                  botão Publicar no canto superior direito, escrever o título da publicação
+                                  e a mensagem, em seguida clicar o botão Publicar para enviar a mensagem." />
+                </h:panelGrid>
+            </p:tab>
+        </p:accordionPanel>
     </h:body>
 </html>
