@@ -55,13 +55,16 @@ public class Horario {
     }
 
     public String getHoraInicio() {
+        //Thu Jan 01 04:00:00 GMT-03:00 1970
         String horaResultado = horaInicio;
-        try{
-            if(validarHora(horaInicio)){
-                horaResultado = horaInicio.substring(11,16);
+        try {
+            if (validarHora(horaInicio)) {
+                String[] array = horaInicio.split(" ");
+                horaResultado = array[3];
+                String[] array2 = horaResultado.split(":");
+                horaResultado = ""+array2[0]+":"+array2[1]; 
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
         }
         return horaResultado;
     }
@@ -72,18 +75,20 @@ public class Horario {
 
     public String getHoraFim() {
         String horaResultado = horaFim;
-        try{
-            if(validarHora(horaFim)){
-                horaResultado = horaFim.substring(11,16);
+        try {
+            if (validarHora(horaFim)) {
+                String[] array = horaFim.split(" ");
+                horaResultado = array[3];
+                String[] array2 = horaResultado.split(":");
+                horaResultado = ""+array2[0]+":"+array2[1]; 
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
         }
         return horaResultado;
     }
-    
-    public Boolean validarHora(String horaResultado){
-        if(horaResultado == null || horaResultado.isEmpty()){
+
+    public Boolean validarHora(String horaResultado) {
+        if (horaResultado == null || horaResultado.isEmpty()) {
             return false;
         }
         return true;
