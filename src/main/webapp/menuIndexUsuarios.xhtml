@@ -30,12 +30,12 @@ and open the template in the editor.
 
             <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
                 <p:panel>
-                    <p:inputText id="campoTitulo" placeholder="Título da publicação" value="#{builderPublicacao.titulo}"/><br></br><br></br>
-                    <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar?" value="#{builderPublicacao.mensagem}"/>
+                    <p:inputText id="campoTitulo" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}"/><br></br><br></br>
+                    <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}"/>
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}"/>
                         </center>
                     </f:facet>
                 </p:panel>
