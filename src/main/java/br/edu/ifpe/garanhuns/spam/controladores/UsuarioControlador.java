@@ -88,12 +88,12 @@ public class UsuarioControlador {
                     } else {
                         a = null;
                         FacesContext.getCurrentInstance().addMessage(null,
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha inválida!", "Falha no login"));
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Senha inválida"));
                     }
                 } else {
                     a = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login inválido!", "Falha no login"));
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Login inválido"));
                 }
             }
 
@@ -108,12 +108,12 @@ public class UsuarioControlador {
                     } else {
                         m = null;
                         FacesContext.getCurrentInstance().addMessage(null,
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Senha inválida!"));
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha incorretos!", "Senha inválida"));
                     }
                 } else {
                     m = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Login inválido!"));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha incorretos!", "Login inválido"));
                 }
             }
         } else {
