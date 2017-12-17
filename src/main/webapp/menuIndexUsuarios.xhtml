@@ -20,7 +20,7 @@ and open the template in the editor.
                 <p:menuitem value="Página Inicial" icon="ui-icon-home" update="@all"/>
                 <f:facet name="options">
                     <p:commandButton value="Publicar" oncomplete="PF('publicarDialog').show()"/>
-                    <p:menuButton value="Olá, usuário!">
+                    <p:menuButton value="Olá, #{usuarioControlador.alunoLogado.nome}!">
                         <p:menuitem value="Perfil" url="" icon="ui-icon-person" />
                         <p:menuitem value="Ajuda" url="paginaAjuda.xhtml" icon="ui-icon-help" />
                         <p:menuitem value="Sair" action="#{usuarioControlador.realizarLogout()}" icon=" ui-icon-arrowreturnthick-1-w" />
