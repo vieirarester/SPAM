@@ -12,9 +12,9 @@ import org.junit.Test;
  *
  * @author João Witor
  */
-public class AlunoControladorTest {
+public class AlunoControladorTeste {
 
-    public AlunoControladorTest() {
+    public AlunoControladorTeste() {
     }
 
     @Test(expected = NullPointerException.class)

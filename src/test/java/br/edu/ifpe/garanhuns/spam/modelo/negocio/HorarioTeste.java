@@ -13,13 +13,13 @@ import static org.junit.Assert.*;
  *
  * @author João Witor
  */
-public class HorarioTest {
+public class HorarioTeste {
     
-    public HorarioTest() {
+    public HorarioTeste() {
     }
 
     @Test
-    public void testRetornoHorasDaFormaCorreta() {
+    public void testeRetornoHorasDaFormaCorreta() {
         //Thu Jan 01 04:00:00 GMT-03:00 1970
         Horario horarioFalso = new Horario(1,"Segunda","Thu Jan 01 04:00:00 GMT-03:00 1970","Thu Jan 01 05:00:00 GMT-03:00 1970");
         Assert.assertEquals("04:00", horarioFalso.getHoraInicio());
@@ -28,21 +28,21 @@ public class HorarioTest {
 
 
     @Test
-    public void testValidarHoraQuandoNulo() {
+    public void testeValidarHoraQuandoNulo() {
         Horario horarioFalso = new Horario(1,"Segunda",null,null);
         String horaResultado = horarioFalso.getHoraInicio();
         Assert.assertFalse(horarioFalso.validarHora(horaResultado));
     }
     
     @Test
-    public void testValidarHoraQuandoVazio() {
+    public void testeValidarHoraQuandoVazio() {
         Horario horarioFalso = new Horario();
         String horaResultado = horarioFalso.getHoraInicio();
         Assert.assertFalse(horarioFalso.validarHora(horaResultado));
     }
     
     @Test
-    public void testValidarHoraQuandoCorreto() {
+    public void testeValidarHoraQuandoCorreto() {
         Horario horarioFalso = new Horario(1,"Segunda","Thu Jan 01 04:00:00 GMT-03:00 1970","Thu Jan 01 05:00:00 GMT-03:00 1970");
         String horaResultado = horarioFalso.getHoraInicio();
         Assert.assertTrue(horarioFalso.validarHora(horaResultado));
