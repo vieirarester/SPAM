@@ -39,7 +39,7 @@ and open the template in the editor.
                                 <h:outputText value="Horários"/>
                             </f:facet>
                             <h:outputText value="Dia*"/>
-                            <p:selectOneMenu id="Dia" value="#{monitorControlador.horario.dia}" style="width:200px" required="true">
+                            <p:selectOneMenu id="Dia" value="#{monitorControlador.horario.dia}" style="width:200px" required="true" requiredMessage="Dia é obrigatório!">
                                 <f:selectItem itemLabel="" itemValue=""/>
                                 <f:selectItem itemLabel="Domingo" itemValue="Domingo" />
                                 <f:selectItem itemLabel="Segunda" itemValue="Segunda" />
@@ -51,10 +51,10 @@ and open the template in the editor.
                             </p:selectOneMenu>
 
                             <h:outputText value="Hora de início*"/>
-                            <p:calendar id="horInicioHorarioMonitor"  value="#{monitorControlador.horario.horaInicio}" pattern="HH:mm" timeOnly="true" required="true"/>                           
+                            <p:calendar id="horInicioHorarioMonitor"  value="#{monitorControlador.horario.horaInicio}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de entrada é obrigatório!"/>                           
 
                             <h:outputText value="Hora de saída*"/>
-                            <p:calendar id="horFimHorarioMonitor" value="#{monitorControlador.horario.horaFim}" pattern="HH:mm" timeOnly="true" required="true"/>
+                            <p:calendar id="horFimHorarioMonitor" value="#{monitorControlador.horario.horaFim}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de saída é obrigatório!"/>
                         </p:panelGrid>
                         <p:commandButton value="Adicionar" icon="ui-icon-plus" update="tabelaHorarios"
                                      action="#{monitorControlador.inserirHorario()}"/>
