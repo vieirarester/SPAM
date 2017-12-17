@@ -13,8 +13,9 @@ import java.security.NoSuchAlgorithmException;
  * @author Ester
  */
 public class Criptografia {
+
     private static MessageDigest md = null;
- 
+
     static {
         try {
             md = MessageDigest.getInstance("MD5");
@@ -22,20 +23,20 @@ public class Criptografia {
             ex.printStackTrace();
         }
     }
- 
-  private static char[] codigoHexadecimal(byte[] text) {
+
+    private static char[] codigoHexadecimal(byte[] text) {
         char[] saidaHexa = new char[text.length * 2];
         String textoHexa;
- 
+
         for (int i = 0; i < text.length; i++) {
             textoHexa = "00" + Integer.toHexString(text[i]);
             textoHexa.toUpperCase().getChars(textoHexa.length() - 2,
-                                	textoHexa.length(), saidaHexa, i * 2);
+                    textoHexa.length(), saidaHexa, i * 2);
         }
         return saidaHexa;
     }
- 
-public static String criptografar(String senha) {
+
+    public static String criptografar(String senha) {
         if (md != null) {
             return new String(codigoHexadecimal(md.digest(senha.getBytes())));
         }
