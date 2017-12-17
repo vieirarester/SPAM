@@ -45,11 +45,22 @@ public class PublicacaoControlador {
         this.publicacao = publicacao;
     }
 
+    public boolean validarPublicacao(Publicacao publicacao) {
+        if (publicacao.getTitulo() != null && publicacao.getMensagem() != null) {
+            return true;
+        }
+        return false;
+    }
+
     public String inserirPublicacao(Publicacao publicacao) {
 
-        this.publicacaoDao.inserir(publicacao);
+        if (validarPublicacao(publicacao)) {
+            this.publicacaoDao.inserir(publicacao);
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A publicação foi cadastrada com sucesso!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A publicação foi cadastrada com sucesso!"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Preencha todos os campos!"));
+        }
         return "";
     }
 
