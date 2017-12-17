@@ -5,13 +5,8 @@
  */
 package br.edu.ifpe.garanhuns.spam.controladores;
 
-import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
-import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
-import junit.framework.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 /**
  *
@@ -22,14 +17,11 @@ public class AlunoControladorTest {
     public AlunoControladorTest() {
     }
 
-    @Test (expected=NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testeValidarUsuarioQuandoNulo() {
         String login = "";
         AlunoControlador controlador = new AlunoControlador();
         controlador.validarUsuario(login);
     }
 
-    
-    
-    
 }
