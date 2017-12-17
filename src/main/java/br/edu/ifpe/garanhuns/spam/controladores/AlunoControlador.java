@@ -9,6 +9,7 @@ import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
@@ -59,8 +60,11 @@ public class AlunoControlador {
     }
 
     public String inserirAluno(Aluno aluno) {
-
+        
         if (!validarUsuario(aluno.getUsuario().getLogin())) {
+            String senhaCripto = Criptografia.criptografar(aluno.getUsuario().getSenha());
+            aluno.getUsuario().setSenha(senhaCripto);
+            
             this.alunoDao.inserir(aluno);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O aluno foi cadastrado com sucesso!"));
         } else{

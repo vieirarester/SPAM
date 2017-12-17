@@ -7,15 +7,19 @@ package br.edu.ifpe.garanhuns.spam.controladores;
 
 import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
+import br.edu.ifpe.garanhuns.spam.dao.PublicacaoDao;
 import br.edu.ifpe.garanhuns.spam.dao.UsuarioDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.PublicacaoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -33,11 +37,12 @@ public class UsuarioControlador {
     UsuarioDao usuarioDao;
     AlunoDao alunoDao;
     MonitorDao monitorDao;
+    PublicacaoDao publicacaoDao;
 
     private Usuario usuario;
     private Aluno aluno;
     private Monitor monitor;
-    private Publicacao publicacao; 
+    private Publicacao publicacao;
 
     @PostConstruct
     public void inicializar() {
@@ -47,6 +52,7 @@ public class UsuarioControlador {
         aluno = new Aluno();
         monitorDao = new MonitorImplDao();
         monitor = new Monitor();
+        publicacaoDao = new PublicacaoImplDao();
         publicacao = new Publicacao();
     }
 
@@ -73,12 +79,12 @@ public class UsuarioControlador {
     public void setPublicacao(Publicacao publicacao) {
         this.publicacao = publicacao;
     }
-    
+
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
-    
-     public Usuario getUsuarioLogado() {
+
+    public Usuario getUsuarioLogado() {
         return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("usuarioLogado");
     }
@@ -95,8 +101,8 @@ public class UsuarioControlador {
     private void setMonitorLogado(Monitor monitor) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("monitorLogado", monitor);
     }
-    
-     public Monitor getMonitorLogado() {
+
+    public Monitor getMonitorLogado() {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
@@ -108,7 +114,8 @@ public class UsuarioControlador {
                 Aluno a = this.alunoDao.recuperarLogin(login);
 
                 if (a != null) {
-                    if (a.getUsuario().getSenha().equals(senha)) {
+                    String senhaCripto = Criptografia.criptografar(senha);
+                    if (a.getUsuario().getSenha().equals(senhaCripto)) {
                         this.setAlunoLogado(a);
                         this.setUsuarioLogado(this.getAlunoLogado().getUsuario());
                         return "alunoIndex.xhtml";
@@ -130,7 +137,8 @@ public class UsuarioControlador {
                 Monitor m = this.monitorDao.recuperarLogin(login);
 
                 if (m != null) {
-                    if (m.getUsuario().getSenha().equals(senha)) {
+                    String senhaCripto = Criptografia.criptografar(senha);
+                    if (m.getUsuario().getSenha().equals(senhaCripto)) {
                         this.setMonitorLogado(m);
                         this.setUsuarioLogado(this.getMonitorLogado().getUsuario());
                         return "monitorIndex.xhtml";
@@ -158,25 +166,36 @@ public class UsuarioControlador {
 
         return "/index.xhtml";
     }
-    
-    public String inserirPublicacao() {
 
-        Usuario u = this.getUsuarioLogado();
-        
-        if(u != null){
-        Publicacao p = new Publicacao();
-        p.setTitulo(this.publicacao.getTitulo());
-        p.setMensagem(this.publicacao.getMensagem());
-        p.setRespostas(this.publicacao.getRespostas());
+    public boolean verificarPublicacao(Publicacao publicacao) {
+        boolean jaExiste;
 
-        if (u.getPublicacoes()== null) {
-            u.setPublicacoes(new ArrayList<Publicacao>());
+        if (usuarioDao.recuperarLogin(getUsuarioLogado().getLogin()).getPublicacoes().contains(publicacao)) {
+            jaExiste = true;
+        } else {
+            jaExiste = false;
         }
+        return jaExiste;
+    }
 
-        u.getPublicacoes().add(p);
+    public String inserirPublicacao() {
+        Usuario u = this.getUsuarioLogado();
+        if (u != null) {
+            Publicacao publicacao = new Publicacao();
+
+            publicacao.setTitulo(this.publicacao.getTitulo());
+            publicacao.setMensagem(this.publicacao.getMensagem());
+
+            if (!verificarPublicacao(publicacao)) {
+                List <Publicacao> p = new ArrayList();
+                u.setPublicacoes(p);
+                u.getPublicacoes().add(publicacao);
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Publicação duplicada!"));
+            }
         }
         this.setUsuario(u);
-        
 
         return "";
     }
@@ -187,5 +206,5 @@ public class UsuarioControlador {
         this.setUsuario(u);
         return "";
     }
-    
+
 }

@@ -9,6 +9,7 @@ import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -70,19 +71,16 @@ public class MonitorControlador {
         return jaExiste;
     }
     
-    public boolean validarMonitor(Monitor monitor) {
-        if (monitor.getNome() != null && monitor.getDisciplina() != null && monitor.getUsuario() != null
-                && !monitor.getHorarios().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-    
     public String inserirMonitor(Monitor monitor) {
         
-        if (validarMonitor(monitor)) {
             if (!validarUsuario(monitor.getUsuario().getLogin())) {
+                System.out.println("MONITOR COM LOGIN VALIDO: "+monitor.getUsuario().getLogin());
+                System.out.println("NOME: "+monitor.getNome());
+                System.out.println("SENHA: "+monitor.getUsuario().getSenha());
                 monitor.setHorarios(this.monitor.getHorarios());
+                String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
+                System.out.println("SENHA CRIPTOGRAFADA: "+senhaCripto);
+                monitor.getUsuario().setSenha(senhaCripto);
                 
                 this.monitorDao.inserir(monitor);
                 
@@ -90,8 +88,6 @@ public class MonitorControlador {
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
             }
-        }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Preencha todos os campos para cadastrar!"));
         return "";
     }
     
