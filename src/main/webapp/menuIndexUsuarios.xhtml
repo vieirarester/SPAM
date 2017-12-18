@@ -18,11 +18,10 @@ and open the template in the editor.
         <p:growl id="mensagemIndexUsuarios" life="3000"/>
         <h:form>
             <p:menubar>
-                <p:menuitem value="Página Inicial" icon="ui-icon-home" update="@all"/>
+                <p:menuitem value="Página Inicial" icon="ui-icon-home" action="@all"/>
                 <f:facet name="options">
                     <p:commandButton value="Publicar" oncomplete="PF('publicarDialog').show()"/>
                     <p:menuButton value="Olá!">
-                        <p:menuitem value="Perfil" url="" icon="ui-icon-person" />
                         <p:menuitem value="Sair" action="#{usuarioControlador.realizarLogout()}" icon=" ui-icon-arrowreturnthick-1-w" />
                     </p:menuButton>
                 </f:facet>
