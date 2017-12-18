@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Página Inicial" url="/monitorIndex.xhtml" icon="ui-icon-person"/>
+                <f:facet name="options">
+                    <p:commandButton value="Adicionar Horário" oncomplete="PF('horarioDialog').show()"/>
+                    <p:menuButton value="Olá!">
+                        <p:menuitem value="Perfil" url="/monitorIndex.xhtml" icon="ui-icon-person" />
+                        <p:menuitem value="Sair" action="#{usuarioControlador.realizarLogout()}" icon=" ui-icon-arrowreturnthick-1-w" />
+                    </p:menuButton>
+                </f:facet>
+            </p:menubar>
+
+            <p:dialog header="Adicionar um novo horário" widgetVar="horarioDialog" resizable="false" modal="true" closeOnEscape="true">
+                <p:panel style="width: 50%">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputText value="Horários"/>
+                        </f:facet>
+                        <h:outputText value="Dia*"/>
+                        <p:selectOneMenu id="Dia" value="#{monitorControlador.horario.dia}" style="width:200px" required="true" requiredMessage="Dia é obrigatório!">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Domingo" itemValue="Domingo" />
+                            <f:selectItem itemLabel="Segunda" itemValue="Segunda" />
+                            <f:selectItem itemLabel="Terça" itemValue="Terça" />
+                            <f:selectItem itemLabel="Quarta" itemValue="Quarta" />
+                            <f:selectItem itemLabel="Quinta" itemValue="Quinta" />
+                            <f:selectItem itemLabel="Sexta" itemValue="Sexta" />
+                            <f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Hora de início*"/>
+                        <p:calendar id="horInicioHorarioMonitor"  value="#{monitorControlador.horario.horaInicio}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de entrada é obrigatório!"/>                           
+
+                        <h:outputText value="Hora de saída*"/>
+                        <p:calendar id="horFimHorarioMonitor" value="#{monitorControlador.horario.horaFim}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de saída é obrigatório!"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Adicionar" icon="ui-icon-plus" update="tabelaHorarios"
+                                     action="#{monitorControlador.inserirHorario()}"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
