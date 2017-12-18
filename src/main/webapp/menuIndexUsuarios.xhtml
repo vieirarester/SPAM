@@ -15,6 +15,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <p:growl id="mensagemIndexUsuarios" life="3000"/>
         <h:form>
             <p:menubar>
                 <p:menuitem value="Página Inicial" icon="ui-icon-home" update="@all"/>
@@ -34,7 +35,7 @@ and open the template in the editor.
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}" update="@all"/>
                         </center>
                     </f:facet>
                 </p:panel>
