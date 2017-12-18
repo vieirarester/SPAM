@@ -27,11 +27,28 @@ and open the template in the editor.
                     </p:panel>
                 </div>
                 <div align="center">
-                    <p:dataTable var="publicacao" style="width: 55%" selectionMode="single">
-                        <p:column headerText="Título">
-                            <h:outputText/>
-                        </p:column>
-                    </p:dataTable>
+                    <p:dataTable id="tabelaHorarios" style="width: 50%"
+                                     value="${monitorControlador.monitor.horarios}"
+                                     var="item" paginator="true" rows="3" editable="true"
+                                     rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
+
+                            <p:column headerText="Dia" style="width:10%; align:center">
+                                <p align="center">${item.dia}</p>
+                            </p:column>
+
+                            <p:column headerText="Hora de início" style="width:10%; align:center">
+                                <p align="center">${item.horaInicio}</p>
+                            </p:column>
+
+                            <p:column headerText="Hora de saída" style="width:10%; align:center">
+                                <p align="center">${item.horaFim}</p>
+                            </p:column>
+
+                            <p:column style="width:5%" headerText="">
+                                <p:commandButton title="Remover" icon="ui-icon-trash"  update="tabelaHorarios"
+                                                 action="#{monitorControlador.removeHorario(item)}" />
+                            </p:column>
+                        </p:dataTable>
                 </div>
             </p:panel>
         </h:form>
