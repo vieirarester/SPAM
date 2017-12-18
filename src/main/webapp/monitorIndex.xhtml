@@ -22,33 +22,17 @@ and open the template in the editor.
                     <p:panel style="width: 20%">
                         <div align="center">
                             <h4>@<p:outputLabel value="#{usuarioControlador.getUsuarioLogado().getLogin()}"/></h4>
-                            <p:commandLink value="Publicações"/>
+                            <p:commandLink value="Publicações"/><br></br>
+                            <p:commandLink value="Horários" ajax="false" action="mostrarHorarios.xhtml"/>
                         </div>
                     </p:panel>
                 </div>
                 <div align="center">
-                    <p:dataTable id="tabelaHorarios" style="width: 50%"
-                                     value="${monitorControlador.monitor.horarios}"
-                                     var="item" paginator="true" rows="3" editable="true"
-                                     rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
-
-                            <p:column headerText="Dia" style="width:10%; align:center">
-                                <p align="center">${item.dia}</p>
-                            </p:column>
-
-                            <p:column headerText="Hora de início" style="width:10%; align:center">
-                                <p align="center">${item.horaInicio}</p>
-                            </p:column>
-
-                            <p:column headerText="Hora de saída" style="width:10%; align:center">
-                                <p align="center">${item.horaFim}</p>
-                            </p:column>
-
-                            <p:column style="width:5%" headerText="">
-                                <p:commandButton title="Remover" icon="ui-icon-trash"  update="tabelaHorarios"
-                                                 action="#{monitorControlador.removeHorario(item)}" />
-                            </p:column>
-                        </p:dataTable>
+                    <p:dataTable var="publicacao" style="width: 55%" selectionMode="single">
+                        <p:column headerText="Título">
+                            <h:outputText/>
+                        </p:column>
+                    </p:dataTable>
                 </div>
             </p:panel>
         </h:form>
