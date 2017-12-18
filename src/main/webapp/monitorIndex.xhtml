@@ -22,6 +22,7 @@ and open the template in the editor.
                     <div align="center">
                         <p:panel>
                             <h4>@<p:outputLabel value="#{usuarioControlador.usuarioLogado.login}"/></h4>
+                            Disciplina: <p:outputLabel value="#{usuarioControlador.monitorLogado.disciplina}"/><br></br>
                             <p:commandLink value="Publicações" ajax="false" action="perfilMonitor.xhtml"/><br></br>
                             <p:commandLink value="Horários" ajax="false" action="mostrarHorarios.xhtml"/>
                         </p:panel>
