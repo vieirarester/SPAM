@@ -79,6 +79,10 @@ public class UsuarioControlador {
     public void setPublicacao(Publicacao publicacao) {
         this.publicacao = publicacao;
     }
+    
+    public List<Publicacao> recuperarTodasPublicacoes(){
+        return this.publicacaoDao.recuperarTodos();
+    }
 
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
@@ -109,7 +113,7 @@ public class UsuarioControlador {
 
     public String realizarLogin(String login, String senha) {
         if (!login.isEmpty() && !senha.isEmpty()) {
-            if (this.alunoDao != null) {
+            if (this.alunoDao.recuperarLogin(login)!=null) {
 
                 Aluno a = this.alunoDao.recuperarLogin(login);
 
@@ -123,16 +127,16 @@ public class UsuarioControlador {
                     } else {
                         a = null;
                         FacesContext.getCurrentInstance().addMessage(null,
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Senha inválida"));
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha incorreta!", "Senha inválida"));
                     }
                 } else {
                     a = null;
                     FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Login inválido"));
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login inválido!", "Login inválido"));
                 }
             }
 
-            if (this.monitorDao != null) {
+            else if (this.monitorDao.recuperarLogin(login)!=null) {
 
                 Monitor m = this.monitorDao.recuperarLogin(login);
 
@@ -167,10 +171,15 @@ public class UsuarioControlador {
         return "/index.xhtml";
     }
 
-    public boolean verificarPublicacao(Publicacao publicacao) {
+    public boolean validarPublicacao(Publicacao publicacao) {
         boolean jaExiste;
 
-        if (usuarioDao.recuperarLogin(getUsuarioLogado().getLogin()).getPublicacoes().contains(publicacao)) {
+        if (getAlunoLogado().getUsuario().getPublicacoes().contains(publicacao)) {
+            jaExiste = true;
+        } else {
+            jaExiste = false;
+        }
+        if (getMonitorLogado().getUsuario().getPublicacoes().contains(publicacao)) {
             jaExiste = true;
         } else {
             jaExiste = false;
@@ -179,31 +188,74 @@ public class UsuarioControlador {
     }
 
     public String inserirPublicacao() {
-        Usuario u = this.getUsuarioLogado();
-        if (u != null) {
-            Publicacao publicacao = new Publicacao();
+        Aluno alunoLog = this.getAlunoLogado();
+        
+        if (alunoLog != null) {
+            Publicacao pub = new Publicacao();
+            pub.setTitulo(this.publicacao.getTitulo());
+            pub.setMensagem(this.publicacao.getMensagem());
 
-            publicacao.setTitulo(this.publicacao.getTitulo());
-            publicacao.setMensagem(this.publicacao.getMensagem());
+            if (alunoLog.getUsuario().getPublicacoes() == null) {
+                alunoLog.getUsuario().setPublicacoes(new ArrayList<Publicacao>());
+            }
 
-            if (!verificarPublicacao(publicacao)) {
-                List <Publicacao> p = new ArrayList();
-                u.setPublicacoes(p);
-                u.getPublicacoes().add(publicacao);
+            boolean existe = false;
+
+            for (Publicacao p : alunoLog.getUsuario().getPublicacoes()) {
+                if (p.equals(pub)) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                alunoLog.getUsuario().getPublicacoes().add(pub);
+                alunoDao.atualizar(alunoLog);
             } else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Publicação duplicada!"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
+            }
+
+        }
+        Monitor monitorLog = this.getMonitorLogado();
+        
+        if (monitorLog != null) {
+            Publicacao pub = new Publicacao();
+            pub.setTitulo(this.publicacao.getTitulo());
+            pub.setMensagem(this.publicacao.getMensagem());
+
+            if (monitorLog.getUsuario().getPublicacoes() == null) {
+                monitorLog.getUsuario().setPublicacoes(new ArrayList<Publicacao>());
+            }
+            
+            boolean existe = false;
+
+            for (Publicacao p : monitorLog.getUsuario().getPublicacoes()) {
+                if (p.equals(pub)) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                monitorLog.getUsuario().getPublicacoes().add(pub);
+                monitorDao.atualizar(monitorLog);
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
             }
         }
-        this.setUsuario(u);
-
         return "";
     }
 
-    public String removePublicacao(Publicacao publicacao) {
-        Usuario u = this.getUsuarioLogado();
-        u.getPublicacoes().remove(publicacao);
-        this.setUsuario(u);
+    public String removerPublicacao(Publicacao publicacao) {
+        Aluno alunoLog = this.getAlunoLogado();
+        Monitor monitorLog = this.getMonitorLogado();
+        if(alunoLog!=null){
+           alunoLog.getUsuario().getPublicacoes().remove(publicacao); 
+           alunoDao.atualizar(alunoLog);
+        } else if(monitorLog!=null){
+            monitorLog.getUsuario().getPublicacoes().remove(publicacao);
+            monitorDao.atualizar(monitorLog);
+        }
         return "";
     }
 
