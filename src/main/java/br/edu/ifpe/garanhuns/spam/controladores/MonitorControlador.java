@@ -74,12 +74,8 @@ public class MonitorControlador {
     public String inserirMonitor(Monitor monitor) {
         
             if (!validarUsuario(monitor.getUsuario().getLogin())) {
-                System.out.println("MONITOR COM LOGIN VALIDO: "+monitor.getUsuario().getLogin());
-                System.out.println("NOME: "+monitor.getNome());
-                System.out.println("SENHA: "+monitor.getUsuario().getSenha());
                 monitor.setHorarios(this.monitor.getHorarios());
                 String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
-                System.out.println("SENHA CRIPTOGRAFADA: "+senhaCripto);
                 monitor.getUsuario().setSenha(senhaCripto);
                 
                 this.monitorDao.inserir(monitor);
