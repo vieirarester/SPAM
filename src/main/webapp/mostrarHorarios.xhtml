@@ -20,6 +20,8 @@ and open the template in the editor.
             </center>
         </p:fieldset>
         <p:panel >
+            <ui:include src="menuPaginaMostrarHorarios.xhtml"/>
+
             <div align="center">
                 <p:dataTable id="tabelaHorarios" style="width: 50%"
                              value="${monitorControlador.monitor.horarios}"
