@@ -12,6 +12,7 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         
+        <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina"/>
         <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno"/>
         <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor"/>
         <mapping class="br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario"/>
