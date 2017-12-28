@@ -15,7 +15,7 @@ import java.util.List;
  * @author Ester
  */
 public class DisciplinaImplDao implements Dao<Disciplina>{
-
+    
     @Override
     public void inserir(Disciplina a) {
         DaoManagerHiber.getInstance().persist(a);
