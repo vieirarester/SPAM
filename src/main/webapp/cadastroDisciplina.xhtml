@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Disciplinas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body style="background-color: #e3eaf0">
+        <ui:include src="menuPaginasCadastro.xhtml"/>
+        <h:form id="cadastrarDisciplina">
+            <p:growl id="mensagemCadastroDisciplina" life="5000"/>
+            <p:panel>
+                <center>
+                    <p:fieldset legend="Cadastrar Disciplina">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Nome*"/>
+                            <p:inputText id="nomeAluno" value="#{builderDisciplina.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
+                        </p:panelGrid>
+                        <br></br>
+                        * Campos obrigatórios
+                        <br></br>
+                        <br></br>
+
+                        <p:commandButton value="Cadastrar" icon="ui-icon-disk" oncomplete="PF('cadastrarDisciplinaDialog').show()"/>
+                    </p:fieldset>
+                </center>
+            </p:panel>
+            <p:dialog resizable="false" visible="false" modal="true" 
+                      showEffect="clip" hideEffect="explode" widgetVar="cadastrarDisciplinaDialog">
+                <f:facet name="header">Atenção!</f:facet>
+                <h:outputText value="Você realmente deseja cadastrar esta disciplina?"/>
+                <f:facet name="footer">
+
+                    <p:commandButton value="Sim" icon="ui-icon-check" action="#{disciplinaControlador.inserirDisciplina(builderDisciplina.construirDisciplina())}"
+                                     oncomplete="PF('cadastrarDisciplinaDialog').hide()" update="cadastrarDisciplina"/>
+                    <p:commandButton value="Não" icon="ui-icon-closethick" oncomplete="PF('cadastrarDisciplinaDialog').hide()"/>
+
+                </f:facet>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
