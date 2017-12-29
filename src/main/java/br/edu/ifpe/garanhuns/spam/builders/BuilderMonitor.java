@@ -5,6 +5,7 @@
  */
 package br.edu.ifpe.garanhuns.spam.builders;
 
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -23,7 +24,7 @@ public class BuilderMonitor {
     private long id;
     private String nome;
     private Usuario usuario;
-    private String disciplina;
+    private Disciplina disciplina;
     private List<Horario> horarios;
 
     public BuilderMonitor() {
@@ -46,11 +47,11 @@ public class BuilderMonitor {
         this.nome = nome;
     }
 
-    public String getDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(String disciplina) {
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
 
