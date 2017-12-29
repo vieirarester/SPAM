@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,15 +30,15 @@ public class Monitor{
     private String nome;
     @Embedded
     private Usuario usuario;
-    @Column
-    private String disciplina;
+    @OneToOne
+    private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)
     private List<Horario> horarios;
     
     public Monitor() {
     }
     
-    public Monitor(long id, String nome, Usuario usuario, String disciplina, List<Horario> horarios) {
+    public Monitor(long id, String nome, Usuario usuario, Disciplina disciplina, List<Horario> horarios) {
         this.nome = nome;
         this.usuario = usuario;
         this.disciplina = disciplina;
@@ -64,11 +65,11 @@ public class Monitor{
         this.usuario = usuario;
     }
 
-    public String getDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
     
-    public void setDisciplina(String disciplina) {
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
     
