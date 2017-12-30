@@ -26,8 +26,12 @@ and open the template in the editor.
                             <p:inputText id="nomeAluno" value="#{builderAluno.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
 
                             <h:outputText value="Curso*"/>
-                            <p:inputText id="cursoAluno" value="#{builderAluno.curso}" required="true" requiredMessage="O curso é obrigatório!"/>
-
+                            <p:selectOneMenu id="gramaCamp" value="#{builderAluno.curso}" style="width:85%">
+                                <f:selectItem itemLabel="Selecione o curso" itemValue=""/>
+                                <f:selectItem itemLabel="Eletroeletrônica" itemValue="Eletroeletrônica" />
+                                <f:selectItem itemLabel="Informática" itemValue="Informática"/>
+                                <f:selectItem itemLabel="Meio Ambiente" itemValue="Meio Ambiente"/>
+                            </p:selectOneMenu>
                             <h:outputText value="Login*"/>
                             <p:inputText id="loginAluno" value="#{builderAluno.usuario.login}" required="true" requiredMessage="O login é obrigatório!"/>
 
