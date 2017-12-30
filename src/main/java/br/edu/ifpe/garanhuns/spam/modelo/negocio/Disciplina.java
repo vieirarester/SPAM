@@ -58,5 +58,9 @@ public class Disciplina implements Serializable, SampleEntity{
     public void setMonitores(List<Monitor> monitores) {
         this.monitores = monitores;
     }
-          
+    
+    @Override
+    public boolean equals(Object obj){
+        return this.id == ((Disciplina)obj).id;
+    }
 }
