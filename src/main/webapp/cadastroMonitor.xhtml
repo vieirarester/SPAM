@@ -25,7 +25,7 @@ and open the template in the editor.
                             <p:inputText id="nomeMonitor" value="#{builderMonitor.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
 
                             <h:outputText value="Disciplina*"/>
-                            <p:selectOneMenu id="disciplinaMonitor" value="#{monitorControlador.disciplina}" style="width: 85%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
+                            <p:selectOneMenu id="disciplinaMonitor" value="#{builderMonitor.disciplina}" style="width: 85%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
                                 <f:selectItem itemLabel="Selecione a disciplina" itemDisabled="true" noSelectionOption="true"/>
                                 <f:selectItems value="#{monitorControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
                             </p:selectOneMenu>
