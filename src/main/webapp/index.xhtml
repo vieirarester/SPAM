@@ -42,11 +42,9 @@
                             <h3 align="center"> Entre na sua conta</h3>
                             <p:inputText placeholder="Usuário" value="#{builderUsuario.login}" required="true" requiredMessage="Login é obrigatório" style="width: 97%"/><br></br><br></br>
                             <p:password placeholder="Senha" value="#{builderUsuario.senha}" required="true" requiredMessage="Senha é obrigatório" style="width: 97%"/><br></br>
-                            <p:panel>
-                                <h:form>
-                                    <center><p:commandLink value="Esqueci a senha" ajax="false"/><br></br></center>
-                                </h:form>
-                            </p:panel>
+
+                            <h:outputLink value="" style="margin-left: 45px; font-size: small">Esqueceu sua senha?</h:outputLink><br></br>
+                            <br></br>
                             <p:commandButton value="Entrar" style="width: 100%" update="@all" action="#{usuarioControlador.realizarLogin(builderUsuario.login, builderUsuario.senha)}"/>
                         </p:panel>
                     </h:form>
@@ -55,15 +53,13 @@
         </h:form>
 
         <p:layoutUnit position="south">
-            <h:form>
-                <p:panel>
-                    <center>
-                        <p:commandLink value="Sobre" ajax="false" action="paginaSobre.xhtml" style="margin-right: 70px"/>
-                        <p:commandLink value="Ajuda" ajax="false" action="paginaAjuda.xhtml" style="margin-right: 70px"/>
-                        ©2017 SPAM
-                    </center>
-                </p:panel>
-            </h:form>
+            <p:panel>
+                <center>
+                    <h:outputLink value="paginaSobre.xhtml" style="margin-right: 70px; font-size: small">Sobre</h:outputLink>
+                    <h:outputLink value="paginaAjuda.xhtml" style="margin-right: 70px; font-size: small">Ajuda</h:outputLink>
+                    <small style="font-size: x-small;">©2017 SPAM</small>
+                </center>
+            </p:panel>
         </p:layoutUnit>        
     </h:body>
 </html>
