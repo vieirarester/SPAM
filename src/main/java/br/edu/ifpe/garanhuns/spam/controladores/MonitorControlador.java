@@ -6,10 +6,13 @@
 package br.edu.ifpe.garanhuns.spam.controladores;
 
 import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
+import br.edu.ifpe.garanhuns.spam.dao.Dao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.DisciplinaImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -31,18 +34,22 @@ public class MonitorControlador {
     
     MonitorDao monitorDao = null;
     AlunoDao alunoDao = null;
+    Dao disciplinaDao = null;
     
     private Monitor monitor;
     private Horario horario;
     private Usuario usuario;
+    private Disciplina disciplina;
     
     @PostConstruct
     public void inicializar() {
         monitorDao = new MonitorImplDao();
         alunoDao = new AlunoImplDao();
+        disciplinaDao = new DisciplinaImplDao();
         monitor = new Monitor();
         horario = new Horario();
         usuario = new Usuario();
+        disciplina = new Disciplina();
     }
     
     public Monitor getMonitor() {
@@ -60,6 +67,14 @@ public class MonitorControlador {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
     
     public boolean validarUsuario(String login) {
         boolean jaExiste;
@@ -75,6 +90,8 @@ public class MonitorControlador {
         
             if (!validarUsuario(monitor.getUsuario().getLogin())) {
                 monitor.setHorarios(this.monitor.getHorarios());
+                monitor.setDisciplina(disciplina);
+                
                 String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
                 monitor.getUsuario().setSenha(senhaCripto);
                 
@@ -111,6 +128,10 @@ public class MonitorControlador {
     
     public List<Horario> recuperarTodosHorario() {
         return this.monitor.getHorarios();
+    }
+    
+    public List<Disciplina> recuperarTodosDisciplina(){
+        return this.disciplinaDao.recuperarTodos();
     }
     
     public boolean validarHorario(Horario horario) {
