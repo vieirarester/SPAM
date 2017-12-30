@@ -5,6 +5,8 @@
  */
 package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
+import br.edu.ifpe.garanhuns.spam.conversores.entidade.SampleEntity;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -13,15 +15,15 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author 20141D120122
  */
 @Entity
-public class Monitor{
+public class Monitor implements Serializable, SampleEntity{
     
     @Id
     @GeneratedValue
@@ -30,7 +32,7 @@ public class Monitor{
     private String nome;
     @Embedded
     private Usuario usuario;
-    @OneToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)
     private List<Horario> horarios;
@@ -45,8 +47,9 @@ public class Monitor{
         this.horarios = horarios;
     }
     
-    public long getId(){
-        return id;
+    @Override
+    public Long getId() {
+        return this.id;
     }
 
     public String getNome() {
@@ -125,4 +128,5 @@ public class Monitor{
     public boolean autenticar(String senha) {
         return this.usuario.getSenha().equals(senha);
     }
+
 }
