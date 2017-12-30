@@ -25,8 +25,10 @@ and open the template in the editor.
                             <p:inputText id="nomeMonitor" value="#{builderMonitor.nome}" required="true" requiredMessage="O nome é obrigatório!"/>
 
                             <h:outputText value="Disciplina*"/>
-                            <p:inputText id="disciplinaMonitor" value="#{builderMonitor.disciplina}" required="true" requiredMessage="A disciplina é obrigatória!"/>
-
+                            <p:selectOneMenu id="disciplinaMonitor" value="#{monitorControlador.disciplina}" style="width: 85%" converter="generic">
+                                <f:selectItem itemLabel="Selecione a disciplina" itemValue=""/>
+                                <f:selectItems value="#{monitorControlador.recuperarTodosDisciplina()}" />
+                            </p:selectOneMenu>
                             <h:outputText value="Login*"/>
                             <p:inputText id="loginMonitor" value="#{builderMonitor.usuario.login}" required="true" requiredMessage="O login é obrigatório!"/>
 
@@ -57,7 +59,7 @@ and open the template in the editor.
                             <p:calendar id="horFimHorarioMonitor" value="#{monitorControlador.horario.horaFim}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de saída é obrigatório!"/>
                         </p:panelGrid>
                         <p:commandButton value="Adicionar" icon="ui-icon-plus" update="tabelaHorarios"
-                                     action="#{monitorControlador.inserirHorario()}"/>
+                                         action="#{monitorControlador.inserirHorario()}"/>
                         <br></br>
                         <br></br>
                         <p:dataTable id="tabelaHorarios" style="width: 50%"
