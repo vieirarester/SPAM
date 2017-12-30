@@ -49,7 +49,7 @@ public class GenericConverter implements Converter, Serializable {
     }
 
     protected void addAttribute(UIComponent component, SampleEntity o) {
-        String key = o.getId().toString(); // codigo da empresa como chave neste caso
+        String key = o.getId().toString();
         this.getAttributesFrom(component).put(key, o);
     }
 
