@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -26,6 +28,9 @@ public class Publicacao {
     private String titulo;
     @Column
     private String mensagem;
+    @ManyToOne
+    @JoinColumn
+    private Disciplina disciplina;
     @OneToMany
     private List<Resposta> respostas;
     
@@ -33,10 +38,11 @@ public class Publicacao {
         
     }
     
-    public Publicacao(long id, String titulo, String mensagem, List<Resposta> respostas){
+    public Publicacao(long id, String titulo, String mensagem, Disciplina disciplina, List<Resposta> respostas){
         this.id=id;
         this.titulo = titulo;
         this.mensagem = mensagem;
+        this.disciplina = disciplina;
         this.respostas=respostas;
     }
 
@@ -58,6 +64,14 @@ public class Publicacao {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public List<Resposta> getRespostas() {

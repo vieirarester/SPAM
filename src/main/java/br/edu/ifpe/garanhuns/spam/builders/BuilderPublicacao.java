@@ -5,6 +5,7 @@
  */
 package br.edu.ifpe.garanhuns.spam.builders;
 
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Resposta;
 import java.util.List;
@@ -22,13 +23,14 @@ public class BuilderPublicacao {
     private long id;
     private String titulo;
     private String mensagem;
+    private Disciplina disciplina;
     private List<Resposta> respostas;
     
     public BuilderPublicacao(){
     }
     
     public Publicacao construirPublicacao(){
-        return new Publicacao(id, titulo, mensagem, respostas);
+        return new Publicacao(id, titulo, mensagem, disciplina, respostas);
     }
     
     public long getId() {
@@ -49,6 +51,14 @@ public class BuilderPublicacao {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public List<Resposta> getRespostas() {
