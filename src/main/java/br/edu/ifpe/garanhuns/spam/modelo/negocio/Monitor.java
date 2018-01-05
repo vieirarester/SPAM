@@ -33,7 +33,7 @@ public class Monitor implements Serializable, SampleEntity{
     private String nome;
     @Embedded
     private Usuario usuario;
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn
     private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)

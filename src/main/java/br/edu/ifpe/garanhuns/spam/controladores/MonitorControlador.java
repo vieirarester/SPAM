@@ -102,15 +102,19 @@ public class MonitorControlador {
     public String inserirMonitor(Monitor monitor) {
 
         if (!validarUsuario(monitor.getUsuario().getLogin())) {
-            monitor.setHorarios(this.monitor.getHorarios());
-            monitor.setDisciplina(disciplina);
+            if (disciplina.getId()!=0) {
+                monitor.setHorarios(this.monitor.getHorarios());
+                monitor.setDisciplina(disciplina);
 
-            String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
-            monitor.getUsuario().setSenha(senhaCripto);
+                String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
+                monitor.getUsuario().setSenha(senhaCripto);
 
-            this.monitorDao.inserir(monitor);
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));
+                this.monitorDao.inserir(monitor);
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Monitor não pode ser cadastrado sem disciplina!"));
+            }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
         }
