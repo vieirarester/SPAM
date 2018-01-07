@@ -86,17 +86,17 @@ public class MonitorControlador {
         return jaExiste;
     }
 
-    public void inserirMonitorNaDisciplina() {
+    public void inserirMonitorNaDisciplina(Monitor monitor) {
 
-        Monitor m = this.getMonitor();
         Disciplina d = this.getDisciplina();
 
         if (d.getMonitores() == null) {
             d.setMonitores(new ArrayList<Monitor>());
         }
 
-        d.getMonitores().add(m);
+        d.getMonitores().add(monitor);
         this.setDisciplina(d);
+        disciplinaDao.atualizar(d);
     }
 
     public String inserirMonitor(Monitor monitor) {
@@ -109,7 +109,7 @@ public class MonitorControlador {
                 String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
                 monitor.getUsuario().setSenha(senhaCripto);
 
-                this.monitorDao.inserir(monitor);
+                inserirMonitorNaDisciplina(monitor);
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O monitor foi cadastrado com sucesso!"));
             } else {
