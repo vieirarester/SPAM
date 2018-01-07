@@ -48,21 +48,27 @@ and open the template in the editor.
                 </p:layoutUnit>
 
                 <p:layoutUnit size = "250" position="east" gutter="20">
-                    <p:dataTable var="monitor" value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}">
+                    <p:dataTable var="monitor" value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}" selectionMode="single">
                         <f:facet name="header">Monitores</f:facet>
                         <p:column headerText="Nome" filterBy="#{monitor.nome}">
                             <h:outputText value="#{monitor.nome}"/>
                         </p:column>
-                        <p:column headerText="Disciplina" filterBy="#{monitor.disciplina}">
-                            <h:outputText value="#{monitor.disciplina}"/>
+                        <p:column headerText="Disciplina" filterBy="#{monitor.disciplina.nome}">
+                            <h:outputText value="#{monitor.disciplina}" converter="generic"/>
                         </p:column>
                     </p:dataTable>
                 </p:layoutUnit>
             </p:layout>
             <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
                 <p:panel>
-                    <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}"/><br></br><br></br>
-                    <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}"/>
+                    <center>
+                        <p:selectOneMenu id="disciplinaPublicacao" value="#{usuarioControlador.publicacao.disciplina}" style="width: 65%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
+                            <f:selectItem itemLabel="A publicacão é sobre qual disciplina?" itemDisabled="true" noSelectionOption="true"/>
+                            <f:selectItems value="#{disciplinaControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
+                        </p:selectOneMenu>
+                        <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}" style="width: 70%"/><br></br><br></br>
+                        <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}" style="width: 70%"/>
+                    </center>
 
                     <f:facet name="footer">
                         <center>
