@@ -7,7 +7,7 @@ package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
 import br.edu.ifpe.garanhuns.spam.conversores.entidade.SampleEntity;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,12 +37,12 @@ public class Monitor implements Serializable, SampleEntity{
     @JoinColumn
     private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)
-    private List<Horario> horarios;
+    private Set<Horario> horarios;
     
     public Monitor() {
     }
     
-    public Monitor(long id, String nome, Usuario usuario, Disciplina disciplina, List<Horario> horarios) {
+    public Monitor(long id, String nome, Usuario usuario, Disciplina disciplina, Set<Horario> horarios) {
         this.nome = nome;
         this.usuario = usuario;
         this.disciplina = disciplina;
@@ -78,11 +78,11 @@ public class Monitor implements Serializable, SampleEntity{
         this.disciplina = disciplina;
     }
     
-    public List<Horario> getHorarios() {
+    public Set<Horario> getHorarios() {
         return horarios;
     }
     
-    public void setHorarios(List<Horario> horario) {
+    public void setHorarios(Set<Horario> horario) {
         this.horarios = horario;
     }
     

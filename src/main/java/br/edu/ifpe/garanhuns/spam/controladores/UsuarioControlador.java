@@ -20,6 +20,7 @@ import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -196,7 +197,7 @@ public class UsuarioControlador {
             pub.setMensagem(this.publicacao.getMensagem());
 
             if (alunoLog.getUsuario().getPublicacoes() == null) {
-                alunoLog.getUsuario().setPublicacoes(new ArrayList<Publicacao>());
+                alunoLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
             }
 
             boolean existe = false;
@@ -224,7 +225,7 @@ public class UsuarioControlador {
             pub.setMensagem(this.publicacao.getMensagem());
 
             if (monitorLog.getUsuario().getPublicacoes() == null) {
-                monitorLog.getUsuario().setPublicacoes(new ArrayList<Publicacao>());
+                monitorLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
             }
             
             boolean existe = false;

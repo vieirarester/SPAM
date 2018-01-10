@@ -5,7 +5,7 @@
  */
 package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,13 +33,13 @@ public class Publicacao {
     @JoinColumn
     private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)
-    private List<Resposta> respostas;
+    private Set<Resposta> respostas;
     
     public Publicacao(){
         
     }
     
-    public Publicacao(long id, String titulo, String mensagem, Disciplina disciplina, List<Resposta> respostas){
+    public Publicacao(long id, String titulo, String mensagem, Disciplina disciplina, Set<Resposta> respostas){
         this.id=id;
         this.titulo = titulo;
         this.mensagem = mensagem;
@@ -75,11 +75,11 @@ public class Publicacao {
         this.disciplina = disciplina;
     }
 
-    public List<Resposta> getRespostas() {
+    public Set<Resposta> getRespostas() {
         return respostas;
     }
 
-    public void setRespostas(List<Resposta> respostas) {
+    public void setRespostas(Set<Resposta> respostas) {
         this.respostas = respostas;
     }
     

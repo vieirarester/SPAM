@@ -8,7 +8,7 @@ package br.edu.ifpe.garanhuns.spam.builders;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Resposta;
-import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -24,7 +24,7 @@ public class BuilderPublicacao {
     private String titulo;
     private String mensagem;
     private Disciplina disciplina;
-    private List<Resposta> respostas;
+    private Set<Resposta> respostas;
     
     public BuilderPublicacao(){
     }
@@ -61,11 +61,11 @@ public class BuilderPublicacao {
         this.disciplina = disciplina;
     }
 
-    public List<Resposta> getRespostas() {
+    public Set<Resposta> getRespostas() {
         return respostas;
     }
 
-    public void setRespostas(List<Resposta> respostas) {
+    public void setRespostas(Set<Resposta> respostas) {
         this.respostas = respostas;
     }
 }

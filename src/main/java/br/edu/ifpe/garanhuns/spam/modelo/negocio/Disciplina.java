@@ -7,7 +7,7 @@ package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
 import br.edu.ifpe.garanhuns.spam.conversores.entidade.SampleEntity;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class Disciplina implements Serializable, SampleEntity{
     @Column
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Monitor> monitores;
+    private Set<Monitor> monitores;
     
     public Disciplina(){
         
@@ -52,11 +52,11 @@ public class Disciplina implements Serializable, SampleEntity{
         this.nome = nome;
     }
 
-    public List<Monitor> getMonitores() {
+    public Set<Monitor> getMonitores() {
         return monitores;
     }
 
-    public void setMonitores(List<Monitor> monitores) {
+    public void setMonitores(Set<Monitor> monitores) {
         this.monitores = monitores;
     }
     

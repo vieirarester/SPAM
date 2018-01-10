@@ -18,6 +18,7 @@ import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -91,7 +92,7 @@ public class MonitorControlador {
         Disciplina d = this.getDisciplina();
 
         if (d.getMonitores() == null) {
-            d.setMonitores(new ArrayList<Monitor>());
+            d.setMonitores((Set<Monitor>) new ArrayList<Monitor>());
         }
 
         d.getMonitores().add(monitor);
@@ -144,7 +145,7 @@ public class MonitorControlador {
     }
 
     public List<Horario> recuperarTodosHorario() {
-        return this.monitor.getHorarios();
+        return (List<Horario>) this.monitor.getHorarios();
     }
 
     public List<Disciplina> recuperarTodosDisciplina() {
@@ -181,7 +182,7 @@ public class MonitorControlador {
         h.setHoraFim(this.horario.getHoraFim());
 
         if (m.getHorarios() == null) {
-            m.setHorarios(new ArrayList<Horario>());
+            m.setHorarios((Set<Horario>) new ArrayList<Horario>());
         }
 
         boolean existe = false;

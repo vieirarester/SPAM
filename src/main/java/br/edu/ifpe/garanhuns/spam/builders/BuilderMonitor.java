@@ -9,7 +9,7 @@ import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Horario;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
-import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -25,7 +25,7 @@ public class BuilderMonitor {
     private String nome;
     private Usuario usuario;
     private Disciplina disciplina;
-    private List<Horario> horarios;
+    private Set<Horario> horarios;
 
     public BuilderMonitor() {
         this.usuario = new Usuario();
@@ -55,11 +55,11 @@ public class BuilderMonitor {
         this.disciplina = disciplina;
     }
 
-    public List<Horario> getHorarios() {
+    public Set<Horario> getHorarios() {
         return horarios;
     }
 
-    public void setHorarios(List<Horario> horarios) {
+    public void setHorarios(Set<Horario> horarios) {
         this.horarios = horarios;
     }
 

@@ -7,7 +7,7 @@ package br.edu.ifpe.garanhuns.spam.builders;
 
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
-import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -21,7 +21,7 @@ public class BuilderDisciplina {
 
     private long id;
     private String nome;
-    private List<Monitor> monitores;
+    private Set<Monitor> monitores;
     
     public BuilderDisciplina(){
         
@@ -43,11 +43,11 @@ public class BuilderDisciplina {
         this.nome = nome;
     }
 
-    public List<Monitor> getMonitores() {
+    public Set<Monitor> getMonitores() {
         return monitores;
     }
 
-    public void setMonitores(List<Monitor> monitores) {
+    public void setMonitores(Set<Monitor> monitores) {
         this.monitores = monitores;
     }    
     

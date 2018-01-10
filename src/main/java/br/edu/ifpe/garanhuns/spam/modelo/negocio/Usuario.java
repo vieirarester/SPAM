@@ -5,7 +5,7 @@
  */
 package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -24,7 +24,7 @@ public class Usuario {
     @Column
     private String senha;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Publicacao> publicacoes;
+    private Set<Publicacao> publicacoes;
     
     public Usuario() {
 
@@ -51,11 +51,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Publicacao> getPublicacoes() {
+    public Set<Publicacao> getPublicacoes() {
         return publicacoes;
     }
 
-    public void setPublicacoes(List<Publicacao> publicacoes) {
+    public void setPublicacoes(Set<Publicacao> publicacoes) {
         this.publicacoes = publicacoes;
     }
     
