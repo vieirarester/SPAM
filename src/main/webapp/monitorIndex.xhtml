@@ -15,8 +15,14 @@ and open the template in the editor.
         <title>Página Inicial do Monitor</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <ui:include src="menuIndexUsuarios.xhtml"/>
         <h:form>
+
             <p:layout>
                 <p:layoutUnit size = "250" position="west" gutter="30" >
                     <div align="center">

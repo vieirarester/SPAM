@@ -9,13 +9,19 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <h:form id="apresentarMonitor">
+            <c:if test="${usuarioControlador.usuarioLogado==null}">
+                <script>
+                    location.href="index.xhtml";
+                </script>
+            </c:if>
             <p:dataTable id="monitor" var="monitor" value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}">
                 <f:facet name="header">Monitores Cadastrados</f:facet>
                 <p:column headerText="Nome" filterBy="#{monitor.nome}">

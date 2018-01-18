@@ -9,44 +9,52 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Mostra horários</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
-        <p:fieldset style="background-color: #007eff">
-            <center>
-                <h1>Horários do monitor @<p:outputLabel value="#{usuarioControlador.getUsuarioLogado().getLogin()}"/></h1>
-            </center>
-        </p:fieldset>
-        <p:panel >
-            <ui:include src="menuPaginaMostrarHorarios.xhtml"/>
+        <h:form>
+            <c:if test="${usuarioControlador.usuarioLogado==null}">
+                <script>
+                    location.href="index.xhtml";
+                </script>
+            </c:if>
+            <p:fieldset style="background-color: #007eff">
+                <center>
+                    <h1>Horários do monitor @<p:outputLabel value="#{usuarioControlador.getUsuarioLogado().getLogin()}"/></h1>
+                </center>
+            </p:fieldset>
+            <p:panel >
+                <ui:include src="menuPaginaMostrarHorarios.xhtml"/>
 
-            <div align="center">
-                <p:dataTable id="tabelaHorarios" style="width: 50%"
-                             value="${monitorControlador.monitor.horarios}"
-                             var="item" paginator="true" rows="3" editable="true"
-                             rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
+                <div align="center">
+                    <p:dataTable id="tabelaHorarios" style="width: 50%"
+                                 value="${monitorControlador.monitor.horarios}"
+                                 var="item" paginator="true" rows="3" editable="true"
+                                 rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
 
-                    <p:column headerText="Dia" style="width:10%; align:center">
-                        <p align="center">${item.dia}</p>
-                    </p:column>
+                        <p:column headerText="Dia" style="width:10%; align:center">
+                            <p align="center">${item.dia}</p>
+                        </p:column>
 
-                    <p:column headerText="Hora de início" style="width:10%; align:center">
-                        <p align="center">${item.horaInicio}</p>
-                    </p:column>
+                        <p:column headerText="Hora de início" style="width:10%; align:center">
+                            <p align="center">${item.horaInicio}</p>
+                        </p:column>
 
-                    <p:column headerText="Hora de saída" style="width:10%; align:center">
-                        <p align="center">${item.horaFim}</p>
-                    </p:column>
+                        <p:column headerText="Hora de saída" style="width:10%; align:center">
+                            <p align="center">${item.horaFim}</p>
+                        </p:column>
 
-                    <p:column style="width:5%" headerText="">
-                        <p:commandButton title="Remover" icon="ui-icon-trash"  update="tabelaHorarios"
-                                         action="#{monitorControlador.removeHorario(item)}" />
-                    </p:column>
-                </p:dataTable>
-            </div>
-        </p:panel>
+                        <p:column style="width:5%" headerText="">
+                            <p:commandButton title="Remover" icon="ui-icon-trash"  update="tabelaHorarios"
+                                             action="#{monitorControlador.removeHorario(item)}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
 
