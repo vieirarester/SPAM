@@ -6,15 +6,18 @@
 package br.edu.ifpe.garanhuns.spam.controladores;
 
 import br.edu.ifpe.garanhuns.spam.dao.AlunoDao;
+import br.edu.ifpe.garanhuns.spam.dao.Dao;
 import br.edu.ifpe.garanhuns.spam.dao.MonitorDao;
 import br.edu.ifpe.garanhuns.spam.dao.PublicacaoDao;
 import br.edu.ifpe.garanhuns.spam.dao.UsuarioDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.AlunoImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.DisciplinaImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.PublicacaoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
@@ -39,11 +42,14 @@ public class UsuarioControlador {
     AlunoDao alunoDao;
     MonitorDao monitorDao;
     PublicacaoDao publicacaoDao;
+    Dao disciplinaDao;
+    
 
     private Usuario usuario;
     private Aluno aluno;
     private Monitor monitor;
     private Publicacao publicacao;
+    private Disciplina disciplina;
 
     @PostConstruct
     public void inicializar() {
@@ -55,6 +61,8 @@ public class UsuarioControlador {
         monitor = new Monitor();
         publicacaoDao = new PublicacaoImplDao();
         publicacao = new Publicacao();
+        disciplina = new Disciplina();
+        disciplinaDao = new DisciplinaImplDao();
     }
 
     public Aluno getAluno() {
@@ -80,8 +88,16 @@ public class UsuarioControlador {
     public void setPublicacao(Publicacao publicacao) {
         this.publicacao = publicacao;
     }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
     
-    public List<Publicacao> recuperarTodasPublicacoes(){
+    public void setDisciplina(Disciplina disciplina){
+        this.disciplina = disciplina;
+    }
+
+    public List<Publicacao> recuperarTodasPublicacoes() {
         return this.publicacaoDao.recuperarTodos();
     }
 
@@ -111,10 +127,14 @@ public class UsuarioControlador {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
+    
+    public List<Disciplina> recuperarTodosDisciplina() {
+        return this.disciplinaDao.recuperarTodos();
+    }
 
     public String realizarLogin(String login, String senha) {
         if (!login.isEmpty() && !senha.isEmpty()) {
-            if (this.alunoDao.recuperarLogin(login)!=null) {
+            if (this.alunoDao.recuperarLogin(login) != null) {
 
                 Aluno a = this.alunoDao.recuperarLogin(login);
 
@@ -135,9 +155,7 @@ public class UsuarioControlador {
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login inválido!", "Login inválido"));
                 }
-            }
-
-            else if (this.monitorDao.recuperarLogin(login)!=null) {
+            } else if (this.monitorDao.recuperarLogin(login) != null) {
 
                 Monitor m = this.monitorDao.recuperarLogin(login);
 
@@ -188,37 +206,40 @@ public class UsuarioControlador {
         return jaExiste;
     }
 
-    public String inserirPublicacao() {
+    public String inserirPublicacao(Publicacao publicacao) {
         Aluno alunoLog = this.getAlunoLogado();
-        
+
         if (alunoLog != null) {
-            Publicacao pub = new Publicacao();
-            pub.setTitulo(this.publicacao.getTitulo());
-            pub.setMensagem(this.publicacao.getMensagem());
+            if (disciplina.getId()!=0) {
+                publicacao.setTitulo(this.publicacao.getTitulo());
+                publicacao.setMensagem(this.publicacao.getMensagem());
+                publicacao.setDisciplina(disciplina);
 
-            if (alunoLog.getUsuario().getPublicacoes() == null) {
-                alunoLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
-            }
-
-            boolean existe = false;
-
-            for (Publicacao p : alunoLog.getUsuario().getPublicacoes()) {
-                if (p.equals(pub)) {
-                    existe = true;
-                    break;
+                if (alunoLog.getUsuario().getPublicacoes() == null) {
+                    alunoLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
                 }
-            }
 
-            if (!existe) {
-                alunoLog.getUsuario().getPublicacoes().add(pub);
-                alunoDao.atualizar(alunoLog);
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
-            }
+                boolean existe = false;
 
+                for (Publicacao p : alunoLog.getUsuario().getPublicacoes()) {
+                    if (p.equals(publicacao)) {
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (!existe) {
+                    alunoLog.getUsuario().getPublicacoes().add(publicacao);
+                    alunoDao.atualizar(alunoLog);
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
+                }
+            } else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação não pode ser inserida sem disciplina!"));
+            }
         }
         Monitor monitorLog = this.getMonitorLogado();
-        
+
         if (monitorLog != null) {
             Publicacao pub = new Publicacao();
             pub.setTitulo(this.publicacao.getTitulo());
@@ -227,7 +248,7 @@ public class UsuarioControlador {
             if (monitorLog.getUsuario().getPublicacoes() == null) {
                 monitorLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
             }
-            
+
             boolean existe = false;
 
             for (Publicacao p : monitorLog.getUsuario().getPublicacoes()) {
@@ -250,10 +271,10 @@ public class UsuarioControlador {
     public String removerPublicacao(Publicacao publicacao) {
         Aluno alunoLog = this.getAlunoLogado();
         Monitor monitorLog = this.getMonitorLogado();
-        if(alunoLog!=null){
-           alunoLog.getUsuario().getPublicacoes().remove(publicacao); 
-           alunoDao.atualizar(alunoLog);
-        } else if(monitorLog!=null){
+        if (alunoLog != null) {
+            alunoLog.getUsuario().getPublicacoes().remove(publicacao);
+            alunoDao.atualizar(alunoLog);
+        } else if (monitorLog != null) {
             monitorLog.getUsuario().getPublicacoes().remove(publicacao);
             monitorDao.atualizar(monitorLog);
         }

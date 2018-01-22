@@ -42,12 +42,11 @@ and open the template in the editor.
                         <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>
-                            <p:column>
-                                <p:accordionPanel>
-                                    <p:tab title="#{publicacao.titulo}">
-                                        <h:outputText value="#{publicacao.mensagem}"/>
-                                    </p:tab>
-                                </p:accordionPanel>
+                            <p:column ariaHeaderText="oi">
+                                    <p:panel header="#{publicacao.titulo}" style="margin-bottom:20px">
+                                        <h:outputText
+                                            value="#{publicacao.mensagem}"/>
+                                    </p:panel>
                             </p:column>
                         </p:dataTable>
                     </center>
@@ -68,9 +67,9 @@ and open the template in the editor.
             <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
                 <p:panel>
                     <center>
-                        <p:selectOneMenu id="disciplinaPublicacao" value="#{usuarioControlador.publicacao.disciplina}" style="width: 65%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
+                        <p:selectOneMenu id="disciplinaPublicacao" value="#{usuarioControlador.disciplina}" style="width: 65%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
                             <f:selectItem itemLabel="A publicacão é sobre qual disciplina?" itemDisabled="true" noSelectionOption="true"/>
-                            <f:selectItems value="#{disciplinaControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
+                            <f:selectItems value="#{usuarioControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
                         </p:selectOneMenu>
                         <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}" style="width: 70%"/><br></br><br></br>
                         <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}" style="width: 70%"/>
@@ -78,7 +77,7 @@ and open the template in the editor.
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}" update="@all"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao(usuarioControlador.publicacao)}" update="@all"/>
                         </center>
                     </f:facet>
                 </p:panel>
