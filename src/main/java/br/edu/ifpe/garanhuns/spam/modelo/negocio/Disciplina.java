@@ -29,6 +29,8 @@ public class Disciplina implements Serializable, SampleEntity{
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Monitor> monitores;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Publicacao> publicacoes;
     
     public Disciplina(){
         
@@ -58,6 +60,14 @@ public class Disciplina implements Serializable, SampleEntity{
 
     public void setMonitores(Set<Monitor> monitores) {
         this.monitores = monitores;
+    }
+
+    public Set<Publicacao> getPublicacoes() {
+        return publicacoes;
+    }
+
+    public void setPublicacoes(Set<Publicacao> publicacoes) {
+        this.publicacoes = publicacoes;
     }
     
     @Override
