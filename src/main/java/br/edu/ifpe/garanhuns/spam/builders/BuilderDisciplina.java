@@ -23,7 +23,6 @@ public class BuilderDisciplina {
     private long id;
     private String nome;
     private Set<Monitor> monitores;
-    private Set<Publicacao> publicacoes;
     
     public BuilderDisciplina(){
         
@@ -51,13 +50,5 @@ public class BuilderDisciplina {
 
     public void setMonitores(Set<Monitor> monitores) {
         this.monitores = monitores;
-    }
-
-    public Set<Publicacao> getPublicacoes() {
-        return publicacoes;
-    }
-
-    public void setPublicacoes(Set<Publicacao> publicacoes) {
-        this.publicacoes = publicacoes;
     }
 }
