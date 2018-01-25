@@ -5,15 +5,15 @@
  */
 package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,8 +29,7 @@ public class Publicacao {
     private String titulo;
     @Column
     private String mensagem;
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToOne
     private Disciplina disciplina;
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Resposta> respostas;
@@ -83,5 +82,20 @@ public class Publicacao {
         this.respostas = respostas;
     }
     
-    
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null){
+            return false;
+        }
+        
+        final Publicacao other = (Publicacao) obj;
+        
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.mensagem, other.mensagem)) {
+            return false;
+        }
+        return true;
+    }
 }
