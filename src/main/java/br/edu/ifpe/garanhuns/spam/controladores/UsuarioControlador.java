@@ -190,22 +190,6 @@ public class UsuarioControlador {
         return "/index.xhtml";
     }
 
-    public boolean validarPublicacao(Publicacao publicacao) {
-        boolean jaExiste;
-
-        if (getAlunoLogado().getUsuario().getPublicacoes().contains(publicacao)) {
-            jaExiste = true;
-        } else {
-            jaExiste = false;
-        }
-        if (getMonitorLogado().getUsuario().getPublicacoes().contains(publicacao)) {
-            jaExiste = true;
-        } else {
-            jaExiste = false;
-        }
-        return jaExiste;
-    }
-
     public String inserirPublicacao(Publicacao publicacao) {
         Aluno alunoLog = this.getAlunoLogado();
 
@@ -227,10 +211,11 @@ public class UsuarioControlador {
                         break;
                     }
                 }
-
+                
                 if (!existe) {
                     alunoLog.getUsuario().getPublicacoes().add(publicacao);
                     alunoDao.atualizar(alunoLog);
+                    setAlunoLogado(alunoLog);
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
                 }
