@@ -71,13 +71,13 @@ and open the template in the editor.
                             <f:selectItem itemLabel="A publicacão é sobre qual disciplina?" itemDisabled="true" noSelectionOption="true"/>
                             <f:selectItems value="#{usuarioControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
                         </p:selectOneMenu>
-                        <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}" style="width: 70%"/><br></br><br></br>
-                        <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}" style="width: 70%"/>
+                        <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{titulo}" style="width: 70%"/><br></br><br></br>
+                        <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{mensagem}" style="width: 70%"/>
                     </center>
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao(usuarioControlador.publicacao)}" update="@all"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao(titulo, mensagem)}" update="@all"/>
                         </center>
                     </f:facet>
                 </p:panel>
