@@ -43,7 +43,6 @@ public class UsuarioControlador {
     MonitorDao monitorDao;
     PublicacaoDao publicacaoDao;
     Dao disciplinaDao;
-    
 
     private Usuario usuario;
     private Aluno aluno;
@@ -92,8 +91,8 @@ public class UsuarioControlador {
     public Disciplina getDisciplina() {
         return disciplina;
     }
-    
-    public void setDisciplina(Disciplina disciplina){
+
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
 
@@ -127,7 +126,7 @@ public class UsuarioControlador {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
-    
+
     public List<Disciplina> recuperarTodosDisciplina() {
         return this.disciplinaDao.recuperarTodos();
     }
@@ -194,7 +193,7 @@ public class UsuarioControlador {
         Aluno alunoLog = this.getAlunoLogado();
         Publicacao pub = new Publicacao();
         if (alunoLog != null) {
-            if (disciplina.getId()!=0) {
+            if (disciplina.getId() != 0) {
                 pub.setTitulo(titulo);
                 pub.setMensagem(msg);
                 pub.setDisciplina(disciplina);
@@ -211,7 +210,7 @@ public class UsuarioControlador {
                         break;
                     }
                 }
-                
+
                 if (!existe) {
                     alunoLog.getUsuario().getPublicacoes().add(pub);
                     alunoDao.atualizar(alunoLog);
@@ -219,15 +218,15 @@ public class UsuarioControlador {
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
                 }
-            } else{
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação não pode ser inserida sem disciplina!"));
             }
         }
         Monitor monitorLog = this.getMonitorLogado();
 
         if (monitorLog != null) {
-            pub.setTitulo(this.publicacao.getTitulo());
-            pub.setMensagem(this.publicacao.getMensagem());
+            pub.setTitulo(titulo);
+            pub.setMensagem(msg);
             pub.setDisciplina(disciplina);
 
             if (monitorLog.getUsuario().getPublicacoes() == null) {
