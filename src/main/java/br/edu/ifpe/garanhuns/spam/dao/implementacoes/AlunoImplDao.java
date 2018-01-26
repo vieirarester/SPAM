@@ -47,7 +47,7 @@ public class AlunoImplDao implements AlunoDao {
     @Override
     public Aluno recuperar(long id) {
         try {
-            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno where id=" + id);
+            return (Aluno) DaoManagerHiber.getInstance().recover("from Aluno where id=" + id).get(0);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
