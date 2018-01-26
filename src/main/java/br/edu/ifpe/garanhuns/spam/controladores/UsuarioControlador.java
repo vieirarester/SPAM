@@ -190,14 +190,14 @@ public class UsuarioControlador {
         return "/index.xhtml";
     }
 
-    public String inserirPublicacao(Publicacao publicacao) {
+    public String inserirPublicacao(String titulo, String msg) {
         Aluno alunoLog = this.getAlunoLogado();
-
+        Publicacao pub = new Publicacao();
         if (alunoLog != null) {
             if (disciplina.getId()!=0) {
-                publicacao.setTitulo(this.publicacao.getTitulo());
-                publicacao.setMensagem(this.publicacao.getMensagem());
-                publicacao.setDisciplina(disciplina);
+                pub.setTitulo(titulo);
+                pub.setMensagem(msg);
+                pub.setDisciplina(disciplina);
 
                 if (alunoLog.getUsuario().getPublicacoes() == null) {
                     alunoLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
@@ -206,16 +206,16 @@ public class UsuarioControlador {
                 boolean existe = false;
 
                 for (Publicacao p : alunoLog.getUsuario().getPublicacoes()) {
-                    if (p.equals(publicacao)) {
+                    if (p.equals(pub)) {
                         existe = true;
                         break;
                     }
                 }
                 
                 if (!existe) {
-                    alunoLog.getUsuario().getPublicacoes().add(publicacao);
+                    alunoLog.getUsuario().getPublicacoes().add(pub);
                     alunoDao.atualizar(alunoLog);
-                    setAlunoLogado(alunoLog);
+                    setAlunoLogado(alunoDao.recuperar(alunoLog.getId()));
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
                 }
@@ -226,9 +226,9 @@ public class UsuarioControlador {
         Monitor monitorLog = this.getMonitorLogado();
 
         if (monitorLog != null) {
-            Publicacao pub = new Publicacao();
             pub.setTitulo(this.publicacao.getTitulo());
             pub.setMensagem(this.publicacao.getMensagem());
+            pub.setDisciplina(disciplina);
 
             if (monitorLog.getUsuario().getPublicacoes() == null) {
                 monitorLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
@@ -246,6 +246,7 @@ public class UsuarioControlador {
             if (!existe) {
                 monitorLog.getUsuario().getPublicacoes().add(pub);
                 monitorDao.atualizar(monitorLog);
+                setMonitorLogado(monitorDao.recuperar(monitorLog.getId()));
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
             }
