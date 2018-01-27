@@ -19,7 +19,12 @@ and open the template in the editor.
         <h:form id="apresentarMonitor">
             <c:if test="${usuarioControlador.usuarioLogado==null}">
                 <script>
-                    location.href="index.xhtml";
+                    location.href = "index.xhtml";
+                </script>
+            </c:if>
+            <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
+                <script>
+                    location.href = "index.xhtml";
                 </script>
             </c:if>
             <p:dataTable id="monitor" var="monitor" value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}">
@@ -37,21 +42,21 @@ and open the template in the editor.
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-            
+
             <p:dialog header="Monitor" closeOnEscape="true" modal="true" resizable="false" widgetVar="visualizarHorarios">
                 <p:dataTable id="horarios" var="horario" value="#{monitorControlador.monitor.horarios}">
-                        <p:column headerText="Dia">
-                            <h:outputText value="#{horario.dia}"/>
-                        </p:column>
-                        <p:column headerText="Hora de entrada">
-                            <h:outputText value="#{horario.horaInicio}"/>
-                        </p:column>
-                        <p:column headerText="Hora de saída">
-                            <h:outputText value="#{horario.horaFim}"/>
-                        </p:column>
-                    </p:dataTable>
+                    <p:column headerText="Dia">
+                        <h:outputText value="#{horario.dia}"/>
+                    </p:column>
+                    <p:column headerText="Hora de entrada">
+                        <h:outputText value="#{horario.horaInicio}"/>
+                    </p:column>
+                    <p:column headerText="Hora de saída">
+                        <h:outputText value="#{horario.horaFim}"/>
+                    </p:column>
+                </p:dataTable>
             </p:dialog>
         </h:form>
-        
+
     </h:body>
 </html>

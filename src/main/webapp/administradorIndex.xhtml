@@ -21,6 +21,11 @@ and open the template in the editor.
                 location.href = "index.xhtml";
             </script>
         </c:if>
+        <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <ui:include src="menuAdministrador.xhtml"/>
         <h:form>
             <br></br>
