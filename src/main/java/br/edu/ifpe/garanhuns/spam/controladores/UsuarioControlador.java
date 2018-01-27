@@ -126,6 +126,10 @@ public class UsuarioControlador {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
+    
+    public boolean verificarSeAdmLogado(){
+        return getUsuarioLogado().getLogin().equals("adm");
+    }
 
     public List<Disciplina> recuperarTodosDisciplina() {
         return this.disciplinaDao.recuperarTodos();
