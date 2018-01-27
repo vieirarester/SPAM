@@ -9,11 +9,17 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de Monitores</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <ui:include src="menuPaginasCadastro.xhtml"/>
         <h:form id="cadastrarMonitor">
             <p:growl id="mensagemCadastroMonitor" life="5000"/>

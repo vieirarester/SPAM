@@ -9,12 +9,18 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de Disciplinas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <ui:include src="menuPaginasCadastro.xhtml"/>
         <h:form id="cadastrarDisciplina">
             <p:growl id="mensagemCadastroDisciplina" life="5000"/>
