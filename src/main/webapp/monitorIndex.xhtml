@@ -28,27 +28,30 @@ and open the template in the editor.
                     <div align="center">
                         <p:panel>
                             <h4>@<p:outputLabel value="#{usuarioControlador.usuarioLogado.login}"/></h4>
-                            Disciplina: <p:outputLabel value="#{usuarioControlador.monitorLogado.disciplina}"/><br></br>
-                            <p:commandLink value="Publicações" ajax="false" action="perfilMonitor.xhtml"/><br></br>
+                            Disciplina: <p:outputLabel value="#{usuarioControlador.monitorLogado.disciplina.nome}"/><br></br>
+                            <h:outputText value="#{usuarioControlador.monitorLogado.usuario.publicacoes.size()}" style="margin-right: 28%"/>
+                            <br></br>
+                            <p:commandLink value="Publicações" ajax="false" action="perfilMonitor.xhtml" style="margin-right: 10px"/>
                             <p:commandLink value="Horários" ajax="false" action="mostrarHorarios.xhtml"/>
                         </p:panel>
                     </div>
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                     <center>
-                        <p:panel>
-                            <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 41%"/>
-                        </p:panel>
-
+                        <p:fieldset style="background-color: #febddf">
+                            <p:inputText id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 62%"/>
+                        </p:fieldset>
+                        
                         <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>
-                            <p:column>
-                                <p:accordionPanel>
-                                    <p:tab title="#{publicacao.titulo}">
-                                        <h:outputText value="#{publicacao.mensagem}"/>
-                                    </p:tab>
-                                </p:accordionPanel>
+                            <p:column filterBy="#{publicacao.disciplina.nome}">
+                                <p:panel header="#{publicacao.disciplina.nome}" style="margin-bottom:20px">
+                                    <center><b><h:outputText value="#{publicacao.titulo}"/></b></center>
+                                    <f:facet name="footer">
+                                        <center><h:outputText value="#{publicacao.mensagem}"/></center>
+                                    </f:facet>
+                                </p:panel>
                             </p:column>
                         </p:dataTable>
                     </center>
@@ -60,12 +63,18 @@ and open the template in the editor.
             </p:layout>
             <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
                 <p:panel>
-                    <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}"/><br></br><br></br>
-                    <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}"/>
+                    <center>
+                        <p:selectOneMenu id="disciplinaPublicacao" value="#{usuarioControlador.disciplina}" style="width: 65%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
+                            <f:selectItem itemLabel="A publicacão é sobre qual disciplina?" itemDisabled="true" noSelectionOption="true"/>
+                            <f:selectItems value="#{usuarioControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
+                        </p:selectOneMenu>
+                        <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{titulo}" style="width: 70%"/><br></br><br></br>
+                        <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{mensagem}" style="width: 70%"/>
+                    </center>
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}" update="@all"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao(titulo, mensagem)}" update="@all"/>
                         </center>
                     </f:facet>
                 </p:panel>
