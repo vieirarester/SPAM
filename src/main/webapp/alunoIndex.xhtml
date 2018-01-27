@@ -63,7 +63,7 @@ and open the template in the editor.
                             <h:outputText value="#{monitor.nome}"/>
                         </p:column>
                         <p:column headerText="Disciplina" filterBy="#{monitor.disciplina.nome}">
-                            <h:outputText value="#{monitor.disciplina}" converter="generic"/>
+                            <h:outputText value="#{monitor.disciplina.nome}" converter="generic"/>
                         </p:column>
                     </p:dataTable>
                 </p:layoutUnit>
