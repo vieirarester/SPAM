@@ -17,13 +17,13 @@ and open the template in the editor.
     </h:head>
     <h:body style="background-color: #e3eaf0">
         <c:if test="${usuarioControlador.usuarioLogado==null}">
-             <script>
-                 location.href = "index.xhtml";
-             </script>
-         </c:if>
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <ui:include src="menuIndexUsuarios.xhtml"/>
         <h:form>
-            
+
             <p:layout>
                 <p:layoutUnit size = "250" position="west" gutter="20" >
                     <div align="center">
@@ -40,7 +40,7 @@ and open the template in the editor.
                         <p:fieldset style="background-color: #febddf">
                             <p:inputText id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 62%"/>
                         </p:fieldset>
-                        
+
                         <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>
@@ -51,6 +51,8 @@ and open the template in the editor.
                                         <center><h:outputText value="#{publicacao.mensagem}"/></center>
                                     </f:facet>
                                 </p:panel>
+                                <p:commandButton value="Responder" icon="ui-icon-check" />
+                                <p:commandButton value="Ver Respostas" icon="ui-icon-check" />
                             </p:column>
                         </p:dataTable>
                     </center>
@@ -63,7 +65,7 @@ and open the template in the editor.
                             <h:outputText value="#{monitor.nome}"/>
                         </p:column>
                         <p:column headerText="Disciplina" filterBy="#{monitor.disciplina.nome}">
-                            <h:outputText value="#{monitor.disciplina.nome}" converter="generic"/>
+                            <h:outputText value="#{monitor.disciplina.nome}" />
                         </p:column>
                     </p:dataTable>
                 </p:layoutUnit>
