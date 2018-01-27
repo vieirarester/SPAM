@@ -21,7 +21,6 @@ public class BuilderDisciplina {
 
     private long id;
     private String nome;
-    private Set<Monitor> monitores;
     
     public BuilderDisciplina(){
         
@@ -42,12 +41,5 @@ public class BuilderDisciplina {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public Set<Monitor> getMonitores() {
-        return monitores;
-    }
-
-    public void setMonitores(Set<Monitor> monitores) {
-        this.monitores = monitores;
-    }
+    
 }
