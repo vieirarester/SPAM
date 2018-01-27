@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Disciplinas Cadastradas</title>
+    </h:head>
+    <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
+        <ui:include src="menuPaginasCadastroAdm.xhtml"/>
+        <p:panel>
+            <h:form id="apresentarDisciplinas">
+                <center>
+                    <p:dataTable id="disciplinas" style="width: 50%" var="disciplina" 
+                                 value="#{disciplinaControlador.recuperarTodosDisciplina()}" rowKey="#{disciplina.id}">
+                        <f:facet name="header">Disciplinas Cadastradas</f:facet>
+
+                        <p:column style="width:10%" headerText="Id">
+                            <h:outputText value="#{disciplina.id}"/>
+                        </p:column>
+
+                        <p:column style="width:80%" headerText="Nome" filterBy="#{disciplina.nome}">
+                            <h:outputText value="#{disciplina.nome}"/>
+                        </p:column>
+
+                        <p:column style="width:10%" headerText="">
+                            <p:commandButton title="Remover" icon="ui-icon-trash"  update="apresentarDisciplinas"
+                                             action="#{disciplinaControlador.removerDisciplina(disciplina)}" />
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
