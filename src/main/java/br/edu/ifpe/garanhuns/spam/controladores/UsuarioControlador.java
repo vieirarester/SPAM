@@ -132,8 +132,19 @@ public class UsuarioControlador {
     }
 
     public String realizarLogin(String login, String senha) {
+        
         if (!login.isEmpty() && !senha.isEmpty()) {
-            if (this.alunoDao.recuperarLogin(login) != null) {
+            if (login.equals("adm")) {
+                if (senha.equals("adm")) {
+                        Usuario user = new Usuario(login, senha);
+                        this.setUsuarioLogado(user);
+                        return "administradorIndex.xhtml";
+
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null,
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha incorreta!", "Senha inválida"));
+                    }
+            } else if (this.alunoDao.recuperarLogin(login) != null) {
 
                 Aluno a = this.alunoDao.recuperarLogin(login);
 
