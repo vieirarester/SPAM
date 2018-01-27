@@ -16,9 +16,14 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+ -            <script>
+ -                location.href = "index.xhtml";
+ -            </script>
+ -        </c:if>
         <ui:include src="menuIndexUsuarios.xhtml"/>
         <h:form>
-
+            
             <p:layout>
                 <p:layoutUnit size = "250" position="west" gutter="20" >
                     <div align="center">
