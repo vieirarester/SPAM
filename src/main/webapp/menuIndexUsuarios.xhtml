@@ -29,12 +29,18 @@ and open the template in the editor.
 
             <p:dialog header="Fazer uma nova publicação" widgetVar="publicarDialog" resizable="false" modal="true" closeOnEscape="true">
                 <p:panel>
-                    <p:inputText id="campoTitulo" placeholder="Título da publicação" value="#{usuarioControlador.publicacao.titulo}"/><br></br><br></br>
-                    <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar?" value="#{usuarioControlador.publicacao.mensagem}"/>
+                    <center>
+                        <p:selectOneMenu id="disciplinaPublicacao" value="#{usuarioControlador.disciplina}" style="width: 65%" required="true" requiredMessage="A disciplina é obrigatória!" converter="generic">
+                            <f:selectItem itemLabel="A publicacão é sobre qual disciplina?" itemDisabled="true" noSelectionOption="true"/>
+                            <f:selectItems value="#{usuarioControlador.recuperarTodosDisciplina()}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}"/>
+                        </p:selectOneMenu>
+                        <p:inputText id="tituloPublicacao" placeholder="Título da publicação" value="#{titulo}" style="width: 70%"/><br></br><br></br>
+                        <p:inputTextarea id="mensagemPublicacao" placeholder="O que você deseja publicar?" value="#{mensagem}" style="width: 70%"/>
+                    </center>
 
                     <f:facet name="footer">
                         <center>
-                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao()}" update="@all"/>
+                            <p:commandButton value="Publicar" icon="ui-icon-check" action="#{usuarioControlador.inserirPublicacao(titulo, mensagem)}" update="@all"/>
                         </center>
                     </f:facet>
                 </p:panel>
