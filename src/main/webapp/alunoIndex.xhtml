@@ -29,6 +29,8 @@ and open the template in the editor.
                     <div align="center">
                         <p:panel>
                             <h4>@<p:outputLabel value="#{usuarioControlador.usuarioLogado.login}"/></h4>
+                            <h:outputText value="#{usuarioControlador.alunoLogado.usuario.publicacoes.size()}"/>
+                            <br></br>
                             <p:commandLink value="Publicações" ajax="false" action="perfilAluno.xhtml"/>
                         </p:panel>
                     </div>
