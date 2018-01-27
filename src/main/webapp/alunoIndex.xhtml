@@ -16,11 +16,6 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body style="background-color: #e3eaf0">
-        <c:if test="${usuarioControlador.usuarioLogado==null}">
-            <script>
-                location.href = "index.xhtml";
-            </script>
-        </c:if>
         <ui:include src="menuIndexUsuarios.xhtml"/>
         <h:form>
 
@@ -35,18 +30,20 @@ and open the template in the editor.
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                     <center>
-                        <p:panel>
-                            <p:inputTextarea id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 41%"/>
-                        </p:panel>
-
+                        <p:fieldset style="background-color: #febddf">
+                            <p:inputText id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 62%"/>
+                        </p:fieldset>
+                        
                         <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>
-                            <p:column ariaHeaderText="oi">
-                                    <p:panel header="#{publicacao.titulo}" style="margin-bottom:20px">
-                                        <h:outputText
-                                            value="#{publicacao.mensagem}"/>
-                                    </p:panel>
+                            <p:column filterBy="#{publicacao.disciplina.nome}">
+                                <p:panel header="#{publicacao.disciplina.nome}" style="margin-bottom:20px">
+                                    <center><b><h:outputText value="#{publicacao.titulo}"/></b></center>
+                                    <f:facet name="footer">
+                                        <center><h:outputText value="#{publicacao.mensagem}"/></center>
+                                    </f:facet>
+                                </p:panel>
                             </p:column>
                         </p:dataTable>
                     </center>
