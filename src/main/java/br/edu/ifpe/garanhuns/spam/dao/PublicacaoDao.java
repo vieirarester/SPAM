@@ -5,7 +5,9 @@
  */
 package br.edu.ifpe.garanhuns.spam.dao;
 
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
+import java.util.List;
 
 /**
  *
@@ -13,6 +15,6 @@ import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
  */
 public interface PublicacaoDao extends Dao<Publicacao>{
     
-    public Publicacao recuperarTitulo(String titulo);
+    public List<Publicacao> recuperarPorDisciplina(Disciplina disciplina);
     
 }

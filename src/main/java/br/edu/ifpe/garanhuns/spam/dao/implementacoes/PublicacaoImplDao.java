@@ -7,6 +7,7 @@ package br.edu.ifpe.garanhuns.spam.dao.implementacoes;
 
 import br.edu.ifpe.garanhuns.spam.dao.DaoManagerHiber;
 import br.edu.ifpe.garanhuns.spam.dao.PublicacaoDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import java.util.List;
 
@@ -14,17 +15,13 @@ import java.util.List;
  *
  * @author Ester
  */
-public class PublicacaoImplDao implements PublicacaoDao{
+public class PublicacaoImplDao implements PublicacaoDao{    
 
     @Override
-    public Publicacao recuperarTitulo(String titulo) {
-        try{
-            return (Publicacao) DaoManagerHiber.getInstance().recover("from Publicacao where titulo"+titulo);
-        }catch(IndexOutOfBoundsException excecao){
-            return null;
-        }
+    public List<Publicacao> recuperarPorDisciplina(Disciplina disciplina) {
+        return DaoManagerHiber.getInstance().recover("from Publicacao where disciplina="+disciplina);
     }
-
+    
     @Override
     public void inserir(Publicacao a) {
         DaoManagerHiber.getInstance().persist(a);
@@ -52,7 +49,6 @@ public class PublicacaoImplDao implements PublicacaoDao{
     @Override
     public List<Publicacao> recuperarTodos() {
         return DaoManagerHiber.getInstance().recover("from Publicacao");
-    }
-    
+    }   
     
 }

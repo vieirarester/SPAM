@@ -5,11 +5,13 @@
  */
 package br.edu.ifpe.garanhuns.spam.controladores;
 
+import br.edu.ifpe.garanhuns.spam.dao.Dao;
 import br.edu.ifpe.garanhuns.spam.dao.PublicacaoDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.PublicacaoImplDao;
+import br.edu.ifpe.garanhuns.spam.dao.implementacoes.DisciplinaImplDao;
+import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Resposta;
-import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -26,6 +28,7 @@ import javax.faces.context.FacesContext;
 public class PublicacaoControlador {
 
     PublicacaoDao publicacaoDao = null;
+    Dao disciplinaDao = null;
 
     private Publicacao publicacao;
     private Resposta resposta;
@@ -33,6 +36,7 @@ public class PublicacaoControlador {
     @PostConstruct
     public void inicializar() {
         publicacaoDao = new PublicacaoImplDao();
+        disciplinaDao = new DisciplinaImplDao();
         publicacao = new Publicacao();
         resposta = new Resposta();
     }
@@ -76,6 +80,19 @@ public class PublicacaoControlador {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O publicação foi alterada com sucesso!"));
         return "";
+    }
+
+    public List<Publicacao> recuperarPorDisciplina(Disciplina disciplina) {
+
+        try {
+            Disciplina d = (Disciplina) disciplinaDao.recuperar(disciplina.getId());
+            if (d != null) {
+                return this.publicacaoDao.recuperarPorDisciplina(disciplina);
+            }
+        } catch (NullPointerException ex) {
+            return null;
+        }
+        return null;
     }
 
     public Publicacao recuperarPublicacao(long id) {
