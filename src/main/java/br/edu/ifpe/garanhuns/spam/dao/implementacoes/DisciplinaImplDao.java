@@ -34,7 +34,7 @@ public class DisciplinaImplDao implements Dao<Disciplina>{
     @Override
     public Disciplina recuperar(long id) {
         try{
-            return (Disciplina) DaoManagerHiber.getInstance().recover("from Disciplina where id="+id);
+            return (Disciplina) DaoManagerHiber.getInstance().recover("from Disciplina where id="+id).get(0);
         }catch (IndexOutOfBoundsException excecao) {
             return null;
         }
