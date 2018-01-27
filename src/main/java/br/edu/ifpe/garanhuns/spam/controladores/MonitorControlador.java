@@ -79,11 +79,8 @@ public class MonitorControlador {
 
     public boolean validarUsuario(String login) {
         boolean jaExiste;
-        if (monitorDao.recuperarLogin(login) != null || alunoDao.recuperarLogin(login) != null) {
-            jaExiste = true;
-        } else {
-            jaExiste = false;
-        }
+        jaExiste = alunoDao.recuperarLogin(login) != null || monitorDao.recuperarLogin(login)!=null ||  
+                login.equals("adm");
         return jaExiste;
     }
 

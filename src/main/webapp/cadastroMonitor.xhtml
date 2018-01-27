@@ -15,6 +15,11 @@ and open the template in the editor.
         <title>Cadastro de Monitores</title>
     </h:head>
     <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
         <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
             <script>
                 location.href = "index.xhtml";
@@ -41,7 +46,7 @@ and open the template in the editor.
                             <h:outputText value="Senha*"/>
                             <p:password id="senhaMonitor" value="#{builderMonitor.usuario.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
                         </p:panelGrid>
-                       
+
                         <br></br>
                         * Campos obrigatórios
                         <br></br>

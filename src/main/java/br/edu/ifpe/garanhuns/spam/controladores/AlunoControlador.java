@@ -51,11 +51,8 @@ public class AlunoControlador {
 
     public boolean validarUsuario(String login) {
         boolean jaExiste;
-        if (alunoDao.recuperarLogin(login) != null || monitorDao.recuperarLogin(login)!=null) {
-            jaExiste = true;
-        } else {
-            jaExiste = false;
-        }
+        jaExiste = alunoDao.recuperarLogin(login) != null || monitorDao.recuperarLogin(login)!=null ||  
+                login.equals("adm");
         return jaExiste;
     }
 
