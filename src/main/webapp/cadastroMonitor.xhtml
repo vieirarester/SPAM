@@ -41,55 +41,7 @@ and open the template in the editor.
                             <h:outputText value="Senha*"/>
                             <p:password id="senhaMonitor" value="#{builderMonitor.usuario.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
                         </p:panelGrid>
-                        <br></br>
-                        <p:panelGrid columns="2" style="width: 30%">
-                            <f:facet name="header">
-                                <h:outputText value="Horários"/>
-                            </f:facet>
-                            <h:outputText value="Dia*"/>
-                            <p:selectOneMenu id="Dia" value="#{monitorControlador.horario.dia}" style="width:200px" required="true" requiredMessage="Dia é obrigatório!">
-                                <f:selectItem itemLabel="" itemValue=""/>
-                                <f:selectItem itemLabel="Domingo" itemValue="Domingo" />
-                                <f:selectItem itemLabel="Segunda" itemValue="Segunda" />
-                                <f:selectItem itemLabel="Terça" itemValue="Terça" />
-                                <f:selectItem itemLabel="Quarta" itemValue="Quarta" />
-                                <f:selectItem itemLabel="Quinta" itemValue="Quinta" />
-                                <f:selectItem itemLabel="Sexta" itemValue="Sexta" />
-                                <f:selectItem itemLabel="Sábado" itemValue="Sábado" />
-                            </p:selectOneMenu>
-
-                            <h:outputText value="Hora de início*"/>
-                            <p:calendar id="horInicioHorarioMonitor"  value="#{monitorControlador.horario.horaInicio}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de entrada é obrigatório!"/>                           
-
-                            <h:outputText value="Hora de saída*"/>
-                            <p:calendar id="horFimHorarioMonitor" value="#{monitorControlador.horario.horaFim}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Hora de saída é obrigatório!"/>
-                        </p:panelGrid>
-                        <p:commandButton value="Adicionar" icon="ui-icon-plus" update="tabelaHorarios"
-                                         action="#{monitorControlador.inserirHorario()}"/>
-                        <br></br>
-                        <br></br>
-                        <p:dataTable id="tabelaHorarios" style="width: 40%"
-                                     value="${monitorControlador.monitor.horarios}"
-                                     var="item" paginator="true" rows="3" editable="true"
-                                     rowKey="${item.id}" sortBy="#{item.dia}" sortOrder="descending">
-
-                            <p:column headerText="Dia" style="width:10%; align:center">
-                                <p align="center">${item.dia}</p>
-                            </p:column>
-
-                            <p:column headerText="Hora de início" style="width:10%; align:center">
-                                <p align="center">${item.horaInicio}</p>
-                            </p:column>
-
-                            <p:column headerText="Hora de saída" style="width:10%; align:center">
-                                <p align="center">${item.horaFim}</p>
-                            </p:column>
-
-                            <p:column style="width:5%" headerText="">
-                                <p:commandButton title="Remover" icon="ui-icon-trash"  update="tabelaHorarios"
-                                                 action="#{monitorControlador.removeHorario(item)}" />
-                            </p:column>
-                        </p:dataTable>
+                       
                         <br></br>
                         * Campos obrigatórios
                         <br></br>

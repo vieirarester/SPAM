@@ -91,7 +91,6 @@ public class MonitorControlador {
 
         if (!validarUsuario(monitor.getUsuario().getLogin())) {
             if (disciplina.getId()!=0) {
-                monitor.setHorarios(this.monitor.getHorarios());
                 monitor.setDisciplina(disciplina);
 
                 String senhaCripto = Criptografia.criptografar(monitor.getUsuario().getSenha());
