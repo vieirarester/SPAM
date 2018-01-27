@@ -7,14 +7,10 @@ package br.edu.ifpe.garanhuns.spam.modelo.negocio;
 
 import br.edu.ifpe.garanhuns.spam.conversores.entidade.SampleEntity;
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,8 +23,6 @@ public class Disciplina implements Serializable, SampleEntity{
     private long id;
     @Column
     private String nome;
-    @OneToMany(mappedBy = "disciplina", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Monitor> monitores;
     
     public Disciplina(){
         
@@ -50,14 +44,6 @@ public class Disciplina implements Serializable, SampleEntity{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Set<Monitor> getMonitores() {
-        return monitores;
-    }
-
-    public void setMonitores(Set<Monitor> monitores) {
-        this.monitores = monitores;
     }
     
     @Override
