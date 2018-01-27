@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Página Inicial do Administrador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
+        <ui:include src="menuAdministrador.xhtml"/>
+        <h:form>
+            <br></br>
+            <p:layout>
+                <p:layoutUnit size = "300" position="west" gutter="20" >
+                    <center>
+                        <p:panel>
+                            Bem-vindo, administrador!
+                        </p:panel>
+                    </center>
+                    <p:panel>
+                        <p:commandLink value="Cadastrar Disciplina" ajax="false" action="cadastroDisciplina.xhtml" /><br></br>
+                        <p:commandLink value="Visualizar Disciplinas" ajax="false" action="apresentarDisciplinas" /><br></br>
+                    </p:panel>
+                    <p:panel>
+                        <p:commandLink value="Cadastrar Monitor" ajax="false" action="cadastroMonitor.xhtml"/><br></br>
+                        <p:commandLink value="Visualizar Monitores" ajax="false" /><br></br>
+                    </p:panel>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    Vamos pensar no que colocar aqui!!
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:form>
+    </h:body>
+</html>
