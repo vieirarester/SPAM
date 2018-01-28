@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 /**
  *
@@ -131,20 +132,20 @@ public class DaoManagerHiber {
 
     public void delete(Object o) {
         Transaction tr = null;
-        try {
-            s = sessionFactory.openSession();
-            tr = s.beginTransaction();
-            s.delete(o);
-            tr.commit();
-            s.flush();
-        } catch (RuntimeException e) {
-            if (tr != null) {
-                tr.rollback();
+
+        if (s.isOpen()) {
+            if (s.getTransaction().getStatus() == TransactionStatus.ACTIVE) {
+                s.getTransaction().commit();
             }
-            throw e;
-        } finally {
             s.close();
         }
+
+        s = sessionFactory.openSession();
+        tr = s.beginTransaction();
+
+        s.delete(o);
+
+        tr.commit();
     }
 
 }
