@@ -25,20 +25,20 @@ and open the template in the editor.
                 location.href = "index.xhtml";
             </script>
         </c:if>
-        <ui:include src="menuPaginasCadastroAdm.xhtml"/>
+        <ui:include src="menuAdm.xhtml"/>
         <p:panel>
             <h:form id="apresentarDisciplinas">
                 <center>
-                    <p:dataTable id="disciplinas" style="width: 50%" var="disciplina" 
+                    <p:dataTable id="disciplinas" style="width: 50%" var="disciplina" selectionMode="single" 
                                  value="#{disciplinaControlador.recuperarTodosDisciplina()}" rowKey="#{disciplina.id}">
                         <f:facet name="header">Disciplinas Cadastradas</f:facet>
 
-                        <p:column style="width:10%" headerText="Id">
-                            <h:outputText value="#{disciplina.id}"/>
+                        <p:column style="width: 10%" headerText="Id">
+                            <center><h:outputText value="#{disciplina.id}"/></center>
                         </p:column>
 
-                        <p:column style="width:80%" headerText="Nome" filterBy="#{disciplina.nome}">
-                            <h:outputText value="#{disciplina.nome}"/>
+                        <p:column headerText="Nome" filterBy="#{disciplina.nome}">
+                            <center><h:outputText value="#{disciplina.nome}"/></center>
                         </p:column>
 
                         <p:column style="width:10%" headerText="">

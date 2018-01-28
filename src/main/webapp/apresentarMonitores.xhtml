@@ -12,10 +12,10 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Monitores Cadastrados</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <h:body>
+    <h:body style="background-color: #e3eaf0">
         <h:form id="apresentarMonitor">
             <c:if test="${usuarioControlador.usuarioLogado==null}">
                 <script>
@@ -27,36 +27,41 @@ and open the template in the editor.
                     location.href = "index.xhtml";
                 </script>
             </c:if>
-            <p:dataTable id="monitor" var="monitor" value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}">
-                <f:facet name="header">Monitores Cadastrados</f:facet>
-                <p:column headerText="Nome" filterBy="#{monitor.nome}">
-                    <h:outputText value="#{monitor.nome}"/>
-                </p:column>
-                <p:column headerText="Disciplina" filterBy="#{monitor.disciplina}">
-                    <h:outputText value="#{monitor.disciplina}"/>
-                </p:column>
+            <ui:include src="menuAdm.xhtml"/>
+            <p:panel>
+                <h:form id="apresentarMonitores">
+                    <center>
+                        <p:dataTable id="monitores" style="width: 60%" var="monitor" selectionMode="single"
+                                     value="#{monitorControlador.recuperarTodosMonitor()}" rowKey="#{monitor.id}">
+                            <f:facet name="header">Monitores Cadastrados</f:facet>
 
-                <p:column headerText="Horários">
-                    <p:commandButton value="Visualizar Horário" icon="ui-icon-search" oncomplete="PF('visualizarHorarios').show()">
-                        <f:setPropertyActionListener value="#{monitor}" target="#{monitorControlador.monitor}"/>
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
+                            <p:column headerText="Id">
+                                <center><h:outputText value="#{monitor.id}"/></center>
+                            </p:column>
 
-            <p:dialog header="Monitor" closeOnEscape="true" modal="true" resizable="false" widgetVar="visualizarHorarios">
-                <p:dataTable id="horarios" var="horario" value="#{monitorControlador.monitor.horarios}">
-                    <p:column headerText="Dia">
-                        <h:outputText value="#{horario.dia}"/>
-                    </p:column>
-                    <p:column headerText="Hora de entrada">
-                        <h:outputText value="#{horario.horaInicio}"/>
-                    </p:column>
-                    <p:column headerText="Hora de saída">
-                        <h:outputText value="#{horario.horaFim}"/>
-                    </p:column>
-                </p:dataTable>
-            </p:dialog>
+                            <p:column headerText="Nome" filterBy="#{monitor.nome}">
+                                <center><h:outputText value="#{monitor.nome}"/></center>
+                            </p:column>
+
+                            <p:column headerText="Disciplina" filterBy="#{monitor.disciplina.nome}">
+                                <center><h:outputText value="#{monitor.disciplina.nome}"/></center>
+                            </p:column>
+
+                            <p:column headerText="Login">
+                                <center>@<h:outputText value="#{monitor.usuario.login}"/></center>
+                            </p:column>
+
+                            <p:column headerText="Horários">
+                                <h:outputText/>
+                            </p:column>
+
+                            <p:column style="width:10%" headerText="">
+                                <p:commandButton title="Remover" icon="ui-icon-trash"  update="monitores"/>
+                            </p:column>
+                        </p:dataTable>
+                    </center>
+                </h:form>
+            </p:panel>
         </h:form>
-
     </h:body>
 </html>
