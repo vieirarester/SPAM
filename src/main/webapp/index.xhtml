@@ -42,7 +42,7 @@
                             <p:inputText placeholder="Usuário" value="#{builderUsuario.login}" required="true" requiredMessage="Login é obrigatório" style="width: 97%"/><br></br><br></br>
                             <p:password placeholder="Senha" value="#{builderUsuario.senha}" required="true" requiredMessage="Senha é obrigatório" style="width: 97%"/><br></br>
 
-                            <h:outputLink value="" style="margin-left: 45px; font-size: small">Esqueceu sua senha?</h:outputLink><br></br>
+                            <h:outputLink value="buscarUsuario.xhtml" style="margin-left: 45px; font-size: small">Esqueceu sua senha?</h:outputLink><br></br>
                             <br></br>
                             <p:commandButton value="Entrar" style="width: 100%" update="@all" action="#{usuarioControlador.realizarLogin(builderUsuario.login, builderUsuario.senha)}"/>
                         </p:panel>
