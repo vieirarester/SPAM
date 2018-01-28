@@ -126,8 +126,8 @@ public class UsuarioControlador {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
-    
-    public boolean verificarSeAdmLogado(){
+
+    public boolean verificarSeAdmLogado() {
         return getUsuarioLogado().getLogin().equals("adm");
     }
 
@@ -136,18 +136,18 @@ public class UsuarioControlador {
     }
 
     public String realizarLogin(String login, String senha) {
-        
+
         if (!login.isEmpty() && !senha.isEmpty()) {
             if (login.equals("adm")) {
                 if (senha.equals("adm")) {
-                        Usuario user = new Usuario(login, senha);
-                        this.setUsuarioLogado(user);
-                        return "administradorIndex.xhtml";
+                    Usuario user = new Usuario(login, senha);
+                    this.setUsuarioLogado(user);
+                    return "administradorIndex.xhtml";
 
-                    } else {
-                        FacesContext.getCurrentInstance().addMessage(null,
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha incorreta!", "Senha inválida"));
-                    }
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha incorreta!", "Senha inválida"));
+                }
             } else if (this.alunoDao.recuperarLogin(login) != null) {
 
                 Aluno a = this.alunoDao.recuperarLogin(login);
@@ -272,11 +272,13 @@ public class UsuarioControlador {
         Aluno alunoLog = this.getAlunoLogado();
         Monitor monitorLog = this.getMonitorLogado();
         if (alunoLog != null) {
-            alunoLog.getUsuario().getPublicacoes().remove(publicacao);
+            publicacaoDao.deletar(publicacao);
             alunoDao.atualizar(alunoLog);
+            setAlunoLogado(alunoDao.recuperar(alunoLog.getId()));
         } else if (monitorLog != null) {
             monitorLog.getUsuario().getPublicacoes().remove(publicacao);
             monitorDao.atualizar(monitorLog);
+            setMonitorLogado(monitorDao.recuperar(monitorLog.getId()));
         }
         return "";
     }
