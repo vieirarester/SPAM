@@ -102,7 +102,7 @@ public class MonitorControlador {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
         }
-        return "";
+        return "apresentarMonitores.xhtml";
     }
 
     public void removerMonitor(Monitor monitor) {

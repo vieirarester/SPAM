@@ -67,7 +67,7 @@ public class AlunoControlador {
         } else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usuário já existe!"));
         }
-        return "";
+        return "apresentarAlunos.xhtml";
     }
 
     public void deletarAluno(Aluno aluno) {

@@ -46,21 +46,22 @@ public class DisciplinaControlador {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi cadastrada com sucesso!"));
 
-        return "";
+        return "apresentarDisciplinas.xhtml";
     }
 
-    public void removerDisciplina(Disciplina disciplina) {
+    public String removerDisciplina(Disciplina disciplina) {
         this.disciplinaDao.deletar(disciplina);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi deletada com sucesso!"));
-
+        
+        return "apresentarDisciplinas.xhtml";
     }
 
     public String alterarDisciplina(Disciplina disciplina) {
         this.disciplinaDao.atualizar(disciplina);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi alterada com sucesso!"));
-        return "";
+        return "apresentarDisciplinas.xhtml";
     }
 
     public Disciplina recuperarDisciplina(long id) {
