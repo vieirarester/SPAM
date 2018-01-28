@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Redefinir Senha</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="alterarSenha" autoUpdate="true"/>
+
+            <p:menubar>
+                <p:menuitem icon="ui-icon-home" url="index.xhtml"/>
+                <p:menuitem icon="ui-icon-person" value="Inscreva-se!" onclick="PF('cadastreSe').show()"/>
+            </p:menubar>
+
+            <p:dialog header="Bem vindo(a) ao SPAM!" widgetVar="cadastreSe" closeOnEscape="true" resizable="false">
+                <center>
+                    <h:outputText value="Ainda não tem uma conta?"/>
+                    <br></br>
+                    <h:outputText value="Procure a coordenação de monitoria e inscreva-se já!"/>
+                </center>
+            </p:dialog>
+
+            <center>
+                <h1>Redefina sua senha</h1>
+                <br></br>
+                <p:fieldset style="width: 30%">
+                    <h4>Encontramos sua conta.</h4>
+                    
+                    <h:outputText value="Digite a nova senha:"/>
+                    <p:password id="senha" value="#{novaSenha}"/>
+                    <br></br>
+                    <br></br>
+                    <h:outputText value="Confirme a nova senha:"/>
+                    <p:password id="confirmacao" value="#{confirmacao}"/>
+                    <br></br>
+                    <br></br>
+                </p:fieldset>
+                <p:commandButton value="Redefinir" action="#{usuarioControlador.redefinirSenha(novaSenha, confirmacao)}" update="alterarSenha"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
