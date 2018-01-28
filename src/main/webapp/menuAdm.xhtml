@@ -16,6 +16,11 @@ and open the template in the editor.
         <h:form>
             <p:menubar>
                 <p:menuitem value="Página Inicial" icon="ui-icon-home" url="administradorIndex.xhtml"/>
+                <f:facet name="options">
+                    <p:menuButton value="Olá!">
+                        <p:menuitem value="Sair" action="#{usuarioControlador.realizarLogout()}" icon=" ui-icon-arrowreturnthick-1-w" />
+                    </p:menuButton>
+                </f:facet>
             </p:menubar>
         </h:form>
     </h:body>
