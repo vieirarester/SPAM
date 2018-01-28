@@ -26,23 +26,27 @@ and open the template in the editor.
                 location.href = "index.xhtml";
             </script>
         </c:if>
-        <ui:include src="menuAdministrador.xhtml"/>
+        <ui:include src="menuAdm.xhtml"/>
         <h:form>
             <br></br>
             <p:layout>
                 <p:layoutUnit size = "300" position="west" gutter="20" >
                     <center>
                         <p:panel>
-                            Bem-vindo, administrador!
+                            <h4>Bem-vindo, administrador!</h4>
                         </p:panel>
                     </center>
                     <p:panel>
+                        <p:commandLink value="Cadastrar Aluno" ajax="false" action="cadastroAluno.xhtml" /><br></br>
+                        <p:commandLink value="Visualizar Alunos" ajax="false" action="apresentarAlunos.xhtml" /><br></br>
+                    </p:panel>
+                    <p:panel>
                         <p:commandLink value="Cadastrar Disciplina" ajax="false" action="cadastroDisciplina.xhtml" /><br></br>
-                        <p:commandLink value="Visualizar Disciplinas" ajax="false" action="apresentarDisciplinas" /><br></br>
+                        <p:commandLink value="Visualizar Disciplinas" ajax="false" action="apresentarDisciplinas.xhtml"/><br></br>
                     </p:panel>
                     <p:panel>
                         <p:commandLink value="Cadastrar Monitor" ajax="false" action="cadastroMonitor.xhtml"/><br></br>
-                        <p:commandLink value="Visualizar Monitores" ajax="false" /><br></br>
+                        <p:commandLink value="Visualizar Monitores" ajax="false" action="apresentarMonitores.xhtml"/><br></br>
                     </p:panel>
                 </p:layoutUnit>
                 <p:layoutUnit position="center">

@@ -14,12 +14,7 @@
             <p:fieldset style="background-color: #007eff">
                 <p:menubar>
                     <p:menuitem icon="ui-icon-home" url="index.xhtml"/>
-                    <f:facet name="options">
-                        <p:menuButton value="Inscreva-se">
-                            <p:menuitem value="Sou aluno" url="cadastroAluno.xhtml" icon="ui-icon-person" />
-                        </p:menuButton>
-
-                    </f:facet>
+                    <p:menuitem icon="ui-icon-person" value="Inscreva-se!" onclick="PF('cadastreSe').show()"/>
                 </p:menubar>
                 <center>
                     <h1>SPAM - Uma nova forma de atendimento de monitoria</h1>
@@ -28,10 +23,15 @@
             </p:fieldset>
 
             <p:panel>
-                <center>
-                    <p:inputText style="margin-right:10px; width: 20%" placeholder="Pesquisar"/>
-                    <p:commandButton icon="ui-icon-search"/>
-                </center>
+                <left>
+                    <b>
+                        <h:outputText value="* Veja horários de monitores e tire dúvidas"/>
+                        <br></br>
+                        <h:outputText value="* Saiba sobre o que estão publicando"/>
+                        <br></br>
+                        <h:outputText value="* Participe da conversa"/>
+                    </b>
+                </left>
             </p:panel>
 
             <p:panel style="background-image: url(spam-logo.jpeg)">
@@ -50,6 +50,14 @@
                 </div>
             </p:panel>
         </h:form>
+
+        <p:dialog header="Bem vindo(a) ao SPAM!" widgetVar="cadastreSe" closeOnEscape="true" resizable="false">
+            <center>
+                <h:outputText value="Ainda não tem uma conta?"/>
+                <br></br>
+                <h:outputText value="Procure a coordenação de monitoria e inscreva-se já!"/>
+            </center>
+        </p:dialog>
 
         <p:layoutUnit position="south">
             <p:panel>
