@@ -37,19 +37,19 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "usuarioControlador")
 @SessionScoped
 public class UsuarioControlador {
-
+    
     UsuarioDao usuarioDao;
     AlunoDao alunoDao;
     MonitorDao monitorDao;
     PublicacaoDao publicacaoDao;
     Dao disciplinaDao;
-
+    
     private Usuario usuario;
     private Aluno aluno;
     private Monitor monitor;
     private Publicacao publicacao;
     private Disciplina disciplina;
-
+    
     @PostConstruct
     public void inicializar() {
         usuarioDao = new UsuarioImplDao();
@@ -63,102 +63,153 @@ public class UsuarioControlador {
         disciplina = new Disciplina();
         disciplinaDao = new DisciplinaImplDao();
     }
-
+    
     public Aluno getAluno() {
         return aluno;
     }
-
+    
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    
     public Publicacao getPublicacao() {
         return publicacao;
     }
-
+    
     public void setPublicacao(Publicacao publicacao) {
         this.publicacao = publicacao;
     }
-
+    
     public Disciplina getDisciplina() {
         return disciplina;
     }
-
+    
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
-
+    
     public List<Publicacao> recuperarTodasPublicacoes() {
         return this.publicacaoDao.recuperarTodos();
     }
-
+    
     public void setUsuarioLogado(Usuario usuario) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
     }
-
+    
     public Usuario getUsuarioLogado() {
         return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("usuarioLogado");
     }
-
+    
     private void setAlunoLogado(Aluno aluno) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("alunoLogado", aluno);
     }
-
+    
     public Aluno getAlunoLogado() {
         return (Aluno) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("alunoLogado");
     }
-
+    
     private void setMonitorLogado(Monitor monitor) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("monitorLogado", monitor);
     }
-
+    
     public Monitor getMonitorLogado() {
         return (Monitor) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .get("monitorLogado");
     }
-
+    
     public boolean verificarSeAdmLogado() {
         return getUsuarioLogado().getLogin().equals("adm");
     }
-
+    
     public List<Disciplina> recuperarTodosDisciplina() {
         return this.disciplinaDao.recuperarTodos();
     }
-
+    
+    public String recuperarLogin(String login) {
+        if (login != null) {
+            if (alunoDao.recuperarLogin(login) != null) {
+                this.aluno = alunoDao.recuperarLogin(login);
+                return "alterarSenha.xhtml";
+            } else if (monitorDao.recuperarLogin(login) != null) {
+                this.monitor = monitorDao.recuperarLogin(login);
+                return "alterarSenha.xhtml";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este usuário não existe!", "Usuário inválido"));
+            }
+        }
+        return "";
+    }
+    
+    public boolean autenticarSenha(String novaSenha, String confirmacao) {
+        if (novaSenha == null || confirmacao == null || novaSenha.isEmpty() || confirmacao.isEmpty()) {
+            return false;
+        } else if (!novaSenha.equals(confirmacao)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public String redefinirSenha(String novaSenha, String confirmacao) {
+        if (autenticarSenha(novaSenha, confirmacao)) {
+            if (aluno != null) {
+                String novaSenhaCripto = Criptografia.criptografar(novaSenha);
+                aluno.getUsuario().setSenha(novaSenhaCripto);
+                
+                alunoDao.atualizar(aluno);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha redefinida com sucesso!", "Senha redefinida com sucesso!"));
+                return "index.xhtml";
+            } else if (monitor != null) {
+                String novaSenhaCripto = Criptografia.criptografar(novaSenha);
+                monitor.getUsuario().setSenha(novaSenhaCripto);
+                
+                monitorDao.atualizar(monitor);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha redefinida com sucesso!", "Senha redefinida com sucesso!"));
+                return "index.xhtml";
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas inválidas!", "Senha inválida"));
+        }
+        return "";
+    }
+    
     public String realizarLogin(String login, String senha) {
-
+        
         if (!login.isEmpty() && !senha.isEmpty()) {
             if (login.equals("adm")) {
                 if (senha.equals("adm")) {
                     Usuario user = new Usuario(login, senha);
                     this.setUsuarioLogado(user);
                     return "administradorIndex.xhtml";
-
+                    
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha incorreta!", "Senha inválida"));
                 }
             } else if (this.alunoDao.recuperarLogin(login) != null) {
-
+                
                 Aluno a = this.alunoDao.recuperarLogin(login);
-
+                
                 if (a != null) {
                     String senhaCripto = Criptografia.criptografar(senha);
                     if (a.getUsuario().getSenha().equals(senhaCripto)) {
                         this.setAlunoLogado(a);
                         this.setUsuarioLogado(this.getAlunoLogado().getUsuario());
                         return "alunoIndex.xhtml";
-
+                        
                     } else {
                         a = null;
                         FacesContext.getCurrentInstance().addMessage(null,
@@ -170,9 +221,9 @@ public class UsuarioControlador {
                             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login inválido!", "Login inválido"));
                 }
             } else if (this.monitorDao.recuperarLogin(login) != null) {
-
+                
                 Monitor m = this.monitorDao.recuperarLogin(login);
-
+                
                 if (m != null) {
                     String senhaCripto = Criptografia.criptografar(senha);
                     if (m.getUsuario().getSenha().equals(senhaCripto)) {
@@ -196,14 +247,14 @@ public class UsuarioControlador {
         }
         return "";
     }
-
+    
     public String realizarLogout() {
-
+        
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
+        
         return "/index.xhtml";
     }
-
+    
     public String inserirPublicacao(String titulo, String msg) {
         Aluno alunoLog = this.getAlunoLogado();
         Publicacao pub = new Publicacao();
@@ -212,20 +263,20 @@ public class UsuarioControlador {
                 pub.setTitulo(titulo);
                 pub.setMensagem(msg);
                 pub.setDisciplina(disciplina);
-
+                
                 if (alunoLog.getUsuario().getPublicacoes() == null) {
                     alunoLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
                 }
-
+                
                 boolean existe = false;
-
+                
                 for (Publicacao p : alunoLog.getUsuario().getPublicacoes()) {
                     if (p.equals(pub)) {
                         existe = true;
                         break;
                     }
                 }
-
+                
                 if (!existe) {
                     alunoLog.getUsuario().getPublicacoes().add(pub);
                     alunoDao.atualizar(alunoLog);
@@ -238,25 +289,25 @@ public class UsuarioControlador {
             }
         }
         Monitor monitorLog = this.getMonitorLogado();
-
+        
         if (monitorLog != null) {
             pub.setTitulo(titulo);
             pub.setMensagem(msg);
             pub.setDisciplina(disciplina);
-
+            
             if (monitorLog.getUsuario().getPublicacoes() == null) {
                 monitorLog.getUsuario().setPublicacoes((Set<Publicacao>) new ArrayList<Publicacao>());
             }
-
+            
             boolean existe = false;
-
+            
             for (Publicacao p : monitorLog.getUsuario().getPublicacoes()) {
                 if (p.equals(pub)) {
                     existe = true;
                     break;
                 }
             }
-
+            
             if (!existe) {
                 monitorLog.getUsuario().getPublicacoes().add(pub);
                 monitorDao.atualizar(monitorLog);
@@ -267,7 +318,7 @@ public class UsuarioControlador {
         }
         return "";
     }
-
+    
     public String removerPublicacao(Publicacao publicacao) {
         Aluno alunoLog = this.getAlunoLogado();
         Monitor monitorLog = this.getMonitorLogado();
@@ -282,5 +333,5 @@ public class UsuarioControlador {
         }
         return "";
     }
-
+    
 }
