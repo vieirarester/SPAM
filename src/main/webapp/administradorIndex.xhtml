@@ -28,33 +28,31 @@ and open the template in the editor.
         </c:if>
         <ui:include src="menuAdm.xhtml"/>
         <h:form>
-            <br></br>
+            <p:fieldset style="background-color: #007eff">
+                <h1 style="margin-left: 62%">Bem vindo, Administrador!</h1>
+            </p:fieldset>
+
             <p:layout>
-                <p:layoutUnit size = "300" position="west" gutter="20" >
-                    <center>
-                        <p:panel>
-                            <h4>Bem-vindo, administrador!</h4>
-                        </p:panel>
-                    </center>
-                    <p:panel>
-                        <p:commandLink value="Cadastrar Aluno" ajax="false" action="cadastroAluno.xhtml" /><br></br>
-                        <p:commandLink value="Visualizar Alunos" ajax="false" action="apresentarAlunos.xhtml" /><br></br>
-                    </p:panel>
-                    <p:panel>
-                        <p:commandLink value="Cadastrar Disciplina" ajax="false" action="cadastroDisciplina.xhtml" /><br></br>
-                        <p:commandLink value="Visualizar Disciplinas" ajax="false" action="apresentarDisciplinas.xhtml"/><br></br>
-                    </p:panel>
-                    <p:panel>
-                        <p:commandLink value="Cadastrar Monitor" ajax="false" action="cadastroMonitor.xhtml"/><br></br>
-                        <p:commandLink value="Visualizar Monitores" ajax="false" action="apresentarMonitores.xhtml"/><br></br>
-                    </p:panel>
+                <p:layoutUnit position="west">
+                    <p:menu toggleable="true">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Aluno" url="cadastroAluno.xhtml"/>
+                            <p:menuitem value="Disciplina" url="cadastroDisciplina.xhtml"/>
+                            <p:menuitem value="Monitor" url="cadastroMonitor.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Apresentações">
+                            <p:menuitem value="Aluno" url="apresentarAlunos.xhtml"/>
+                            <p:menuitem value="Disciplina" url="apresentarDisciplinas.xhtml"/>
+                            <p:menuitem value="Monitor" url="apresentarMonitores.xhtml"/>
+                        </p:submenu>
+                    </p:menu>
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
-                    Vamos pensar no que colocar aqui!!
+                    <center>
+                        <p:graphicImage value="spam-logo-sem-fundo.png" style="margin-top: 5%"/>
+                    </center>
                 </p:layoutUnit>
-
             </p:layout>
-
         </h:form>
     </h:body>
 </html>
