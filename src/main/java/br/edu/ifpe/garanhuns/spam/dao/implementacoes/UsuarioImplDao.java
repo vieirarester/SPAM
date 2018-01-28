@@ -19,7 +19,7 @@ public class UsuarioImplDao implements UsuarioDao {
     @Override
     public Usuario recuperarLogin(String login) {
         try {
-            return (Usuario) DaoManagerHiber.getInstance().recover("from Usuario where login=" + login);
+            return (Usuario) DaoManagerHiber.getInstance().recover("from Usuario where login='" + login+"'");
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
