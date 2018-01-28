@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Disciplinas Cadastradas</title>
+    </h:head>
+    <h:body style="background-color: #e3eaf0">
+        <c:if test="${usuarioControlador.usuarioLogado==null}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
+        <c:if test="${usuarioControlador.verificarSeAdmLogado()==false}">
+            <script>
+                location.href = "index.xhtml";
+            </script>
+        </c:if>
+        <ui:include src="menuAdm.xhtml"/>
+        <p:panel>
+            <h:form id="apresentarPublicacoes">
+                <center>
+                    <p:dataTable id="publicacoes" style="width: 50%" var="publicacao" selectionMode="single" 
+                                 value="#{publicacaoControlador.recuperarTodosPublicacao()}" rowKey="#{publicacao.id}">
+                        <f:facet name="header">Publicações Cadastradas</f:facet>
+
+                        <p:column style="width: 10%" headerText="Id">
+                            <center><h:outputText value="#{publicacao.id}"/></center>
+                        </p:column>
+
+                        <p:column headerText="Disciplina" filterBy="#{publicacao.disciplina.nome}">
+                            <center><h:outputText value="#{publicacao.disciplina.nome}"/></center>
+                        </p:column>
+                        
+                        <p:column headerText="Título" filterBy="#{publicacao.titulo}">
+                            <center><h:outputText value="#{publicacao.titulo}"/></center>
+                        </p:column>
+                        
+                        <p:column headerText="Mensagem">
+                            <center><h:outputText value="#{publicacao.mensagem}"/></center>
+                        </p:column>
+                        
+                        <p:column headerText="Respostas">
+                            <center><h:outputText/></center>
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
