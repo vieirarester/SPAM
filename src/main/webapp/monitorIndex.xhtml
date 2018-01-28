@@ -20,7 +20,7 @@ and open the template in the editor.
                 location.href = "index.xhtml";
             </script>
         </c:if>
-        <ui:include src="menuIndexUsuarios.xhtml"/>
+        <ui:include src="menuMonitor.xhtml"/>
         <h:form>
 
             <p:layout>
@@ -41,7 +41,7 @@ and open the template in the editor.
                         <p:fieldset style="background-color: #febddf">
                             <p:inputText id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 62%"/>
                         </p:fieldset>
-                        
+
                         <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>

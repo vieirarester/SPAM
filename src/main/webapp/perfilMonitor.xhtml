@@ -19,7 +19,7 @@ and open the template in the editor.
                 location.href = "index.xhtml";
             </script>
         </c:if>
-        <ui:include src="menuIndexUsuarios.xhtml"/>
+        <ui:include src="menuMonitor.xhtml"/>
         <h:form>
 
             <p:panel>
@@ -32,15 +32,16 @@ and open the template in the editor.
                     </p:panel>
                 </div>
                 <div align="center">
-                    <p:dataTable var="publicacao" value="#{usuarioControlador.monitorLogado.usuario.publicacoes}" style="width: 40%" 
-                                 selectionMode="single" rowKey="#{publicacao.id}" >
+                    <p:dataTable id="tabelaPublicacoes" var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 50%" 
+                                 rowKey="#{publicacao.id}" >
                         <f:facet name="header">Minhas Publicações</f:facet>
                         <p:column>
-                            <p:accordionPanel>
-                                <p:tab title="#{publicacao.titulo}">
-                                    <h:outputText value="#{publicacao.mensagem}"/>
-                                </p:tab>
-                            </p:accordionPanel>
+                            <p:panel header="#{publicacao.disciplina.nome}" style="margin-bottom:20px">
+                                <center><b><h:outputText value="#{publicacao.titulo}"/></b></center>
+                                <f:facet name="footer">
+                                    <center><h:outputText value="#{publicacao.mensagem}"/></center>
+                                </f:facet>
+                            </p:panel>
                         </p:column>
                     </p:dataTable>
                 </div>
