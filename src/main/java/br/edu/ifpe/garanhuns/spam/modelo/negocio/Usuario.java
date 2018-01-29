@@ -25,7 +25,7 @@ public class Usuario {
     private String senha;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Publicacao> publicacoes;
-    
+
     public Usuario() {
 
     }
@@ -58,6 +58,6 @@ public class Usuario {
     public void setPublicacoes(Set<Publicacao> publicacoes) {
         this.publicacoes = publicacoes;
     }
-    
-    
+
+
 }
