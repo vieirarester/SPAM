@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
  * @author Ester
  */
 @Entity
-public class Publicacao {
+public class Publicacao implements Comparable<Publicacao>{
     
     @Id
     @GeneratedValue
@@ -97,5 +97,15 @@ public class Publicacao {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(Publicacao o) {
+        if(this.id > o.id){
+            return 1;
+        } else if(this.id < o.id){
+            return -1;
+        }
+        return 0;
     }
 }
