@@ -42,7 +42,7 @@ and open the template in the editor.
                             <p:inputText id="campoMensagem" placeholder="O que você deseja publicar agora?" onclick="PF('publicarDialog').show()" style="width: 62%"/>
                         </p:fieldset>
 
-                        <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarTodasPublicacoes()}" style="width: 60%" 
+                        <p:dataTable var="publicacao" value="#{usuarioControlador.recuperarPublicacaoOrdenada()}" style="width: 60%" 
                                      selectionMode="single" rowKey="#{publicacao.id}" >
                             <f:facet name="header">O que estão publicando agora?</f:facet>
                             <p:column filterBy="#{publicacao.disciplina.nome}">
