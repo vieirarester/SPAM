@@ -16,12 +16,14 @@ import br.edu.ifpe.garanhuns.spam.dao.implementacoes.MonitorImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.PublicacaoImplDao;
 import br.edu.ifpe.garanhuns.spam.dao.implementacoes.UsuarioImplDao;
 import br.edu.ifpe.garanhuns.spam.modelo.Criptografia;
+import br.edu.ifpe.garanhuns.spam.modelo.PublicacaoComparator;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Aluno;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Disciplina;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Monitor;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Publicacao;
 import br.edu.ifpe.garanhuns.spam.modelo.negocio.Usuario;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -98,6 +100,24 @@ public class UsuarioControlador {
     
     public List<Publicacao> recuperarTodasPublicacoes() {
         return this.publicacaoDao.recuperarTodos();
+    }
+    
+    public List<Publicacao> recuperarPublicacaoOrdenada(){
+        List<Publicacao> lista = new ArrayList<>();
+        
+        for(Publicacao p:this.publicacaoDao.recuperarTodos()){
+            lista.add(p);
+        }
+        lista.sort(new PublicacaoComparator());
+        
+        List <Publicacao> listaInversa = new ArrayList<>();
+        for(Publicacao p: lista){
+            listaInversa.add(p);
+        }
+        
+        Collections.reverse(listaInversa);
+        
+        return listaInversa;
     }
     
     public void setUsuarioLogado(Usuario usuario) {
