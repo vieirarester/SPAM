@@ -52,7 +52,7 @@ public class MonitorImplDao implements MonitorDao {
     @Override
     public Monitor recuperar(long id) {
         try {
-            return (Monitor) DaoManagerHiber.getInstance().recover("from Monitor where id=" + id);
+            return (Monitor) DaoManagerHiber.getInstance().recover("from Monitor where id=" + id).get(0);
         } catch (IndexOutOfBoundsException excecao) {
             return null;
         }
