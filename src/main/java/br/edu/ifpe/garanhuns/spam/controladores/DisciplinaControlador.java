@@ -53,14 +53,27 @@ public class DisciplinaControlador {
         this.disciplinaDao.deletar(disciplina);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi deletada com sucesso!"));
-        
+
         return "apresentarDisciplinas.xhtml";
     }
 
     public String alterarDisciplina(Disciplina disciplina) {
-        this.disciplinaDao.atualizar(disciplina);
+        boolean existe = false;
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi alterada com sucesso!"));
+        for (Disciplina d : recuperarTodosDisciplina()) {
+            if (disciplina.getNome().equals(d.getNome())) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
+            this.disciplinaDao.atualizar(disciplina);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina foi alterada com sucesso!"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A disciplina já existe!"));
+        }
+
         return "apresentarDisciplinas.xhtml";
     }
 
