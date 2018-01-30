@@ -30,7 +30,7 @@ and open the template in the editor.
             <h:form id="apresentarPublicacoes">
                 <center>
                     <p:dataTable id="publicacoes" style="width: 50%" var="publicacao" selectionMode="single" 
-                                 value="#{publicacaoControlador.recuperarTodosPublicacao()}" rowKey="#{publicacao.id}">
+                                 value="#{usuarioControlador.recuperarPublicacaoOrdenada()}" rowKey="#{publicacao.id}">
                         <f:facet name="header">Publicações Cadastradas</f:facet>
 
                         <p:column style="width: 10%" headerText="Id">

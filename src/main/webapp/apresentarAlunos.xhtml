@@ -49,11 +49,6 @@ and open the template in the editor.
                         <p:column headerText="Login">
                             <center>@<h:outputText value="#{aluno.usuario.login}"/></center>
                         </p:column>
-
-                        <p:column style="width:10%" headerText="">
-                            <p:commandButton title="Remover" icon="ui-icon-trash"  update="apresentarAlunos"
-                                             action="#{disciplinaControlador.removerDisciplina(disciplina)}" />
-                        </p:column>
                     </p:dataTable>
                 </center>
             </h:form>
