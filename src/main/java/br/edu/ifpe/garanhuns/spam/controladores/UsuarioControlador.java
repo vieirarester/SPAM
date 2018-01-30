@@ -110,14 +110,7 @@ public class UsuarioControlador {
         }
         lista.sort(new PublicacaoComparator());
         
-        List <Publicacao> listaInversa = new ArrayList<>();
-        for(Publicacao p: lista){
-            listaInversa.add(p);
-        }
-        
-        Collections.reverse(listaInversa);
-        
-        return listaInversa;
+        return lista;
     }
     
     public void setUsuarioLogado(Usuario usuario) {
@@ -301,6 +294,7 @@ public class UsuarioControlador {
                     alunoLog.getUsuario().getPublicacoes().add(pub);
                     alunoDao.atualizar(alunoLog);
                     setAlunoLogado(alunoDao.recuperar(alunoLog.getId()));
+                    recuperarPublicacaoOrdenada();
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
                 }
@@ -332,6 +326,7 @@ public class UsuarioControlador {
                 monitorLog.getUsuario().getPublicacoes().add(pub);
                 monitorDao.atualizar(monitorLog);
                 setMonitorLogado(monitorDao.recuperar(monitorLog.getId()));
+                recuperarPublicacaoOrdenada();
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Publicação duplicada!"));
             }
