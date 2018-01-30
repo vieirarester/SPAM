@@ -21,7 +21,7 @@ public class PublicacaoComparator implements Comparator<Publicacao>{
         String id1 = Long.toString(p1.getId());
         String id2 = Long.toString(p2.getId());
         
-        return id1.compareTo(id2);
+        return -id1.compareTo(id2);
     }
     
 }
